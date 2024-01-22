@@ -2,15 +2,15 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>My New Hugo Site</title>
-    <link>http://example.org/</link>
+    <link>http://knightsnape.github.io/</link>
     <description>Recent content on My New Hugo Site</description>
     <image>
       <title>My New Hugo Site</title>
-      <url>http://example.org/images/papermod-cover.png</url>
-      <link>http://example.org/images/papermod-cover.png</link>
+      <url>http://knightsnape.github.io/images/papermod-cover.png</url>
+      <link>http://knightsnape.github.io/images/papermod-cover.png</link>
     </image>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <atom:link href="http://example.org/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="http://knightsnape.github.io/index.xml" rel="self" type="application/rss+xml" />
   </channel>
 </rss>

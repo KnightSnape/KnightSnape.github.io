@@ -2,15 +2,15 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>PaperMod RTL</title>
-    <link>http://example.org/fa/</link>
+    <link>http://knightsnape.github.io/fa/</link>
     <description>Recent content on PaperMod RTL</description>
     <image>
       <title>PaperMod RTL</title>
-      <url>http://example.org/images/papermod-cover.png</url>
-      <link>http://example.org/images/papermod-cover.png</link>
+      <url>http://knightsnape.github.io/images/papermod-cover.png</url>
+      <link>http://knightsnape.github.io/images/papermod-cover.png</link>
     </image>
     <generator>Hugo -- gohugo.io</generator>
     <language>fa</language>
-    <atom:link href="http://example.org/fa/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="http://knightsnape.github.io/fa/index.xml" rel="self" type="application/rss+xml" />
   </channel>
 </rss>

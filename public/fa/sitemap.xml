@@ -2,27 +2,27 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
-    <loc>http://example.org/fa/facategories/</loc>
+    <loc>http://knightsnape.github.io/fa/facategories/</loc>
   </url><url>
-    <loc>http://example.org/fa/faseries/</loc>
+    <loc>http://knightsnape.github.io/fa/faseries/</loc>
   </url><url>
-    <loc>http://example.org/fa/fatags/</loc>
+    <loc>http://knightsnape.github.io/fa/fatags/</loc>
   </url><url>
-    <loc>http://example.org/fa/</loc>
+    <loc>http://knightsnape.github.io/fa/</loc>
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
-                href="http://example.org/"
+                href="http://knightsnape.github.io/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="fr"
-                href="http://example.org/fr/"
+                href="http://knightsnape.github.io/fr/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="fa"
-                href="http://example.org/fa/"
+                href="http://knightsnape.github.io/fa/"
                 />
   </url>
 </urlset>
