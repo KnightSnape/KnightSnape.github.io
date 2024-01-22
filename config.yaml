@@ -1,6 +1,6 @@
-baseURL: http://knightsnape.github.io
+baseURL: http://knightsnape.github.io/public/
 languageCode: en-us
-title: My New Hugo Site
+title: PaperMod
 theme: "PaperMod"
 module: 
   imports:
@@ -66,6 +66,7 @@ params:
   ShowPageNums: true
   ShowToc: true
   # comments: false
+  images: ["images/papermod-cover.png"]
 
   profileMode:
     enabled: false
@@ -88,6 +89,14 @@ params:
       - **PaperMod**  is designed to be clean and simple but fast and responsive theme with useful feature-set that enhances UX.
 
       - Feel free to show your support by giving us a star 🌟 on GitHub and sharing with your friends and social media .
+
+  editPost: 
+    URL: "https://github.com/KnightSnape"
+    Text: "Suggest Changes"
+    appendFilePath: true
+
+  assets:
+    disableHLJS: true
 
  
 markup:
