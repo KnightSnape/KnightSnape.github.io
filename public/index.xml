@@ -42,6 +42,13 @@
       <description>Sample article showcasing basic Markdown syntax and formatting for HTML elements.</description>
     </item>
     <item>
+      <title>Navigation Algorithm</title>
+      <link>http://knightsnape.github.io/public/posts/navigation_algorithm/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>http://knightsnape.github.io/public/posts/navigation_algorithm/</guid>
+      <description>The total result of navigation algorithm</description>
+    </item>
+    <item>
       <title>Markdown Syntax Guide</title>
       <link>http://knightsnape.github.io/public/posts/markdown-syntax/</link>
       <pubDate>Mon, 11 Mar 2019 00:00:00 +0000</pubDate>
