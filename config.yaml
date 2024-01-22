@@ -51,6 +51,7 @@ params:
   description: "Theme PaperMod - https://github.com/KnightSnape/knightsnape.github.io"
   author: Theme PaperMod
   # author: ["Me", "You"] # multiple authors
+  mathjax: true
 
   defaultTheme: auto
   # disableThemeToggle: true
