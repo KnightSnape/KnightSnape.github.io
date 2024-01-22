@@ -30,14 +30,14 @@ languages:
       series: series
     menu:
       main:
-        - name: Archive
-          url: archives
+        - name: category
+          url: categories/
           weight: 5
-        - name: Search
-          url: search/
-          weight: 10
-        - name: Tags
+        - name: tag
           url: tags/
+          weight: 10
+        - name: series
+          url: series/
           weight: 10
 
 outputs:
