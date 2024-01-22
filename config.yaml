@@ -7,6 +7,16 @@ module:
     - path: github.com/adityatelange/hugo-PaperMod
 
 enableEmoji: true
+enableRobotsTXT: true
+enableInlineShortcodes: true
+buildDrafts: false
+buildFuture: false
+buildExpired: false
+pygmentsUseClasses: true
+mainsections: ["posts","papermod"]
+
+minify:
+  disableXML: true
 
 params:
   author: knight
@@ -20,6 +30,17 @@ params:
   ShowWordCount: true
   ShowRssButtonInSectionTermList: true
   UseHugoToc: true
+
+  homeInfoParams:
+    Title: "KnightSnape"
+
+    Content: > 
+      Hello Knight
+
+    socialIcons:
+      - name: github
+        title: View Source on GitHub
+        url: "https://github.com/KnightSnape"
 
 menu:
   main:
