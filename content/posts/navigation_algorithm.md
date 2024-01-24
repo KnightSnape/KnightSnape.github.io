@@ -1369,11 +1369,346 @@ int main()
 
 ## 5.2 PRM算法
 
+PRM算法的步骤如下：
+
+- 初始化两个集合，其中$N$: 随机点集，$E$:路径集
+
+- 随机撒点，将撒入的点放入$N$中，随机撒点的过程中：
+
+1. 必须是自由空间的随机点
+
+2. 每个点都要确保与障碍物无碰撞(最基本约束)
+
+- 对每一个新的节点C，我们从当前N中选择一系列的相邻点$n$，并且使用local_planner进行路径规划
+
+- 将可行的路径的边界$(c,n)$加入到$E$的集合中，不可行的路径去掉
+
+它本身实际上是基于图搜索的方法，一共分为两个步骤：学习阶段和查询阶段。
+
+它将连续空间转换成离散空间，再利用最短路等在路线图上寻找路径，提高搜索效率。可以用相对少的随机采样点来找到一个解，对多数问题而言，相对少的样本足以覆盖大部分可行的空间，并且找到路径的概率为1。当采样点太少或者分布不合理时，PRM算法是不完备的。
+
+```cpp
+#include<opencv2/opencv.hpp>
+
+#include<unistd.h>
+#include<typeinfo>
+
+#include<iostream>
+#include<vector>
+#include<string>
+#include<queue>
+
+#include<random>
+#define INF 13421772
+#define sampleNum 200
+#define START 0
+#define GOAL 1
+
+#define PI 3.141592653589793238
+double toDegree(double radian)
+{
+    return radian * 180 / PI;
+}
+
+double toRadian(double degree)
+{
+    return degree * PI / 180;
+}
+
+struct GraphNode{
+    int label;
+    std::vector<GraphNode*> neighbors;
+    GraphNode(int x):label(x){};
+};
+
+bool checkCollision(const std::vector<int> point,const cv::Mat img_src)
+{
+    bool reach = true;
+    if(img_src.at<cv::Vec3b>(point[1],point[0])[0] == 0 &&
+       img_src.at<cv::Vec3b>(point[1],point[0])[1] == 0 &&
+       img_src.at<cv::Vec3b>(point[1],point[0])[2] == 0)
+       {
+            reach = false;
+       }
+    return reach;
+}
+
+bool checkPath(const std::vector<int> point_a,
+               const std::vector<int> point_b,
+               const cv::Mat map,int split_num)
+{
+    std::vector<double> path_x;
+    std::vector<double> path_y;
+
+    double interval_x = (point_b[0] - point_a[0]) / split_num;
+    double interval_y = (point_b[1] - point_a[1]) / split_num;
+
+    for(int i = 0; i <= split_num; i++)
+    {
+        path_x.push_back(point_a[0] + i * interval_x);
+        path_y.push_back(point_a[1] + i * interval_y);
+    }
+
+    for(int i = 0; i < split_num; i++)
+    {
+        if(!checkCollision({int(path_x[i]),int(path_y[i])},map))
+        {
+            return false;
+        }
+    }
+
+    return true;
+}
+
+double calcDistance(const std::vector<int> point_a,
+                    const std::vector<int> point_b)
+{
+    return sqrt(std::pow(point_a[0] - point_b[0],2) + std::pow(point_a[1] - point_b[1],2));
+}
+
+struct Dijkstra {
+    struct node{
+        int point;
+        double value;
+        node(int _point, double _value):point(_point), value(_value){}
+        bool operator < (const node& rhs) const{
+                return value > rhs.value;
+        }
+    };
+
+    std::vector<node> edges[sampleNum];
+    double dist[sampleNum];
+    int path[sampleNum];
+
+    void init()
+	{
+		for(int i = 0; i < sampleNum; i++)
+        {
+            edges[i].clear();
+            dist[i] = 0;
+            path[i] = 0;
+        }
+	}
+
+    void addEdge(int from, int to, double dist)
+	{
+		edges[from].push_back(node(to,dist));
+        // edges[to].push_back(node(from,dist));
+	}
+
+    void showEdge()
+    {
+        std::cout << "------------------------" << std::endl;
+
+        for(int i = 0; i< sampleNum; i++)
+        {
+            // cout << "-----" << i << "-----" << endl;
+
+            for(int j=0; j<edges[i].size(); j++)
+            {
+                std::cout << i << "," << edges[i][j].point << "," << edges[i][j].value << std::endl;
+            }
+
+            // cout << "**********************" << endl;
+
+        }
+
+        std::cout << "------------------------" << std::endl;
+    }
+
+    std::vector<int> dijkstra(int s, int t)
+	{
+		std::priority_queue <node> q;
+
+		for(int i = 0; i < sampleNum; i++)
+            dist[i] = INF;
+
+		dist[s] = 0;
+		q.push(node(s, dist[s]));
+
+		while(!q.empty())
+		{
+            node x = q.top(); q.pop();
+            for (int i = 0; i < edges[x.point].size(); i++)
+            {
+                // std::cout << edges[x.point].size() << std::endl;
+                node y = edges[x.point][i];
+                if (dist[y.point] > dist[x.point] + y.value)
+                {
+                    dist[y.point] = dist[x.point] + y.value;
+                    path[y.point] = x.point;
+                    q.push(node(y.point, dist[y.point]));
+                }
+            }
+		}
+
+        std::vector<int> result;
+
+        // 存距离
+        // result.push_back(dist[t]);
+        std::cout << "dist[t]:" << dist[t] << std::endl;
+
+        while(t)
+        {
+            result.push_back(t);
+            t = path[t];
+        }
+        
+        result.push_back(path[0]);
+
+
+        reverse(result.begin(),result.end()); //起点->终点 ，+ 距离
+
+        return result;
+    }
+};
+
+struct Dijkstra DijkstraPlanning;
+
+int main(int argc,char **argv)
+{
+    cv::Mat dismap = cv::imread("../map/map_2.bmp");
+
+    int mapLength = dismap.cols;
+    int mapWidth = dismap.rows; 
+
+    std::vector<int> pStrat = {10, 10};
+    std::vector<int> pGoal = {490, 490};
+
+    std::vector<std::vector<int> > sampleMap;
+    sampleMap.reserve(sampleNum + 2);
+    sampleMap.push_back(pStrat);
+    sampleMap.push_back(pGoal);
+
+    //初始化采样点
+    while (sampleMap.size() < sampleNum + 2)
+    // while (sampleMap.size() < 10)
+    {
+
+        std::random_device rd;
+        std::mt19937 gen(rd());
+        std::uniform_int_distribution<> dis(0, dismap.size[0]-1);
+        
+        
+        std::vector<int> res;
+        // sampleMap.push_back(std::vector<int>());
+        for(int i=0; i<2; ++i){
+            res.push_back(dis(gen));
+            // sampleMap.back().push_back(dis(gen));
+        }
+
+        if(checkCollision(res, dismap)){
+            sampleMap.push_back({res[0], res[1]});
+        }
+        
+        // std::cout << res[0] << "," << res[1] << std::endl;
+    }
+
+    const int MAX_N = sampleNum + 2;
+    GraphNode *Graph[MAX_N];
+
+    const double DISTANCE = 100; 
+    const int SPLIT_N = 10;
+
+    DijkstraPlanning.init();
+
+    for (int i = 0; i < MAX_N; i++)
+    {
+        for(int j = 0; j < MAX_N; j++){
+            if (calcDistance(sampleMap[i], sampleMap[j]) <= DISTANCE && 
+                checkPath(sampleMap[i], sampleMap[j], dismap, SPLIT_N) && i!= j)
+            {
+                cv::line(dismap, cv::Point(sampleMap[i][0], sampleMap[i][1]), 
+                                 cv::Point(sampleMap[j][0], sampleMap[j][1]), 
+                                 cv::Scalar(0, 0, 255), 1);
+                // Graph[i]->neighbors.push_back(Graph(i));
+
+                DijkstraPlanning.addEdge(i, j, calcDistance(sampleMap[i], sampleMap[j]));
+            }
+            
+        }
+    }
+    DijkstraPlanning.showEdge();
+
+    std::vector<int> result = DijkstraPlanning.dijkstra(START, GOAL);
+
+    if(result.size() > 2){
+        for(int i=0;i < result.size() - 1; i++)
+        {
+            // std::cout << result[i] << " ";
+            cv::line(dismap, cv::Point(sampleMap[result[i]][0], sampleMap[result[i]][1]), 
+                    cv::Point(sampleMap[result[i+1]][0], sampleMap[result[i+1]][1]), 
+                    cv::Scalar(0, 255, 0), 5);
+        }
+    }
+
+    for(int i=0; i<sampleMap.size(); i++){
+        // std::cout << i << ":";
+        for(int j=0; j<sampleMap[i].size(); j++){
+            // std::cout << sampleMap[i][j] << ",";
+            dismap.at<cv::Vec3b>(sampleMap[i][1],sampleMap[i][0])[0] = 0;
+            dismap.at<cv::Vec3b>(sampleMap[i][1],sampleMap[i][0])[1] = 255; 
+            dismap.at<cv::Vec3b>(sampleMap[i][1],sampleMap[i][0])[2] = 0;
+
+        }
+        // std::cout << std::endl;
+    }
+    
+    // std::cout << sampleMap.size() << std::endl;
+
+    cv::imshow("dismap", dismap);
+    cv::waitKey(10000);
+    
+    return 0;
+}
+```
+
 ## 5.3 RRT算法
+
+RRT是Steven M. LaValle和James J.Kuffner Jr.提出的一种通过随机构建Space Filling Tree实现对非凸高维空间快速搜索的算法。该算法可以很容易的处理包含障碍物和差分运动约束的场景，因而广泛的被应用在各种机器人的运动规划场景中。
+
+原始的RRT算法中将搜索的起点位置作为跟节点，然后通过随机采样增加叶子节点的方式，生成一个随机拓展树。当随机树的叶子节点进入目标区域，就得到了从起点位置到目标位置的路径。
+
+```cpp
+Path RRT(const Map& M,const Node& x_start,const Node& x_end)
+{
+    Path path = new Path(x_start);
+    Node x_new = new Node();
+    while(x_new != x_end)
+    {
+        x_rand = Sample(M);
+        x_near = Near(x_rand,path);
+        x_new = Steer(x_rand,x_near,StepSize);
+        E = Edge(x_new,x_near);
+        if(CollisionFree(M,E))
+        {
+            path.addNode(x_new);
+            path.addEdge(E);
+        }
+    }
+    return path;
+}
+```
+
+上面的代码中，M是地图环境，x_start是起始位置，x_goal是目标位置。路径空间搜索的过程从起点开始，先随机撒点x_rand，然后查找距离x_rand最近的节点x_near，然后沿着x_near到x_rand方向前进Stepsize距离得到x_new,使用CollisionFree(M,E)方法检测Edge(x_new,x_near)是否与地图环境中的障碍物有碰撞，如果没有碰撞，则完成一次空间搜索拓展。重复上述流程，直到达到目标位置。
+
+为了加快随机数收敛到目标位置的速度，基于概率的RRT算法在随机树拓展的步骤中引入了一个概率$p$，根据概率的值来选择树的生长方向是随即生长还是朝向目标位置生成，引入向目标生长的机制可以加快路径搜索的收敛速度。
+
+```cpp
+x_rand = ChooseTarget(x_rand,x_end,p);
+```
 
 ## 5.4 RRT-Connect
 
+RRT-Connect在RRT的基础上引入了双树拓展环节，即分别以起点和目标点为根节点生成两个树进行双向拓展，当两棵树建立连接时可认为路径规划成功。通过一次采样得到一个采样点x_rand，然后两棵树同时向x_rand方向进行拓展，加快两棵树建立连接的速度。相较于单树拓展的RRT算法，RRT-Connect加入了启发式步骤，加快了搜索速度，对于狭窄通道也有较好的效果。
+
 ## 5.5 RRT*算法
+
+RRT*算法是一种渐进最优算法。
+
+算法流程与RRT算法流程基本相同，不同之处就在于最后加入将x_new加入搜索树时父节点的选择策略。
+
+RRT*算法在选择父节点时会有一个重连的过程，也就是在以x_new为圆心，半径为r的邻域内，找到与x_new连接后路径代价(从起点移动到x_new的路径长度)最小的节点，并重新选择x_min作为x_new的父节点，而不是x_near。
 
 
 
