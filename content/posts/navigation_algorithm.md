@@ -3,9 +3,7 @@ author: "KnightSnape"
 title: "Navigation Algorithm"
 date: "2024-1-22"
 description: "The total result of navigation algorithm"
-FAtags: ["markdown", "css", "html", "themes"]
-FAcategories: ["themes", "syntax"]
-FAseries: ["Themes Guide"]
+tags: ["navigation"]
 aliases: ["migrate-from-jekyl"]
 ShowToc: true
 TocOpen: true

@@ -28,73 +28,10 @@
       <description></description>
     </item>
     <item>
-      <title>css</title>
-      <link>http://knightsnape.github.io/public/tags/css/</link>
-      <pubDate>Mon, 11 Mar 2019 00:00:00 +0000</pubDate>
-      <guid>http://knightsnape.github.io/public/tags/css/</guid>
-      <description></description>
-    </item>
-    <item>
-      <title>html</title>
-      <link>http://knightsnape.github.io/public/tags/html/</link>
-      <pubDate>Mon, 11 Mar 2019 00:00:00 +0000</pubDate>
-      <guid>http://knightsnape.github.io/public/tags/html/</guid>
-      <description></description>
-    </item>
-    <item>
-      <title>markdown</title>
-      <link>http://knightsnape.github.io/public/tags/markdown/</link>
-      <pubDate>Mon, 11 Mar 2019 00:00:00 +0000</pubDate>
-      <guid>http://knightsnape.github.io/public/tags/markdown/</guid>
-      <description></description>
-    </item>
-    <item>
-      <title>themes</title>
-      <link>http://knightsnape.github.io/public/tags/themes/</link>
-      <pubDate>Mon, 11 Mar 2019 00:00:00 +0000</pubDate>
-      <guid>http://knightsnape.github.io/public/tags/themes/</guid>
-      <description></description>
-    </item>
-    <item>
-      <title>code</title>
-      <link>http://knightsnape.github.io/public/tags/code/</link>
-      <pubDate>Sun, 10 Mar 2019 00:00:00 +0000</pubDate>
-      <guid>http://knightsnape.github.io/public/tags/code/</guid>
-      <description></description>
-    </item>
-    <item>
-      <title>gist</title>
-      <link>http://knightsnape.github.io/public/tags/gist/</link>
-      <pubDate>Sun, 10 Mar 2019 00:00:00 +0000</pubDate>
-      <guid>http://knightsnape.github.io/public/tags/gist/</guid>
-      <description></description>
-    </item>
-    <item>
-      <title>privacy</title>
-      <link>http://knightsnape.github.io/public/tags/privacy/</link>
-      <pubDate>Sun, 10 Mar 2019 00:00:00 +0000</pubDate>
-      <guid>http://knightsnape.github.io/public/tags/privacy/</guid>
-      <description></description>
-    </item>
-    <item>
-      <title>shortcodes</title>
-      <link>http://knightsnape.github.io/public/tags/shortcodes/</link>
-      <pubDate>Sun, 10 Mar 2019 00:00:00 +0000</pubDate>
-      <guid>http://knightsnape.github.io/public/tags/shortcodes/</guid>
-      <description></description>
-    </item>
-    <item>
-      <title>syntax</title>
-      <link>http://knightsnape.github.io/public/tags/syntax/</link>
-      <pubDate>Sun, 10 Mar 2019 00:00:00 +0000</pubDate>
-      <guid>http://knightsnape.github.io/public/tags/syntax/</guid>
-      <description></description>
-    </item>
-    <item>
-      <title>emoji</title>
-      <link>http://knightsnape.github.io/public/tags/emoji/</link>
-      <pubDate>Tue, 05 Mar 2019 00:00:00 +0000</pubDate>
-      <guid>http://knightsnape.github.io/public/tags/emoji/</guid>
+      <title>navigation</title>
+      <link>http://knightsnape.github.io/public/tags/navigation/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>http://knightsnape.github.io/public/tags/navigation/</guid>
       <description></description>
     </item>
   </channel>

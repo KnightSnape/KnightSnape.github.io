@@ -11,21 +11,6 @@
     </image>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Mon, 11 Mar 2019 00:00:00 +0000</lastBuildDate>
     <atom:link href="http://knightsnape.github.io/public/categories/index.xml" rel="self" type="application/rss+xml" />
-    <item>
-      <title>syntax</title>
-      <link>http://knightsnape.github.io/public/categories/syntax/</link>
-      <pubDate>Mon, 11 Mar 2019 00:00:00 +0000</pubDate>
-      <guid>http://knightsnape.github.io/public/categories/syntax/</guid>
-      <description></description>
-    </item>
-    <item>
-      <title>themes</title>
-      <link>http://knightsnape.github.io/public/categories/themes/</link>
-      <pubDate>Mon, 11 Mar 2019 00:00:00 +0000</pubDate>
-      <guid>http://knightsnape.github.io/public/categories/themes/</guid>
-      <description></description>
-    </item>
   </channel>
 </rss>
