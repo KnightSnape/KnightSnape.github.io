@@ -1,0 +1,1263 @@
+<!DOCTYPE html>
+<html lang="en" dir="auto">
+
+<head><meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="robots" content="index, follow">
+<title>PaperMod</title>
+<meta name="keywords" content="">
+<meta name="description" content="数值分析 前言 $\quad$ 数值分析主要考虑问题的数值解方面的内容, 包括但不限于数值算法的构建, 误差传播的影响, 计算复杂度的估算以及高效可靠的计算机的实现. 虽然对于不同的问题有不同的数值模型来构建, 但是他们一般都具有一些共同点:
+$\quad$ 数值分析一般会以线性代数, 高等数学, 实分析和泛函分析等内容为基础或者分析工具
+$\quad$ 如果一个问题不能直接求解, 尝试考虑一个近似的可解的问题
+$\quad$ 稳定性. 这里的稳定性是指模型问题的解对初始数据的敏感度, 也就是说, 解因为初始数据的微小改变而产生的变化, 变化越小越稳定.
+数值分析的研究领域非常广泛, 并且由于现代种类交叉学科的发展, 数值分析的边界变得越来越模糊. 但是主要的内容包含如下几个方面:
+数值线性代数 $\quad$ 主要研究内容主要涉及线性方程组算法研究, 特征值和相关数值算法研究
+非线性方程组 $\quad$ 非线性方程组的求解一般是以一系列近似的线性问题为工具, 经典的方法包括二分法, 不动点迭代, 最速下降法和牛顿法等
+逼近理论 $\quad$ 逼近理论主要考虑如何利用简单的函数来逼近复杂函数, 并且如何给出定量误差估计
+1.数值计算的误差
+2.内积空间与正交分解
+3.线性方程组问题
+3.1.高斯消元法 3.2.列主元消去法 3.3.矩阵的三角分解法 3.4.矩阵的直接LU分解法 3.5.三对角线性方程组的追赶法 3.6.迭代法求解线性方程组 3.7.雅可比迭代法 3.8.高斯-赛德尔迭代法 4.插值算法
+4.1.线性插值 4.2.双线性插值 4.3.拉格朗日插值 4.4.牛顿插值 5.数值微分和积分
+5.1.数值微分与计算方法 5.2.数值积分与计算方法 6.数值逼近
+6.1.曲线和曲面的拟合 6.2.正交多项式与函数逼近 1.数值计算的误差 $\quad$既然直接聊到了误差，那么就直接讲其分类以及来源:
+模型误差：实际问题和对其进行抽象，简化后得到的数学模型之间存在的误差 观测误差：由于精度限制，观察和测量的时候产生的误差 舍入误差：计算机字长的限制，所能表示的数只能有有限的位数，后面的部分按照不同的舍入规则舍去产生的误差。 截断/方法误差：得不到精确解的数学模型通常用数值方法求近似解，二者之间的误差，通常用有限过程对无穷进行截断，比如：泰勒公式的近似代替如下： $$ P_n(x) = f(0) &#43; \frac{f`(0)}{1!">
+<meta name="author" content="Theme PaperMod">
+<link rel="canonical" href="http://knightsnape.github.io/public/posts/math_numerical_analysis/">
+<link crossorigin="anonymous" href="/public/assets/css/stylesheet.5ff2630c4d1b3e25bc21f0ecd96681dbcf58219e741fa627857820b5485cb770.css" integrity="sha256-X/JjDE0bPiW8IfDs2WaB289YIZ50H6YnhXggtUhct3A=" rel="preload stylesheet" as="style">
+<link rel="icon" href="http://knightsnape.github.io/public/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="http://knightsnape.github.io/public/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="http://knightsnape.github.io/public/favicon-32x32.png">
+<link rel="apple-touch-icon" href="http://knightsnape.github.io/public/apple-touch-icon.png">
+<link rel="mask-icon" href="http://knightsnape.github.io/public/safari-pinned-tab.svg">
+<meta name="theme-color" content="#2e2e33">
+<meta name="msapplication-TileColor" content="#2e2e33">
+<noscript>
+    <style>
+        #theme-toggle,
+        .top-link {
+            display: none;
+        }
+
+    </style>
+    <style>
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --theme: rgb(29, 30, 32);
+                --entry: rgb(46, 46, 51);
+                --primary: rgb(218, 218, 219);
+                --secondary: rgb(155, 156, 157);
+                --tertiary: rgb(65, 66, 68);
+                --content: rgb(196, 196, 197);
+                --code-block-bg: rgb(46, 46, 51);
+                --code-bg: rgb(55, 56, 62);
+                --border: rgb(51, 51, 51);
+            }
+
+            .list {
+                background: var(--theme);
+            }
+
+            .list:not(.dark)::-webkit-scrollbar-track {
+                background: 0 0;
+            }
+
+            .list:not(.dark)::-webkit-scrollbar-thumb {
+                border-color: var(--theme);
+            }
+        }
+
+    </style>
+</noscript>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.15.2/dist/katex.min.css" integrity="sha384-MlJdn/WNKDGXveldHDdyRP1R4CTHr3FeuDNfhsLPYrq2t0UBkUdK2jyTnXPEK1NQ" crossorigin="anonymous">
+
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.2/dist/katex.min.js" integrity="sha384-VQ8d8WVFw0yHhCk5E8I86oOhv48xLpnDZx5T9GogA/Y84DcCKWXDmSDfn13bzFZY" crossorigin="anonymous"></script>
+
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.2/dist/contrib/auto-render.min.js" integrity="sha384-+XBljXPPiv+OzfbB3cVmLHf4hdUFHlWNZN5spNQ7rmHTXpd7WvJum6fIACpNNfIR" crossorigin="anonymous"
+    onload="renderMathInElement(document.body);"></script>
+
+>
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+    renderMathInElement(document.body, {
+        delimiters: [
+            {left: "$$", right: "$$", display: true},
+            {left: "$", right: "$", display: false}
+        ]
+    });
+});
+</script>
+<meta property="og:title" content="" />
+<meta property="og:description" content="数值分析 前言 $\quad$ 数值分析主要考虑问题的数值解方面的内容, 包括但不限于数值算法的构建, 误差传播的影响, 计算复杂度的估算以及高效可靠的计算机的实现. 虽然对于不同的问题有不同的数值模型来构建, 但是他们一般都具有一些共同点:
+$\quad$ 数值分析一般会以线性代数, 高等数学, 实分析和泛函分析等内容为基础或者分析工具
+$\quad$ 如果一个问题不能直接求解, 尝试考虑一个近似的可解的问题
+$\quad$ 稳定性. 这里的稳定性是指模型问题的解对初始数据的敏感度, 也就是说, 解因为初始数据的微小改变而产生的变化, 变化越小越稳定.
+数值分析的研究领域非常广泛, 并且由于现代种类交叉学科的发展, 数值分析的边界变得越来越模糊. 但是主要的内容包含如下几个方面:
+数值线性代数 $\quad$ 主要研究内容主要涉及线性方程组算法研究, 特征值和相关数值算法研究
+非线性方程组 $\quad$ 非线性方程组的求解一般是以一系列近似的线性问题为工具, 经典的方法包括二分法, 不动点迭代, 最速下降法和牛顿法等
+逼近理论 $\quad$ 逼近理论主要考虑如何利用简单的函数来逼近复杂函数, 并且如何给出定量误差估计
+1.数值计算的误差
+2.内积空间与正交分解
+3.线性方程组问题
+3.1.高斯消元法 3.2.列主元消去法 3.3.矩阵的三角分解法 3.4.矩阵的直接LU分解法 3.5.三对角线性方程组的追赶法 3.6.迭代法求解线性方程组 3.7.雅可比迭代法 3.8.高斯-赛德尔迭代法 4.插值算法
+4.1.线性插值 4.2.双线性插值 4.3.拉格朗日插值 4.4.牛顿插值 5.数值微分和积分
+5.1.数值微分与计算方法 5.2.数值积分与计算方法 6.数值逼近
+6.1.曲线和曲面的拟合 6.2.正交多项式与函数逼近 1.数值计算的误差 $\quad$既然直接聊到了误差，那么就直接讲其分类以及来源:
+模型误差：实际问题和对其进行抽象，简化后得到的数学模型之间存在的误差 观测误差：由于精度限制，观察和测量的时候产生的误差 舍入误差：计算机字长的限制，所能表示的数只能有有限的位数，后面的部分按照不同的舍入规则舍去产生的误差。 截断/方法误差：得不到精确解的数学模型通常用数值方法求近似解，二者之间的误差，通常用有限过程对无穷进行截断，比如：泰勒公式的近似代替如下： $$ P_n(x) = f(0) &#43; \frac{f`(0)}{1!" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="http://knightsnape.github.io/public/posts/math_numerical_analysis/" /><meta property="og:image" content="http://knightsnape.github.io/public/images/papermod-cover.png"/><meta property="article:section" content="posts" />
+
+
+
+
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="http://knightsnape.github.io/public/images/papermod-cover.png"/>
+
+<meta name="twitter:title" content=""/>
+<meta name="twitter:description" content="数值分析 前言 $\quad$ 数值分析主要考虑问题的数值解方面的内容, 包括但不限于数值算法的构建, 误差传播的影响, 计算复杂度的估算以及高效可靠的计算机的实现. 虽然对于不同的问题有不同的数值模型来构建, 但是他们一般都具有一些共同点:
+$\quad$ 数值分析一般会以线性代数, 高等数学, 实分析和泛函分析等内容为基础或者分析工具
+$\quad$ 如果一个问题不能直接求解, 尝试考虑一个近似的可解的问题
+$\quad$ 稳定性. 这里的稳定性是指模型问题的解对初始数据的敏感度, 也就是说, 解因为初始数据的微小改变而产生的变化, 变化越小越稳定.
+数值分析的研究领域非常广泛, 并且由于现代种类交叉学科的发展, 数值分析的边界变得越来越模糊. 但是主要的内容包含如下几个方面:
+数值线性代数 $\quad$ 主要研究内容主要涉及线性方程组算法研究, 特征值和相关数值算法研究
+非线性方程组 $\quad$ 非线性方程组的求解一般是以一系列近似的线性问题为工具, 经典的方法包括二分法, 不动点迭代, 最速下降法和牛顿法等
+逼近理论 $\quad$ 逼近理论主要考虑如何利用简单的函数来逼近复杂函数, 并且如何给出定量误差估计
+1.数值计算的误差
+2.内积空间与正交分解
+3.线性方程组问题
+3.1.高斯消元法 3.2.列主元消去法 3.3.矩阵的三角分解法 3.4.矩阵的直接LU分解法 3.5.三对角线性方程组的追赶法 3.6.迭代法求解线性方程组 3.7.雅可比迭代法 3.8.高斯-赛德尔迭代法 4.插值算法
+4.1.线性插值 4.2.双线性插值 4.3.拉格朗日插值 4.4.牛顿插值 5.数值微分和积分
+5.1.数值微分与计算方法 5.2.数值积分与计算方法 6.数值逼近
+6.1.曲线和曲面的拟合 6.2.正交多项式与函数逼近 1.数值计算的误差 $\quad$既然直接聊到了误差，那么就直接讲其分类以及来源:
+模型误差：实际问题和对其进行抽象，简化后得到的数学模型之间存在的误差 观测误差：由于精度限制，观察和测量的时候产生的误差 舍入误差：计算机字长的限制，所能表示的数只能有有限的位数，后面的部分按照不同的舍入规则舍去产生的误差。 截断/方法误差：得不到精确解的数学模型通常用数值方法求近似解，二者之间的误差，通常用有限过程对无穷进行截断，比如：泰勒公式的近似代替如下： $$ P_n(x) = f(0) &#43; \frac{f`(0)}{1!"/>
+
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position":  1 ,
+      "name": "Posts",
+      "item": "http://knightsnape.github.io/public/posts/"
+    }, 
+    {
+      "@type": "ListItem",
+      "position":  2 ,
+      "name": "",
+      "item": "http://knightsnape.github.io/public/posts/math_numerical_analysis/"
+    }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "",
+  "name": "",
+  "description": "数值分析 前言 $\\quad$ 数值分析主要考虑问题的数值解方面的内容, 包括但不限于数值算法的构建, 误差传播的影响, 计算复杂度的估算以及高效可靠的计算机的实现. 虽然对于不同的问题有不同的数值模型来构建, 但是他们一般都具有一些共同点:\n$\\quad$ 数值分析一般会以线性代数, 高等数学, 实分析和泛函分析等内容为基础或者分析工具\n$\\quad$ 如果一个问题不能直接求解, 尝试考虑一个近似的可解的问题\n$\\quad$ 稳定性. 这里的稳定性是指模型问题的解对初始数据的敏感度, 也就是说, 解因为初始数据的微小改变而产生的变化, 变化越小越稳定.\n数值分析的研究领域非常广泛, 并且由于现代种类交叉学科的发展, 数值分析的边界变得越来越模糊. 但是主要的内容包含如下几个方面:\n数值线性代数 $\\quad$ 主要研究内容主要涉及线性方程组算法研究, 特征值和相关数值算法研究\n非线性方程组 $\\quad$ 非线性方程组的求解一般是以一系列近似的线性问题为工具, 经典的方法包括二分法, 不动点迭代, 最速下降法和牛顿法等\n逼近理论 $\\quad$ 逼近理论主要考虑如何利用简单的函数来逼近复杂函数, 并且如何给出定量误差估计\n1.数值计算的误差\n2.内积空间与正交分解\n3.线性方程组问题\n3.1.高斯消元法 3.2.列主元消去法 3.3.矩阵的三角分解法 3.4.矩阵的直接LU分解法 3.5.三对角线性方程组的追赶法 3.6.迭代法求解线性方程组 3.7.雅可比迭代法 3.8.高斯-赛德尔迭代法 4.插值算法\n4.1.线性插值 4.2.双线性插值 4.3.拉格朗日插值 4.4.牛顿插值 5.数值微分和积分\n5.1.数值微分与计算方法 5.2.数值积分与计算方法 6.数值逼近\n6.1.曲线和曲面的拟合 6.2.正交多项式与函数逼近 1.数值计算的误差 $\\quad$既然直接聊到了误差，那么就直接讲其分类以及来源:\n模型误差：实际问题和对其进行抽象，简化后得到的数学模型之间存在的误差 观测误差：由于精度限制，观察和测量的时候产生的误差 舍入误差：计算机字长的限制，所能表示的数只能有有限的位数，后面的部分按照不同的舍入规则舍去产生的误差。 截断/方法误差：得不到精确解的数学模型通常用数值方法求近似解，二者之间的误差，通常用有限过程对无穷进行截断，比如：泰勒公式的近似代替如下： $$ P_n(x) = f(0) + \\frac{f`(0)}{1!",
+  "keywords": [
+    
+  ],
+  "articleBody": "数值分析 前言 $\\quad$ 数值分析主要考虑问题的数值解方面的内容, 包括但不限于数值算法的构建, 误差传播的影响, 计算复杂度的估算以及高效可靠的计算机的实现. 虽然对于不同的问题有不同的数值模型来构建, 但是他们一般都具有一些共同点:\n$\\quad$ 数值分析一般会以线性代数, 高等数学, 实分析和泛函分析等内容为基础或者分析工具\n$\\quad$ 如果一个问题不能直接求解, 尝试考虑一个近似的可解的问题\n$\\quad$ 稳定性. 这里的稳定性是指模型问题的解对初始数据的敏感度, 也就是说, 解因为初始数据的微小改变而产生的变化, 变化越小越稳定.\n数值分析的研究领域非常广泛, 并且由于现代种类交叉学科的发展, 数值分析的边界变得越来越模糊. 但是主要的内容包含如下几个方面:\n数值线性代数 $\\quad$ 主要研究内容主要涉及线性方程组算法研究, 特征值和相关数值算法研究\n非线性方程组 $\\quad$ 非线性方程组的求解一般是以一系列近似的线性问题为工具, 经典的方法包括二分法, 不动点迭代, 最速下降法和牛顿法等\n逼近理论 $\\quad$ 逼近理论主要考虑如何利用简单的函数来逼近复杂函数, 并且如何给出定量误差估计\n1.数值计算的误差\n2.内积空间与正交分解\n3.线性方程组问题\n3.1.高斯消元法 3.2.列主元消去法 3.3.矩阵的三角分解法 3.4.矩阵的直接LU分解法 3.5.三对角线性方程组的追赶法 3.6.迭代法求解线性方程组 3.7.雅可比迭代法 3.8.高斯-赛德尔迭代法 4.插值算法\n4.1.线性插值 4.2.双线性插值 4.3.拉格朗日插值 4.4.牛顿插值 5.数值微分和积分\n5.1.数值微分与计算方法 5.2.数值积分与计算方法 6.数值逼近\n6.1.曲线和曲面的拟合 6.2.正交多项式与函数逼近 1.数值计算的误差 $\\quad$既然直接聊到了误差，那么就直接讲其分类以及来源:\n模型误差：实际问题和对其进行抽象，简化后得到的数学模型之间存在的误差 观测误差：由于精度限制，观察和测量的时候产生的误差 舍入误差：计算机字长的限制，所能表示的数只能有有限的位数，后面的部分按照不同的舍入规则舍去产生的误差。 截断/方法误差：得不到精确解的数学模型通常用数值方法求近似解，二者之间的误差，通常用有限过程对无穷进行截断，比如：泰勒公式的近似代替如下： $$ P_n(x) = f(0) + \\frac{f`(0)}{1!}x + \\frac{f``(0)}{2!}x^2 + … + \\frac{f^{n}(0)}{n!}x^n $$\n则截断误差为:\n$$ R_n(x) = f(x) - P_n(x) = \\frac{f^{n+1}(\\xi)}{(n+1)!}x^{n+1} $$\n其中$\\xi \\in (0,x)$\n定义1: 设$x$为准确值，$x^$为$x$的一个近似值，称$E(x^) = x^* - x$为近似值的绝对误差，简称误差\n实际上，准确值$x$通常无法求得甚至未知，因此上面的$E(x^)$往往也无法求得，只能知道其绝对值的某个上界$\\varepsilon(x) \\ge E(x^) = |x^ - x|$，数值$\\varepsilon(x*)$称为$x^*$的(绝对)误差限。\n但是一个测量值的精确程度除了与绝对误差限有关外，还和该量的大小有关，由此引入相对误差限：\n定义2: 设$x$为准确值，$x^$为$x$的一个近似值，称$\\frac{E(x^)}{x} = \\frac{x^* - x}{x}$为近似值x^的相对误差，简记为E_r，$\\varepsilon_r(x^) \\ge |E_r(x^)|$为$x^$的相对误差限\n两种误差限制的关系为:$\\varepsilon_r = \\frac{\\varepsilon}{|x^*|}$\n定义3: 若$x^$为$x$的近似值，其绝对误差的绝对值不超过某一位数字的半个单位，而该位数字到$x^$的第一位非零数字共有n位，则称用$x^$近似$x$时具有$n$位有效数字，简称$x^$有$n$位有效数字。\n有效数字与绝对误差限的关系：\n$x$的近似值$x^*$的规格化形式可以写作：\n$$ x^* = \\pm0.a_1a_2…a_k \\times 10^m $$\n其中$m$是整数，$a_i$是0-9中的一个数字且$a_1=0$,则上式具有n位($n \\leq k$)有效数字当且仅当$|E| = |x^* - x| \\leq 0.5 \\times 10^{m - n}$\n$x^*$有n位有效数字，则相对误差限:\n$$ e_r^* \\leq \\frac{1}{2a_1} \\times 10^{1-n} $$\n反之相对误差限:\n$$ e_r^* \\leq \\frac{1}{2(a_1+1)} \\times 10^{1-n} $$\n数值运算的误差估计：\n$$ \\varepsilon(x_1^* + x_2^) = \\varepsilon(x_1^) + \\varepsilon(x_2^*) $$\n$$ \\varepsilon (x_1^x_2^) \\approx |x_1^|\\varepsilon(x_2^) + |x_2^|\\varepsilon(x_1^) $$\n$$ \\varepsilon(\\frac{x_1^}{x_2^}) \\approx \\frac{|x_1^|\\varepsilon(x_2^) + |x_2^|\\varepsilon(x_1^)}{|x_2^*|^2} $$\n一般地，自变量有误差时，计算函数值也产生误差，误差限可利用函数的泰勒展开式进行估计，\n$$ \\varepsilon(f(x^)) = f(x) - f(x^) = f`(x^)(x - x^) + \\frac{f``(\\xi)}{2}(x - x^*)^2 $$\n其中$\\xi$介于$x$和$x^*$之间\n取绝对值并假定$f`(x^)$和$f``(x^)$比值不大，忽略$\\varepsilon(x^*)$的高阶项，有：\n$$ \\varepsilon(f(x^)) \\approx |f`(x^)|\\varepsilon(x^*) $$\n多元函数同理\n四则运算的稳定性问题：\n防止大数吃小数(计算机位数有限造成)-\u003e求和时从小到大相加，可使和的误差减小 做减法时避免相近数相减-\u003e使用有理化，三角变换等 避免小数作为除数和大数作为乘数 提高算法效率问题：\n减少运算次数(多项式计算的秦九韶算法) 病态问题 定义4: 对数学问题本身如果输入数据有微小扰动，引起输出数据的很大扰动，即病态问题\n计算函数值$f(x)$，当$x$有扰动，$\\delta = x - x^$，相对误差$\\frac{\\delta}{x}$，函数值相对误差$\\frac{f(x) - f(x^)}{f(x)}$，相对误差比值为:$\\frac{\\frac{f(x) - f(x^*)}{f(x)}}{\\frac{\\delta}{x}} \\approx \\frac{xf`(x)}{f(x)} = C_p$ 其中$C_p$为计算函数值问题的条件数\n2.内积空间与正交分解 矢量的模与赋范空间 向量的模是线性空间中不存在的概念，它就是向量的大小，对于几何而言反映为有向线段的长短，其满足如下性质：\n1.正定性:$||\\mathbf{a}|| \u003e 0 , ||\\mathbf{0}|| = 0$ 2.正齐次性:$||\\lambda\\mathbf{a}||=|\\lambda|||\\mathbf{a}||$ 3.三角不等式:$||\\mathbf{a}+\\mathbf{b}|| \\leq ||a|| + ||b||$\n矢量的模运算可以看成是$R^3$空间到$R$的映射，也可以看成一维实数的绝对值在二维和三维空间的推广。我们可以进一步推广到n维向量的模场：\n$$ ||\\mathbf{v}|| = \\sqrt{\\sum_{i=1}^{n}{x_i^2}} $$\n更一般的，我们不需要定义计算元素“长短”的公式，我们只需要定义计算元素“长短”的运算所满足的条件。比如我们在线性空间中，定义范数(norm)运算，记为$||·||$，使之满足上面的正定性，正齐次性，三角不等式，我们就得到了一个新的代数结构——赋范线性空间。\n矢量的单位化: 单位向量是定义为模长为1的向量,那么任意向量的单位化:\n$$ normalize(\\mathbf{a}) = \\frac{\\mathbf{a}}{||\\mathbf{a}||} $$\n单位化也常称归一化，规范化。单位化向量在几何和物理中，特指向量的方向。单位向量和原向量线性相关\n赋范线性空间的定义：$V$是数域$F$上的线性空间，映射$||·||:V \\to F$满足\n1.正定性: $||\\mathbf{\\xi}|| \u003e 0, ||\\mathbf{0}|| = 0$\n2.正齐次性：$||k\\xi||=|k|||\\xi||,k \\in F$\n3.三角不等式 $||\\xi_1 + \\xi_2|| \\leq ||\\xi_1|| + ||\\xi_2||$\n比如，在线性空间与线性变换中，我们知道所有在闭区间$[a,b]$上连续的函数构成一个线性空间$C[a,b]$，我们可以定义三种常用的范数，使之构成赋范线性空间。那么可以定义函数的范数：\n1.$\\infty - $范数:$||f(x)||\\infty=max{a \\leq x \\leq b}|f(x)|$\n2.$1 - $范数:$||f(x)||1 = \\int{a}^{b}|f(x)|dx$\n3.$2 - $范数:$||f(x)||2 = \\sqrt{\\int{a}^{b}{(f(x))^2}dx}$\n类比于向量的单位化，与函数范数的定义，我们可以得到函数的单位化：单位函数是范数为1的函数，那么函数的单位化：\n$$ normalize[f(x)] = \\frac{f(x)}{||f(x)||} $$\n单位函数的反映在函数图像上，保留了原函数的“起伏”形状。也即单位函数与原函数线性相关，而且导函数与原函数都线性相关：\n$$ (\\frac{f(x)}{||f(x)||})=\\frac{1}{||f(x)||}f(x)=kf`(x) $$\n$$ \\int{\\frac{f(x)}{f`(x)}dx}=\\frac{1}{||f(x)||}\\int{f(x)dx}=k\\int{f(x)dx} $$\n范数是模的抽象，是数学上衡量元素“长短”的一般概念，如果是更一般的集合，只要范数运算满足正定性、正齐次性、三角不等式，那么就称它为赋范空间。\n向量的内积和内积空间 熟悉的内积公式为：\n$$ \\mathbf{a}·\\mathbf{b} = ||\\mathbf{a}||||\\mathbf{b}||cos\u003c\\mathbf{a},\\mathbf{b}\u003e $$\n通过内积运算，也建立一个从矢量到标量的映射。矢量内积最重要的几何意义是反应了两矢量的夹角$\\alpha$，所以我们也常常使用矢量内积计算两矢量的夹角：\n$$ \\cos{\\alpha} = \\frac{\\mathbf{a}·\\mathbf{b}}{||\\mathbf{a}||||\\mathbf{b}||} $$\n因为$-1 \\leq cos\\alpha \\leq -1$，所以有 $|\\mathbf{a}·\\mathbf{b}| \\leq ||\\mathbf{a}||||\\mathbf{b}||$\n这个不等式就是柯西-布涅柯夫斯基不等式。\n由定义，我们还可以从内积公式中得到向量模的计算公式：\n$$ ||\\mathbf{a}|| = \\sqrt{\\mathbf{a}·\\mathbf{a}} $$\n内积空间的定义： $V$ 是数域$F$上的线性空间，在$V$上定义内积运算$(\\alpha,\\beta)$，对$\\forall \\alpha,\\beta \\in V$，都有$F$中的一个元素与之对应。它具有以下性质:\n共轭对称性：$(\\alpha,\\beta) = \\overline{(\\beta,\\alpha)}$ 数乘结合律: $(k\\alpha,\\beta) = k(\\alpha,\\beta)$ 加法分配律: $(\\alpha + \\beta,\\gamma) = (\\alpha,\\gamma) + (\\beta,\\gamma)$ 正定性: $(\\alpha,\\alpha) \\geq 0$，当且仅当$\\alpha = 0$时$(\\alpha,\\alpha) = 0$ 由定义，内积空间一定是线性空间。\n正交 定义： 如果$(\\alpha,\\beta)=0$，称$\\alpha,\\beta$正交。正交是垂直的推广，只有在内积空间中才有意义。两正交元素是线性无关的。\n正交基与标准正交基：在内积空间，一组非零的元素，如果它们两两正交，就称为正交元素组。在$n$维内积空间中，有$n$个两两正交的元素，称为正交基，如果正交基的元素都是单位元素，则称为标准正交基。设$\\epsilon_1,\\epsilon_2,…,\\epsilon_n$是一组正交基，那么：\n$$ (\\epsilon_i,\\epsilon_j) = \\left{ \\begin{aligned} \u0026E_i,when \\quad i=j \\ \u00260,when \\quad i \\neq j \\ \\end{aligned} \\right. $$\n当$E_i=1$时，就是标准正交基。一组基为标准正交基的充要条件是，它的度量矩阵为单位矩阵。在标准正交基下，内积公式可以简化为：\n$$ (\\alpha,\\beta) = \\sum_{i=1}^{n}{\\sum_{j=1}^{n}{x_iy_i}} = X_TY $$\n定理(施密特(Schimidt)正交化)： 通过$n$维欧式空间中任意一组线性无关的向量组${\\epsilon_i}$，都可以找到一组标准的正交基${\\eta_i}$\n逐个正交化，令$\\beta_1 = \\epsilon_1$\n因为\\beta_i是${\\epsilon_i}$的线性组合，那么我们可以构造递推公式：\n$$ \\beta_i = \\epsilon_i - \\sum_{j=1}^{i-1}{k_j\\beta_j},i \u003e 1 $$\n其中\n$$ k_j = \\frac{(\\epsilon_{i+1},\\beta_i)}{(\\beta_i,\\beta_i)} $$\n再逐个归一化：\n$$ \\eta_i = \\frac{\\beta_i}{|\\beta_i|},i=1,2,…,n $$\n3.线性方程组问题 3.1.高斯消元法 你一定会解简单的线性方程组，比如下面这样的：\n$$ 2x_1 + 4x_2 - 2x_3 = 2 $$\n$$ 4x_1 + 9x_2 - 3x_3 = 8 $$\n$$ -2x_1 - 3x_2 + 7x_3 = 10 $$\n你一定知道，消元的过程就是解方程的过程。对于上面的方程组， $(1) + (3),(1) \\times 2 - (2)$ 可以消掉$x_1$，得到两个方程进一步可以消掉$x_2$ 或 $x_3$，进而解得结果\n这个过程可以用矩阵描述，表达的是相同含义。\n把方程组左边变量得系数放进矩阵：\n$$ A = \\begin{bmatrix} 2 \u0026 4 \u0026 -2\\ 4 \u0026 9 \u0026 -3\\ -2 \u0026 -3 \u0026 7 \\end{bmatrix} $$\n把方程组右边的数字放入矩阵：\n$$ b = \\begin{bmatrix} 2 \\ 8 \\ 10 \\end{bmatrix} $$\n原方程可以写成：\n$$ Ax = b $$\n接下来进行高斯消元得过程，由于等十之间得加减法同时操作等式两边，以上两个矩阵$A,b$的行变换需要同时进行，故把它们放进同一个矩阵：\n$$ A` = \\begin{bmatrix} 2 \u0026 4 \u0026 -2 \u0026 2\\ 4 \u0026 9 \u0026 -3 \u0026 8\\ -2 \u0026 -3 \u0026 7 \u0026 10 \\end{bmatrix} $$\n先消掉$(2)$,$(3)$中的$x_1$，也就是把矩阵第2，3行的第一列变成0。可以实现这样的效果：\n$$ A^{(1)} = \\begin{bmatrix} 2 \u0026 4 \u0026 -2 \u0026 2\\ 0 \u0026 1 \u0026 1 \u0026 4\\ 0 \u0026 1 \u0026 5 \u0026 12 \\end{bmatrix} $$\n相当于保持第一个方程不变，使用第一个方程。在第2,3中消去了$x_1$，新的2,3方程如下：\n$$ x_2 + x_3 = 4 $$\n$$ x_2 + 5x_3 = 12 $$\n上面的操作可以看出，把矩阵的一行乘上某个数字，再加/减到另一行，可以看作把方程组中的两个方程拿出来，让他们的等式两边相互加减，就是我们熟悉的消元手法！\n3.2.列主元消去法 列主元素消去法是为控制舍入误差而提出来的一种算法，列主元素消去法计算基本上能控制舍入误差的影响，其基本思想是：在进行第 $k(k=1,2,…,n-1)$步消元时，从第k列的 akk及其以下的各元素中选取绝对值最大的元素，然后通过行变换将它交换到主元素akk的位置上，再进行消元。\n优点 高斯消去法从第k步到第k+1步的消元过程，必须满足条件a(kk)不等于零 （kk指下标）。而这个元素 即被称为第k步的主元(素)。显然，高斯消去法是按方程排列的自然顺序产生主元的，这样，一旦出现 计算就归于失败，而且即使a(kk)不等于零 （kk指下标） ，但若其绝对值很小，也将会因用它作除数，引起其他元素的数量级及舍人误差急剧增大，导致最终计算结果不可靠。为了避免在高斯消去法应用中可能出现的这类问题，就发展形成了列主元、全主元等多种消去法。这些方法的基本点在于对高斯消去法的过程作某些技术性修改，全面或局部地选取绝对值最大的元素为主元素，从而构成了相应的主元(素)消去法。列主元(素)消去法以处理简单、相对计算量小的特点，在各类主元消去法中得到最为广泛的应用。\n算法流程 本算法将消元结果覆盖$A$，乘数$m_{jk}$ ，冲掉$a_{ik}$，解x存放在b内。\n对于$k=1,2,3….n$，依次做到第五步 按列选主元，即确定$i_k$，使得 $$ |a_{i_k,k}| = max_{k \\leq i \\leq n}|a_{ik}| $$\n如果$a_{i_k,k} = 0，则输出无解$ 如果$i_k = k$，则转向5，否则换行 $$ a_{kj} \\Leftrightarrow a_{i_k,k} (j=k,k+1,…,n) $$\n$$ b_k \\Leftrightarrow b_{i_k} $$\n消元过程： $$ a_{ik} \\leftarrow m_{ik} = \\frac{a_{ik}}{a_{kk}}, (i=k+1,…,n) $$\n$$ a_{ij} \\leftarrow a_{ij} - m_{ik}a_{kj} (i,j=k+1,…,m) $$\n$$ b_i \\leftarrow b_i - m_{ik}b_k, (i=k+1,…,n) $$\n如果$a_{00} = 0$，则停机 回代求解 $$ b_n \\leftarrow \\frac{b_n}{a_{nm}} $$\n$$ b_i \\leftarrow \\frac{b_i - \\sum_{j=i+1}^{n}{a_{ij}b_j}}{a_{ii}},(i=n-1,…,2,1) $$\n输出结果x. 3.3.矩阵的三角分解法 假设我们有这样的方程：\n$$ 2x_1 + x_2 + x_3 = 4 $$\n$$ 4_x1 + 3x_2 + 3x_3 + x_4 = 11 $$\n$$ 8x_1 + 7x_2 + 9x_3 + 5x_4 = 29 $$\n$$ 6x_1 + 7x_2 + 9x_3 + 8x_4 = 30 $$\n通过高斯消元法，获得等价问题:\n$$ 2x_1 + x_2 + x_3 = 4 $$\n$$ x_2 + x_3 + x_4 = 3 $$\n$$ 2x_3 + 2x_4 = 4 $$\n$$ 2x_4 = 2 $$\n这样的消元过程如果写成矩阵相乘的过程，那么如下所示：\n$$ L_1A = \\begin{bmatrix} 1 \u0026 \u0026 \u0026 \\ -2 \u0026 1 \u0026 \u0026 \\ -4 \u0026 \u0026 1 \u0026 \\ -3\u0026 \u0026 \u0026 1 \\end{bmatrix}\\begin{bmatrix} 2 \u0026 1 \u0026 1 \u0026 0\\ 0 \u0026 1 \u0026 1 \u0026 1\\ 8 \u0026 7 \u0026 9 \u0026 5 \\ 6 \u0026 7 \u0026 9 \u0026 8 \\end{bmatrix} = \\begin{bmatrix} 2 \u0026 1 \u0026 1 \u0026 0\\ 0 \u0026 1 \u0026 1 \u0026 1\\ 0 \u0026 3 \u0026 5 \u0026 5 \\ 0 \u0026 4 \u0026 6 \u0026 8 \\end{bmatrix} $$\n第二次消元意味着\n$$ L_2L_1A = \\begin{bmatrix} 1 \u0026 \u0026 \u0026 \\ \u0026 1 \u0026 \u0026 \\ \u0026 -3 \u0026 1 \u0026 \\ \u0026 -4 \u0026 \u0026 1 \\end{bmatrix}\\begin{bmatrix} 2 \u0026 1 \u0026 1 \u0026 0\\ 0 \u0026 1 \u0026 1 \u0026 1\\ 8 \u0026 7 \u0026 9 \u0026 5 \\ 6 \u0026 7 \u0026 9 \u0026 8 \\end{bmatrix} = \\begin{bmatrix} 2 \u0026 1 \u0026 1 \u0026 0\\ 0 \u0026 1 \u0026 1 \u0026 1\\ 0 \u0026 0 \u0026 2 \u0026 2 \\ 0 \u0026 0 \u0026 2 \u0026 4 \\end{bmatrix} $$\n第三次消元意味着\n$$ L_3L_2L_1A = \\begin{bmatrix} 1 \u0026 \u0026 \u0026 \\ \u0026 1 \u0026 \u0026 \\ \u0026 \u0026 1 \u0026 \\ \u0026 \u0026 -1 \u0026 1 \\end{bmatrix} \\begin{bmatrix} 2 \u0026 1 \u0026 1 \u0026 0\\ 0 \u0026 1 \u0026 1 \u0026 1\\ 8 \u0026 7 \u0026 9 \u0026 5 \\ 6 \u0026 7 \u0026 9 \u0026 8 \\end{bmatrix} = \\begin{bmatrix} 2 \u0026 1 \u0026 1 \u0026 0\\ 0 \u0026 1 \u0026 1 \u0026 1\\ 0 \u0026 0 \u0026 2 \u0026 2 \\ 0 \u0026 0 \u0026 0 \u0026 2 \\end{bmatrix} = U $$\n通过上述过程得到了LU分解的基本形式。\n对于n阶方阵A，如果存在n阶单位下三角矩阵L和n阶上三角形矩阵U，使得A=LU，则称其为矩阵A的LU分解，也称为Doolittle分解。\n对于Gauss消去法和LU分解法的乘法计算计算量都是在$\\frac{n^3}{3}$ 量级，这个就是分解过程的乘法计算量，推导过程可以模拟一下高斯消去法的整体过程，就可以得到如下的等式，\n$$ \\sum_{k=1}^{n-1}(n-k)(n-k+2) = \\frac{1}{3}n^3 + \\frac{1}{2}n^2 - \\frac{5}{6}n $$\n$$ \\sum_{k=1}^{n}(n-k+1)=\\frac{n(n+1)}{2} $$\n#include using namespace std; const int n = 3; //矩阵的ALU分解 void ALU(double a[n][n], double b[n]) { double l[n][n] = { 0 }; double u[n][n] = { 0 }; int i, r, k; //进行U的第一行的赋值 for (i = 0; i",
+  "wordCount" : "1920",
+  "inLanguage": "en",
+  "datePublished": "0001-01-01T00:00:00Z",
+  "dateModified": "0001-01-01T00:00:00Z",
+  "author":{
+    "@type": "Person",
+    "name": "Theme PaperMod"
+  },
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "http://knightsnape.github.io/public/posts/math_numerical_analysis/"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "PaperMod",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "http://knightsnape.github.io/public/favicon.ico"
+    }
+  }
+}
+</script>
+</head>
+
+<body class="" id="top">
+<script>
+    if (localStorage.getItem("pref-theme") === "dark") {
+        document.body.classList.add('dark');
+    } else if (localStorage.getItem("pref-theme") === "light") {
+        document.body.classList.remove('dark')
+    } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        document.body.classList.add('dark');
+    }
+
+</script>
+
+<header class="header">
+    <nav class="nav">
+        <div class="logo">
+            <a href="http://knightsnape.github.io/public/" accesskey="h" title="PaperMod (Alt + H)">PaperMod</a>
+            <div class="logo-switches">
+                <button id="theme-toggle" accesskey="t" title="(Alt + T)">
+                    <svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                    </svg>
+                    <svg id="sun" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="5"></circle>
+                        <line x1="12" y1="1" x2="12" y2="3"></line>
+                        <line x1="12" y1="21" x2="12" y2="23"></line>
+                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                        <line x1="1" y1="12" x2="3" y2="12"></line>
+                        <line x1="21" y1="12" x2="23" y2="12"></line>
+                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                    </svg>
+                </button>
+            </div>
+        </div>
+        <ul id="menu">
+            <li>
+                <a href="http://knightsnape.github.io/public/categories/" title="category">
+                    <span>category</span>
+                </a>
+            </li>
+            <li>
+                <a href="http://knightsnape.github.io/public/series/" title="series">
+                    <span>series</span>
+                </a>
+            </li>
+            <li>
+                <a href="http://knightsnape.github.io/public/tags/" title="tag">
+                    <span>tag</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+</header>
+<main class="main">
+
+<article class="post-single">
+  <header class="post-header">
+    <div class="breadcrumbs"><a href="http://knightsnape.github.io/public/">Home</a>&nbsp;»&nbsp;<a href="http://knightsnape.github.io/public/posts/">Posts</a></div>
+    <h1 class="post-title entry-hint-parent">
+      
+    </h1>
+    <div class="post-meta">10 min&nbsp;·&nbsp;Theme PaperMod&nbsp;|&nbsp;<a href="https://github.com/KnightSnape/posts/math_numerical_analysis.md" rel="noopener noreferrer" target="_blank">Suggest Changes</a>
+
+</div>
+  </header> <div class="toc">
+    <details >
+        <summary accesskey="c" title="(Alt + C)">
+            <span class="details">Table of Contents</span>
+        </summary>
+
+        <div class="inner"><ul>
+                <li>
+                    <a href="#%e6%95%b0%e5%80%bc%e5%88%86%e6%9e%90" aria-label="数值分析">数值分析</a><ul>
+                        
+                <li>
+                    <a href="#%e5%89%8d%e8%a8%80" aria-label="前言">前言</a><ul>
+                        
+                <li>
+                    <a href="#%e6%95%b0%e5%80%bc%e7%ba%bf%e6%80%a7%e4%bb%a3%e6%95%b0" aria-label="数值线性代数">数值线性代数</a></li>
+                <li>
+                    <a href="#%e9%9d%9e%e7%ba%bf%e6%80%a7%e6%96%b9%e7%a8%8b%e7%bb%84" aria-label="非线性方程组">非线性方程组</a></li>
+                <li>
+                    <a href="#%e9%80%bc%e8%bf%91%e7%90%86%e8%ae%ba" aria-label="逼近理论">逼近理论</a></li></ul>
+                </li></ul>
+                </li>
+                <li>
+                    <a href="#1%e6%95%b0%e5%80%bc%e8%ae%a1%e7%ae%97%e7%9a%84%e8%af%af%e5%b7%ae" aria-label="1.数值计算的误差">1.数值计算的误差</a></li>
+                <li>
+                    <a href="#2%e5%86%85%e7%a7%af%e7%a9%ba%e9%97%b4%e4%b8%8e%e6%ad%a3%e4%ba%a4%e5%88%86%e8%a7%a3" aria-label="2.内积空间与正交分解">2.内积空间与正交分解</a></li>
+                <li>
+                    <a href="#3%e7%ba%bf%e6%80%a7%e6%96%b9%e7%a8%8b%e7%bb%84%e9%97%ae%e9%a2%98" aria-label="3.线性方程组问题">3.线性方程组问题</a><ul>
+                        
+                <li>
+                    <a href="#31%e9%ab%98%e6%96%af%e6%b6%88%e5%85%83%e6%b3%95" aria-label="3.1.高斯消元法">3.1.高斯消元法</a></li>
+                <li>
+                    <a href="#32%e5%88%97%e4%b8%bb%e5%85%83%e6%b6%88%e5%8e%bb%e6%b3%95" aria-label="3.2.列主元消去法">3.2.列主元消去法</a></li>
+                <li>
+                    <a href="#33%e7%9f%a9%e9%98%b5%e7%9a%84%e4%b8%89%e8%a7%92%e5%88%86%e8%a7%a3%e6%b3%95" aria-label="3.3.矩阵的三角分解法">3.3.矩阵的三角分解法</a></li>
+                <li>
+                    <a href="#34%e7%9f%a9%e9%98%b5%e7%9a%84%e7%9b%b4%e6%8e%a5lu%e5%88%86%e8%a7%a3%e6%b3%95" aria-label="3.4.矩阵的直接LU分解法">3.4.矩阵的直接LU分解法</a></li>
+                <li>
+                    <a href="#35%e4%b8%89%e5%af%b9%e8%a7%92%e7%ba%bf%e6%80%a7%e6%96%b9%e7%a8%8b%e7%bb%84%e7%9a%84%e8%bf%bd%e8%b5%b6%e6%b3%95" aria-label="3.5.三对角线性方程组的追赶法">3.5.三对角线性方程组的追赶法</a></li>
+                <li>
+                    <a href="#36%e8%bf%ad%e4%bb%a3%e6%b3%95%e6%b1%82%e8%a7%a3%e7%ba%bf%e6%80%a7%e6%96%b9%e7%a8%8b%e7%bb%84" aria-label="3.6.迭代法求解线性方程组">3.6.迭代法求解线性方程组</a></li>
+                <li>
+                    <a href="#37%e9%9b%85%e5%8f%af%e6%af%94%e8%bf%ad%e4%bb%a3%e6%b3%95" aria-label="3.7.雅可比迭代法">3.7.雅可比迭代法</a></li>
+                <li>
+                    <a href="#38%e9%ab%98%e6%96%af-%e8%b5%9b%e5%be%b7%e5%b0%94%e8%bf%ad%e4%bb%a3%e6%b3%95" aria-label="3.8.高斯-赛德尔迭代法">3.8.高斯-赛德尔迭代法</a></li></ul>
+                </li>
+                <li>
+                    <a href="#4%e6%8f%92%e5%80%bc%e7%ae%97%e6%b3%95" aria-label="4.插值算法">4.插值算法</a><ul>
+                        
+                <li>
+                    <a href="#41%e7%ba%bf%e6%80%a7%e6%8f%92%e5%80%bc" aria-label="4.1.线性插值">4.1.线性插值</a></li>
+                <li>
+                    <a href="#42%e5%8f%8c%e7%ba%bf%e6%80%a7%e6%8f%92%e5%80%bc" aria-label="4.2.双线性插值">4.2.双线性插值</a></li>
+                <li>
+                    <a href="#43%e6%8b%89%e4%b8%aa%e6%9c%97%e6%97%a5%e6%8f%92%e5%80%bc" aria-label="4.3.拉个朗日插值">4.3.拉个朗日插值</a></li>
+                <li>
+                    <a href="#44%e7%89%9b%e9%a1%bf%e6%8f%92%e5%80%bc" aria-label="4.4.牛顿插值">4.4.牛顿插值</a></li></ul>
+                </li>
+                <li>
+                    <a href="#5%e6%95%b0%e5%80%bc%e5%be%ae%e5%88%86%e5%92%8c%e7%a7%af%e5%88%86" aria-label="5.数值微分和积分">5.数值微分和积分</a><ul>
+                        
+                <li>
+                    <a href="#51%e6%95%b0%e5%80%bc%e5%be%ae%e5%88%86%e4%b8%8e%e8%ae%a1%e7%ae%97%e6%96%b9%e6%b3%95" aria-label="5.1.数值微分与计算方法">5.1.数值微分与计算方法</a></li>
+                <li>
+                    <a href="#52%e6%95%b0%e5%80%bc%e7%a7%af%e5%88%86%e4%b8%8e%e8%ae%a1%e7%ae%97%e6%96%b9%e6%b3%95" aria-label="5.2.数值积分与计算方法">5.2.数值积分与计算方法</a></li></ul>
+                </li>
+                <li>
+                    <a href="#6%e6%95%b0%e5%80%bc%e9%80%bc%e8%bf%91" aria-label="6.数值逼近">6.数值逼近</a><ul>
+                        
+                <li>
+                    <a href="#61%e6%9b%b2%e7%ba%bf%e5%92%8c%e6%9b%b2%e9%9d%a2%e7%9a%84%e6%8b%9f%e5%90%88" aria-label="6.1.曲线和曲面的拟合">6.1.曲线和曲面的拟合</a></li>
+                <li>
+                    <a href="#62%e6%ad%a3%e4%ba%a4%e5%a4%9a%e9%a1%b9%e5%bc%8f%e4%b8%8e%e5%87%bd%e6%95%b0%e9%80%bc%e8%bf%91" aria-label="6.2.正交多项式与函数逼近">6.2.正交多项式与函数逼近</a>
+                </li>
+            </ul>
+            </li>
+            </ul>
+        </div>
+    </details>
+</div>
+
+  <div class="post-content"><h1 id="数值分析">数值分析<a hidden class="anchor" aria-hidden="true" href="#数值分析">#</a></h1>
+<h2 id="前言">前言<a hidden class="anchor" aria-hidden="true" href="#前言">#</a></h2>
+<p>$\quad$ 数值分析主要考虑问题的数值解方面的内容, 包括但不限于数值算法的构建, 误差传播的影响, 计算复杂度的估算以及高效可靠的计算机的实现. 虽然对于不同的问题有不同的数值模型来构建, 但是他们一般都具有一些共同点:</p>
+<p>$\quad$ 数值分析一般会以线性代数, 高等数学, 实分析和泛函分析等内容为基础或者分析工具</p>
+<p>$\quad$ 如果一个问题不能直接求解, 尝试考虑一个近似的可解的问题</p>
+<p>$\quad$ 稳定性. 这里的稳定性是指模型问题的解对初始数据的敏感度, 也就是说, 解因为初始数据的微小改变而产生的变化, 变化越小越稳定.</p>
+<p>数值分析的研究领域非常广泛, 并且由于现代种类交叉学科的发展, 数值分析的边界变得越来越模糊. 但是主要的内容包含如下几个方面:</p>
+<h3 id="数值线性代数">数值线性代数<a hidden class="anchor" aria-hidden="true" href="#数值线性代数">#</a></h3>
+<p>$\quad$ 主要研究内容主要涉及线性方程组算法研究, 特征值和相关数值算法研究</p>
+<h3 id="非线性方程组">非线性方程组<a hidden class="anchor" aria-hidden="true" href="#非线性方程组">#</a></h3>
+<p>$\quad$ 非线性方程组的求解一般是以一系列近似的线性问题为工具, 经典的方法包括二分法, 不动点迭代, 最速下降法和牛顿法等</p>
+<h3 id="逼近理论">逼近理论<a hidden class="anchor" aria-hidden="true" href="#逼近理论">#</a></h3>
+<p>$\quad$ 逼近理论主要考虑如何利用简单的函数来逼近复杂函数, 并且如何给出定量误差估计</p>
+<ul>
+<li>
+<p><a href="#1-%E6%95%B0%E5%80%BC%E8%AE%A1%E7%AE%97%E7%9A%84%E8%AF%AF%E5%B7%AE">1.数值计算的误差</a></p>
+</li>
+<li>
+<p><a href="#2-%E5%86%85%E7%A7%AF%E7%A9%BA%E9%97%B4%E4%B8%8E%E6%AD%A3%E4%BA%A4%E5%88%86%E8%A7%A3">2.内积空间与正交分解</a></p>
+</li>
+<li>
+<p><a href="#3-%E7%BA%BF%E6%80%A7%E6%96%B9%E7%A8%8B%E7%BB%84%E9%97%AE%E9%A2%98">3.线性方程组问题</a></p>
+<ul>
+<li><a href="#31-%E9%AB%98%E6%96%AF%E6%B6%88%E5%85%83%E6%B3%95">3.1.高斯消元法</a></li>
+<li><a href="#32-%E5%88%97%E4%B8%BB%E5%85%83%E6%B6%88%E5%8E%BB%E6%B3%95">3.2.列主元消去法</a></li>
+<li><a href="#33-%E7%9F%A9%E9%98%B5%E7%9A%84%E4%B8%89%E8%A7%92%E5%88%86%E8%A7%A3%E6%B3%95">3.3.矩阵的三角分解法</a></li>
+<li><a href="#34-%E7%9F%A9%E9%98%B5%E7%9A%84%E7%9B%B4%E6%8E%A5LU%E5%88%86%E8%A7%A3%E6%B3%95">3.4.矩阵的直接LU分解法</a></li>
+<li><a href="#35-%E4%B8%89%E5%AF%B9%E8%A7%92%E7%BA%BF%E6%80%A7%E6%96%B9%E7%A8%8B%E7%BB%84%E7%9A%84%E8%BF%BD%E8%B5%B6%E6%B3%95">3.5.三对角线性方程组的追赶法</a></li>
+<li><a href="#36-%E8%BF%AD%E4%BB%A3%E6%B3%95%E6%B1%82%E8%A7%A3%E7%BA%BF%E6%80%A7%E6%96%B9%E7%A8%8B%E7%BB%84">3.6.迭代法求解线性方程组</a></li>
+<li><a href="#37-%E9%9B%85%E5%8F%AF%E6%AF%94%E8%BF%AD%E4%BB%A3%E6%B3%95">3.7.雅可比迭代法</a></li>
+<li><a href="#38-%E9%AB%98%E6%96%AF-%E8%B5%9B%E5%BE%B7%E5%B0%94%E8%BF%AD%E4%BB%A3%E6%B3%95">3.8.高斯-赛德尔迭代法</a></li>
+</ul>
+</li>
+<li>
+<p><a href="#4-%E6%8F%92%E5%80%BC%E7%AE%97%E6%B3%95">4.插值算法</a></p>
+<ul>
+<li><a href="#41-%E7%BA%BF%E6%80%A7%E6%8F%92%E5%80%BC">4.1.线性插值</a></li>
+<li><a href="#42-%E5%8F%8C%E7%BA%BF%E6%80%A7%E6%8F%92%E5%80%BC">4.2.双线性插值</a></li>
+<li><a href="#43-%E6%8B%89%E6%A0%BC%E6%9C%97%E6%97%A5%E6%8F%92%E5%80%BC">4.3.拉格朗日插值</a></li>
+<li><a href="#44-%E7%89%9B%E9%A1%BF%E6%8F%92%E5%80%BC">4.4.牛顿插值</a></li>
+</ul>
+</li>
+<li>
+<p><a href="#5-%E6%95%B0%E5%80%BC%E5%BE%AE%E5%88%86%E5%92%8C%E7%A7%AF%E5%88%86">5.数值微分和积分</a></p>
+<ul>
+<li><a href="#51-%E6%95%B0%E5%80%BC%E5%BE%AE%E5%88%86%E4%B8%8E%E8%AE%A1%E7%AE%97%E6%96%B9%E6%B3%95">5.1.数值微分与计算方法</a></li>
+<li><a href="#52-%E6%95%B0%E5%80%BC%E7%A7%AF%E5%88%86%E4%B8%8E%E8%AE%A1%E7%AE%97%E6%96%B9%E6%B3%95">5.2.数值积分与计算方法</a></li>
+</ul>
+</li>
+<li>
+<p><a href="#6-%E6%95%B0%E5%80%BC%E9%80%BC%E8%BF%91">6.数值逼近</a></p>
+<ul>
+<li><a href="#61-%E6%9B%B2%E7%BA%BF%E5%92%8C%E6%9B%B2%E9%9D%A2%E7%9A%84%E6%8B%9F%E5%90%88">6.1.曲线和曲面的拟合</a></li>
+<li><a href="#62-%E6%AD%A3%E4%BA%A4%E5%A4%9A%E9%A1%B9%E5%BC%8F%E4%B8%8E%E5%87%BD%E6%95%B0%E9%80%BC%E8%BF%91">6.2.正交多项式与函数逼近</a></li>
+</ul>
+</li>
+</ul>
+<h1 id="1数值计算的误差">1.数值计算的误差<a hidden class="anchor" aria-hidden="true" href="#1数值计算的误差">#</a></h1>
+<p>$\quad$既然直接聊到了误差，那么就直接讲其分类以及来源:</p>
+<ul>
+<li>模型误差：实际问题和对其进行抽象，简化后得到的数学模型之间存在的误差</li>
+<li>观测误差：由于精度限制，观察和测量的时候产生的误差</li>
+<li>舍入误差：计算机字长的限制，所能表示的数只能有有限的位数，后面的部分按照不同的舍入规则舍去产生的误差。</li>
+<li>截断/方法误差：得不到精确解的数学模型通常用数值方法求近似解，二者之间的误差，通常用有限过程对无穷进行截断，比如：泰勒公式的近似代替如下：</li>
+</ul>
+<p>$$
+P_n(x) = f(0) + \frac{f`(0)}{1!}x + \frac{f``(0)}{2!}x^2 + &hellip; + \frac{f^{n}(0)}{n!}x^n
+$$</p>
+<p>则截断误差为:</p>
+<p>$$
+R_n(x) = f(x) - P_n(x) = \frac{f^{n+1}(\xi)}{(n+1)!}x^{n+1}
+$$</p>
+<p>其中$\xi \in (0,x)$</p>
+<p><font color=RED>定义1:</font> 设$x$为准确值，$x^<em>$为$x$的一个近似值，称$E(x^</em>) = x^* - x$为近似值的绝对误差，简称误差</p>
+<p>实际上，准确值$x$通常无法求得甚至未知，因此上面的$E(x^<em>)$往往也无法求得，只能知道其绝对值的某个上界$\varepsilon(x</em>) \ge E(x^<em>) = |x^</em> - x|$，数值$\varepsilon(x*)$称为$x^*$的(绝对)误差限。</p>
+<p>但是一个测量值的精确程度除了与绝对误差限有关外，还和该量的大小有关，由此引入相对误差限：</p>
+<p><font color=RED>定义2:</font> 设$x$为准确值，$x^<em>$为$x$的一个近似值，称$\frac{E(x^</em>)}{x} = \frac{x^* - x}{x}$为近似值x^<em>的相对误差，简记为E_r，$\varepsilon_r(x^</em>) \ge |E_r(x^<em>)|$为$x^</em>$的相对误差限</p>
+<p>两种误差限制的关系为:$\varepsilon_r = \frac{\varepsilon}{|x^*|}$</p>
+<p><font color=RED>定义3:</font> 若$x^<em>$为$x$的近似值，其绝对误差的绝对值不超过某一位数字的半个单位，而该位数字到$x^</em>$的第一位非零数字共有n位，则称用$x^<em>$近似$x$时具有$n$位有效数字，简称$x^</em>$有$n$位有效数字。</p>
+<p>有效数字与绝对误差限的关系：</p>
+<p>$x$的近似值$x^*$的规格化形式可以写作：</p>
+<p>$$
+x^* = \pm0.a_1a_2&hellip;a_k \times 10^m
+$$</p>
+<p>其中$m$是整数，$a_i$是0-9中的一个数字且$a_1=0$,则上式具有n位($n \leq k$)有效数字当且仅当$|E| = |x^* - x| \leq 0.5 \times 10^{m - n}$</p>
+<p>$x^*$有n位有效数字，则相对误差限:</p>
+<p>$$
+e_r^* \leq \frac{1}{2a_1} \times 10^{1-n}
+$$</p>
+<p>反之相对误差限:</p>
+<p>$$
+e_r^* \leq \frac{1}{2(a_1+1)} \times 10^{1-n}
+$$</p>
+<p>数值运算的误差估计：</p>
+<p>$$
+\varepsilon(x_1^* + x_2^<em>) = \varepsilon(x_1^</em>) + \varepsilon(x_2^*)
+$$</p>
+<p>$$
+\varepsilon (x_1^<em>x_2^</em>) \approx |x_1^<em>|\varepsilon(x_2^</em>) + |x_2^<em>|\varepsilon(x_1^</em>)
+$$</p>
+<p>$$
+\varepsilon(\frac{x_1^<em>}{x_2^</em>}) \approx \frac{|x_1^<em>|\varepsilon(x_2^</em>) + |x_2^<em>|\varepsilon(x_1^</em>)}{|x_2^*|^2}
+$$</p>
+<p>一般地，自变量有误差时，计算函数值也产生误差，误差限可利用函数的泰勒展开式进行估计，</p>
+<p>$$
+\varepsilon(f(x^<em>)) = f(x) - f(x^</em>) = f`(x^<em>)(x - x^</em>) + \frac{f``(\xi)}{2}(x - x^*)^2
+$$</p>
+<p>其中$\xi$介于$x$和$x^*$之间</p>
+<p>取绝对值并假定$f`(x^<em>)$和$f``(x^</em>)$比值不大，忽略$\varepsilon(x^*)$的高阶项，有：</p>
+<p>$$
+\varepsilon(f(x^<em>)) \approx |f`(x^</em>)|\varepsilon(x^*)
+$$</p>
+<p>多元函数同理</p>
+<p>四则运算的稳定性问题：</p>
+<ul>
+<li>防止大数吃小数(计算机位数有限造成)-&gt;求和时从小到大相加，可使和的误差减小</li>
+<li>做减法时避免相近数相减-&gt;使用有理化，三角变换等</li>
+<li>避免小数作为除数和大数作为乘数</li>
+</ul>
+<p>提高算法效率问题：</p>
+<ul>
+<li>减少运算次数(多项式计算的秦九韶算法)</li>
+<li>病态问题</li>
+</ul>
+<p><font color=RED>定义4: </font>对数学问题本身如果输入数据有微小扰动，引起输出数据的很大扰动，即病态问题</p>
+<ul>
+<li>计算函数值$f(x)$，当$x$有扰动，$\delta = x - x^<em>$，相对误差$\frac{\delta}{x}$，函数值相对误差$\frac{f(x) - f(x^</em>)}{f(x)}$，相对误差比值为:$\frac{\frac{f(x) - f(x^*)}{f(x)}}{\frac{\delta}{x}} \approx \frac{xf`(x)}{f(x)} = C_p$</li>
+</ul>
+<p>其中$C_p$为计算函数值问题的条件数</p>
+<h1 id="2内积空间与正交分解">2.内积空间与正交分解<a hidden class="anchor" aria-hidden="true" href="#2内积空间与正交分解">#</a></h1>
+<ul>
+<li>矢量的模与赋范空间</li>
+</ul>
+<p>向量的模是线性空间中不存在的概念，它就是向量的大小，对于几何而言反映为有向线段的长短，其满足如下性质：</p>
+<p>1.正定性:$||\mathbf{a}|| &gt; 0 , ||\mathbf{0}|| = 0$
+2.正齐次性:$||\lambda\mathbf{a}||=|\lambda|||\mathbf{a}||$
+3.三角不等式:$||\mathbf{a}+\mathbf{b}|| \leq ||a|| + ||b||$</p>
+<p>矢量的模运算可以看成是$R^3$空间到$R$的映射，也可以看成一维实数的绝对值在二维和三维空间的推广。我们可以进一步推广到n维向量的模场：</p>
+<p>$$
+||\mathbf{v}|| = \sqrt{\sum_{i=1}^{n}{x_i^2}}
+$$</p>
+<p>更一般的，我们不需要定义计算元素“长短”的公式，我们只需要定义计算元素“长短”的运算所满足的条件。比如我们在线性空间中，定义范数(norm)运算，记为$||·||$，使之满足上面的正定性，正齐次性，三角不等式，我们就得到了一个新的代数结构——赋范线性空间。</p>
+<p><font color=RED>矢量的单位化: </font> 单位向量是定义为模长为1的向量,那么任意向量的单位化:</p>
+<p>$$
+normalize(\mathbf{a}) = \frac{\mathbf{a}}{||\mathbf{a}||}
+$$</p>
+<p>单位化也常称归一化，规范化。单位化向量在几何和物理中，特指向量的方向。单位向量和原向量线性相关</p>
+<p><font color=RED>赋范线性空间的定义：</font>$V$是数域$F$上的线性空间，映射$||·||:V \to F$满足</p>
+<p>1.正定性: $||\mathbf{\xi}|| &gt; 0, ||\mathbf{0}|| = 0$</p>
+<p>2.正齐次性：$||k\xi||=|k|||\xi||,k \in F$</p>
+<p>3.三角不等式 $||\xi_1 + \xi_2|| \leq ||\xi_1|| + ||\xi_2||$</p>
+<p>比如，在线性空间与线性变换中，我们知道所有在闭区间$[a,b]$上连续的函数构成一个线性空间$C[a,b]$，我们可以定义三种常用的范数，使之构成赋范线性空间。那么可以定义函数的范数：</p>
+<p>1.$\infty - $范数:$||f(x)||<em>\infty=max</em>{a \leq x \leq b}|f(x)|$</p>
+<p>2.$1 - $范数:$||f(x)||<em>1 = \int</em>{a}^{b}|f(x)|dx$</p>
+<p>3.$2 - $范数:$||f(x)||<em>2 = \sqrt{\int</em>{a}^{b}{(f(x))^2}dx}$</p>
+<p>类比于向量的单位化，与函数范数的定义，我们可以得到函数的单位化：单位函数是范数为1的函数，那么函数的单位化：</p>
+<p>$$
+normalize[f(x)] = \frac{f(x)}{||f(x)||}
+$$</p>
+<p>单位函数的反映在函数图像上，保留了原函数的“起伏”形状。也即单位函数与原函数线性相关，而且导函数与原函数都线性相关：</p>
+<p>$$
+(\frac{f(x)}{||f(x)||})<code>=\frac{1}{||f(x)||}f</code>(x)=kf`(x)
+$$</p>
+<p>$$
+\int{\frac{f(x)}{f`(x)}dx}=\frac{1}{||f(x)||}\int{f(x)dx}=k\int{f(x)dx}
+$$</p>
+<p>范数是模的抽象，是数学上衡量元素“长短”的一般概念，如果是更一般的集合，只要范数运算满足正定性、正齐次性、三角不等式，那么就称它为赋范空间。</p>
+<ul>
+<li>向量的内积和内积空间</li>
+</ul>
+<p>熟悉的内积公式为：</p>
+<p>$$
+\mathbf{a}·\mathbf{b} = ||\mathbf{a}||||\mathbf{b}||cos&lt;\mathbf{a},\mathbf{b}&gt;
+$$</p>
+<p>通过内积运算，也建立一个从矢量到标量的映射。矢量内积最重要的几何意义是反应了两矢量的夹角$\alpha$，所以我们也常常使用矢量内积计算两矢量的夹角：</p>
+<p>$$
+\cos{\alpha} = \frac{\mathbf{a}·\mathbf{b}}{||\mathbf{a}||||\mathbf{b}||}
+$$</p>
+<p>因为$-1 \leq cos\alpha \leq -1$，所以有
+$|\mathbf{a}·\mathbf{b}| \leq ||\mathbf{a}||||\mathbf{b}||$</p>
+<p>这个不等式就是柯西-布涅柯夫斯基不等式。</p>
+<p>由定义，我们还可以从内积公式中得到向量模的计算公式：</p>
+<p>$$
+||\mathbf{a}|| = \sqrt{\mathbf{a}·\mathbf{a}}
+$$</p>
+<p><font color=RED>内积空间的定义： </font>$V$ 是数域$F$上的线性空间，在$V$上定义内积运算$(\alpha,\beta)$，对$\forall \alpha,\beta \in V$，都有$F$中的一个元素与之对应。它具有以下性质:</p>
+<ul>
+<li>共轭对称性：$(\alpha,\beta) = \overline{(\beta,\alpha)}$</li>
+<li>数乘结合律: $(k\alpha,\beta) = k(\alpha,\beta)$</li>
+<li>加法分配律: $(\alpha + \beta,\gamma) = (\alpha,\gamma) + (\beta,\gamma)$</li>
+<li>正定性: $(\alpha,\alpha) \geq 0$，当且仅当$\alpha = 0$时$(\alpha,\alpha) = 0$</li>
+</ul>
+<p>由定义，内积空间一定是线性空间。</p>
+<ul>
+<li>正交</li>
+</ul>
+<p><font color=RED>定义： </font>如果$(\alpha,\beta)=0$，称$\alpha,\beta$正交。正交是垂直的推广，只有在内积空间中才有意义。两正交元素是线性无关的。</p>
+<p>正交基与标准正交基：在内积空间，一组非零的元素，如果它们两两正交，就称为正交元素组。在$n$维内积空间中，有$n$个两两正交的元素，称为正交基，如果正交基的元素都是单位元素，则称为标准正交基。设$\epsilon_1,\epsilon_2,&hellip;,\epsilon_n$是一组正交基，那么：</p>
+<p>$$
+(\epsilon_i,\epsilon_j) = \left{
+\begin{aligned}
+&amp;E_i,when \quad i=j \
+&amp;0,when \quad i \neq j \
+\end{aligned}
+\right.
+$$</p>
+<p>当$E_i=1$时，就是标准正交基。一组基为标准正交基的充要条件是，它的度量矩阵为单位矩阵。在标准正交基下，内积公式可以简化为：</p>
+<p>$$
+(\alpha,\beta) = \sum_{i=1}^{n}{\sum_{j=1}^{n}{x_iy_i}} = X_TY
+$$</p>
+<p><font color=RED>定理(施密特(Schimidt)正交化)： </font>通过$n$维欧式空间中任意一组线性无关的向量组${\epsilon_i}$，都可以找到一组标准的正交基${\eta_i}$</p>
+<p>逐个正交化，令$\beta_1 = \epsilon_1$</p>
+<p>因为\beta_i是${\epsilon_i}$的线性组合，那么我们可以构造递推公式：</p>
+<p>$$
+\beta_i = \epsilon_i - \sum_{j=1}^{i-1}{k_j\beta_j},i &gt; 1
+$$</p>
+<p>其中</p>
+<p>$$
+k_j = \frac{(\epsilon_{i+1},\beta_i)}{(\beta_i,\beta_i)}
+$$</p>
+<p>再逐个归一化：</p>
+<p>$$
+\eta_i = \frac{\beta_i}{|\beta_i|},i=1,2,&hellip;,n
+$$</p>
+<h1 id="3线性方程组问题">3.线性方程组问题<a hidden class="anchor" aria-hidden="true" href="#3线性方程组问题">#</a></h1>
+<h2 id="31高斯消元法">3.1.高斯消元法<a hidden class="anchor" aria-hidden="true" href="#31高斯消元法">#</a></h2>
+<p>你一定会解简单的线性方程组，比如下面这样的：</p>
+<p>$$
+2x_1 + 4x_2 - 2x_3 = 2
+$$</p>
+<p>$$
+4x_1 + 9x_2 - 3x_3 = 8
+$$</p>
+<p>$$
+-2x_1 - 3x_2 + 7x_3 = 10
+$$</p>
+<p>你一定知道，消元的过程就是解方程的过程。对于上面的方程组，
+$(1) + (3),(1) \times 2 - (2)$ 可以消掉$x_1$，得到两个方程进一步可以消掉$x_2$ 或 $x_3$，进而解得结果</p>
+<p>这个过程可以用矩阵描述，表达的是相同含义。</p>
+<p>把方程组左边变量得系数放进矩阵：</p>
+<p>$$
+A = \begin{bmatrix}
+2 &amp; 4 &amp; -2\
+4 &amp; 9 &amp; -3\
+-2 &amp; -3 &amp; 7
+\end{bmatrix}
+$$</p>
+<p>把方程组右边的数字放入矩阵：</p>
+<p>$$
+b = \begin{bmatrix}
+2 \
+8 \
+10
+\end{bmatrix}
+$$</p>
+<p>原方程可以写成：</p>
+<p>$$
+Ax = b
+$$</p>
+<p>接下来进行高斯消元得过程，由于等十之间得加减法同时操作等式两边，以上两个矩阵$A,b$的行变换需要同时进行，故把它们放进同一个矩阵：</p>
+<p>$$
+A` = \begin{bmatrix}
+2 &amp; 4 &amp; -2 &amp; 2\
+4 &amp; 9 &amp; -3 &amp; 8\
+-2 &amp; -3 &amp; 7 &amp; 10
+\end{bmatrix}
+$$</p>
+<p>先消掉$(2)$,$(3)$中的$x_1$，也就是把矩阵第2，3行的第一列变成0。可以实现这样的效果：</p>
+<p>$$
+A^{(1)} = \begin{bmatrix}
+2 &amp; 4 &amp; -2 &amp; 2\
+0 &amp; 1 &amp; 1 &amp; 4\
+0 &amp; 1 &amp; 5 &amp; 12
+\end{bmatrix}
+$$</p>
+<p>相当于保持第一个方程不变，使用第一个方程。在第2,3中消去了$x_1$，新的2,3方程如下：</p>
+<p>$$
+x_2 + x_3 = 4
+$$</p>
+<p>$$
+x_2 + 5x_3 = 12
+$$</p>
+<p>上面的操作可以看出，把矩阵的一行乘上某个数字，再加/减到另一行，可以看作把方程组中的两个方程拿出来，让他们的等式两边相互加减，就是我们熟悉的消元手法！</p>
+<h2 id="32列主元消去法">3.2.列主元消去法<a hidden class="anchor" aria-hidden="true" href="#32列主元消去法">#</a></h2>
+<p>列主元素消去法是为控制舍入误差而提出来的一种算法，列主元素消去法计算基本上能控制舍入误差的影响，其基本思想是：在进行第 $k(k=1,2,…,n-1)$步消元时，从第k列的 akk及其以下的各元素中选取绝对值最大的元素，然后通过行变换将它交换到主元素akk的位置上，再进行消元。</p>
+<ul>
+<li>优点</li>
+</ul>
+<p>高斯消去法从第k步到第k+1步的消元过程，必须满足条件a(kk)不等于零 （kk指下标）。而这个元素 即被称为第k步的主元(素)。显然，高斯消去法是按方程排列的自然顺序产生主元的，这样，一旦出现 计算就归于失败，而且即使a(kk)不等于零 （kk指下标） ，但若其绝对值很小，也将会因用它作除数，引起其他元素的数量级及舍人误差急剧增大，导致最终计算结果不可靠。为了避免在高斯消去法应用中可能出现的这类问题，就发展形成了列主元、全主元等多种消去法。这些方法的基本点在于对高斯消去法的过程作某些技术性修改，全面或局部地选取绝对值最大的元素为主元素，从而构成了相应的主元(素)消去法。列主元(素)消去法以处理简单、相对计算量小的特点，在各类主元消去法中得到最为广泛的应用。</p>
+<ul>
+<li>算法流程</li>
+</ul>
+<p>本算法将消元结果覆盖$A$，乘数$m_{jk}$ ，冲掉$a_{ik}$，解x存放在b内。</p>
+<ol>
+<li>对于$k=1,2,3&hellip;.n$，依次做到第五步</li>
+<li>按列选主元，即确定$i_k$，使得</li>
+</ol>
+<p>$$
+|a_{i_k,k}| = max_{k \leq i \leq n}|a_{ik}|
+$$</p>
+<ol start="3">
+<li>如果$a_{i_k,k} = 0，则输出无解$</li>
+<li>如果$i_k = k$，则转向5，否则换行</li>
+</ol>
+<p>$$
+a_{kj} \Leftrightarrow a_{i_k,k} (j=k,k+1,&hellip;,n)
+$$</p>
+<p>$$
+b_k \Leftrightarrow b_{i_k}
+$$</p>
+<ol start="5">
+<li>消元过程：</li>
+</ol>
+<p>$$
+a_{ik} \leftarrow m_{ik} = \frac{a_{ik}}{a_{kk}}, (i=k+1,&hellip;,n)
+$$</p>
+<p>$$
+a_{ij} \leftarrow a_{ij} - m_{ik}a_{kj} (i,j=k+1,&hellip;,m)
+$$</p>
+<p>$$
+b_i \leftarrow b_i - m_{ik}b_k, (i=k+1,&hellip;,n)
+$$</p>
+<ol start="6">
+<li>如果$a_{00} = 0$，则停机</li>
+<li>回代求解</li>
+</ol>
+<p>$$
+b_n \leftarrow \frac{b_n}{a_{nm}}
+$$</p>
+<p>$$
+b_i \leftarrow \frac{b_i - \sum_{j=i+1}^{n}{a_{ij}b_j}}{a_{ii}},(i=n-1,&hellip;,2,1)
+$$</p>
+<ol start="8">
+<li>输出结果x.</li>
+</ol>
+<h2 id="33矩阵的三角分解法">3.3.矩阵的三角分解法<a hidden class="anchor" aria-hidden="true" href="#33矩阵的三角分解法">#</a></h2>
+<p>假设我们有这样的方程：</p>
+<p>$$
+2x_1 + x_2 + x_3 = 4
+$$</p>
+<p>$$
+4_x1 + 3x_2 + 3x_3 + x_4 = 11
+$$</p>
+<p>$$
+8x_1 + 7x_2 + 9x_3 + 5x_4 = 29
+$$</p>
+<p>$$
+6x_1 + 7x_2 + 9x_3 + 8x_4 = 30
+$$</p>
+<p>通过高斯消元法，获得等价问题:</p>
+<p>$$
+2x_1 + x_2 + x_3 = 4
+$$</p>
+<p>$$
+x_2 + x_3 + x_4 = 3
+$$</p>
+<p>$$
+2x_3 + 2x_4 = 4
+$$</p>
+<p>$$
+2x_4 = 2
+$$</p>
+<p>这样的消元过程如果写成矩阵相乘的过程，那么如下所示：</p>
+<p>$$
+L_1A = \begin{bmatrix}
+1 &amp;  &amp;  &amp; \
+-2 &amp; 1 &amp;  &amp; \
+-4 &amp;  &amp; 1 &amp;  \
+-3&amp; &amp; &amp; 1
+\end{bmatrix}\begin{bmatrix}
+2 &amp; 1 &amp; 1 &amp; 0\
+0 &amp; 1 &amp; 1 &amp; 1\
+8 &amp; 7 &amp; 9 &amp; 5 \
+6 &amp; 7 &amp; 9 &amp; 8
+\end{bmatrix} = \begin{bmatrix}
+2 &amp; 1 &amp; 1 &amp; 0\
+0 &amp; 1 &amp; 1 &amp; 1\
+0 &amp; 3 &amp; 5 &amp; 5 \
+0 &amp; 4 &amp; 6 &amp; 8
+\end{bmatrix}
+$$</p>
+<p>第二次消元意味着</p>
+<p>$$
+L_2L_1A = \begin{bmatrix}
+1 &amp;  &amp;  &amp; \
+&amp; 1 &amp;  &amp; \
+&amp; -3 &amp; 1 &amp;  \
+&amp; -4 &amp; &amp; 1
+\end{bmatrix}\begin{bmatrix}
+2 &amp; 1 &amp; 1 &amp; 0\
+0 &amp; 1 &amp; 1 &amp; 1\
+8 &amp; 7 &amp; 9 &amp; 5 \
+6 &amp; 7 &amp; 9 &amp; 8
+\end{bmatrix} =
+\begin{bmatrix}
+2 &amp; 1 &amp; 1 &amp; 0\
+0 &amp; 1 &amp; 1 &amp; 1\
+0 &amp; 0 &amp; 2 &amp; 2 \
+0 &amp; 0 &amp; 2 &amp; 4
+\end{bmatrix}
+$$</p>
+<p>第三次消元意味着</p>
+<p>$$
+L_3L_2L_1A = \begin{bmatrix}
+1 &amp;  &amp;  &amp; \
+&amp; 1 &amp;  &amp; \
+&amp;  &amp; 1 &amp;  \
+&amp;  &amp; -1 &amp; 1
+\end{bmatrix}
+\begin{bmatrix}
+2 &amp; 1 &amp; 1 &amp; 0\
+0 &amp; 1 &amp; 1 &amp; 1\
+8 &amp; 7 &amp; 9 &amp; 5 \
+6 &amp; 7 &amp; 9 &amp; 8
+\end{bmatrix} =
+\begin{bmatrix}
+2 &amp; 1 &amp; 1 &amp; 0\
+0 &amp; 1 &amp; 1 &amp; 1\
+0 &amp; 0 &amp; 2 &amp; 2 \
+0 &amp; 0 &amp; 0 &amp; 2
+\end{bmatrix} = U
+$$</p>
+<p>通过上述过程得到了LU分解的基本形式。</p>
+<p>对于n阶方阵A，如果存在n阶单位下三角矩阵L和n阶上三角形矩阵U，使得A=LU，则称其为矩阵A的LU分解，也称为Doolittle分解。</p>
+<p>对于Gauss消去法和LU分解法的乘法计算计算量都是在$\frac{n^3}{3}$
+量级，这个就是分解过程的乘法计算量，推导过程可以模拟一下高斯消去法的整体过程，就可以得到如下的等式，</p>
+<p>$$
+\sum_{k=1}^{n-1}(n-k)(n-k+2) = \frac{1}{3}n^3 + \frac{1}{2}n^2 - \frac{5}{6}n
+$$</p>
+<p>$$
+\sum_{k=1}^{n}(n-k+1)=\frac{n(n+1)}{2}
+$$</p>
+<pre tabindex="0"><code>#include&lt;iostream&gt;
+using namespace std;
+
+const int n = 3;
+//矩阵的ALU分解
+void ALU(double a[n][n], double b[n])
+{
+    double l[n][n] = { 0 };
+    double u[n][n] = { 0 };
+    int i, r, k;
+    //进行U的第一行的赋值
+    for (i = 0; i&lt;n; i++)
+    {
+        u[0][i] = a[0][i];
+    }
+
+    //进行L的第一列的赋值
+    for (i = 1; i&lt;n; i++)
+    {
+        l[i][0] = a[i][0] / u[0][0];
+    }
+
+    //计算U的剩下的行数和L的剩下的列数
+    for (r = 1; r&lt;n; r++)
+    {
+        for (i = r; i &lt;n; i++)
+        {
+            double sum1 = 0;
+            for (k = 0; k &lt; r; k++)
+            {
+                sum1 += l[r][k] * u[k][i];
+                //cout &lt;&lt; &#34;&#34; &lt;&lt; r &lt;&lt; &#34;&#34; &lt;&lt; sum1 &lt;&lt; endl;
+            }
+            u[r][i] = a[r][i] - sum1;
+        }
+
+
+        if(r!=n)
+        for(i=r+1;i&lt;n;i++)
+        {
+            double sum2 = 0;
+              for (k = 0; k&lt;r; k++)
+            {
+                  sum2 += l[i][k] * u[k][r];
+            }
+                l[i][r] = (a[i][r] - sum2) / u[r][r];
+        }
+
+    }
+
+    double y[n] = { 0 };
+    y[0] = b[0];
+    for (i = 1; i&lt;n; i++)
+    {
+        double sum3 = 0;
+        for (k = 0; k&lt;i; k++)
+            sum3 += l[i][k] * y[k];
+        y[i] = b[i] - sum3;
+    }
+
+    double x[n] = { 0 };
+    x[n - 1] = y[n - 1] / u[n - 1][n - 1];
+    for (i = n - 2; i &gt;= 0; i--)
+    {
+        double sum4 = 0;
+        for (k = i + 1; k&lt;n; k++)
+            sum4 += u[i][k] * x[k];
+        x[i] = (y[i] - sum4) / u[i][i];
+    }
+    for (i = 0; i&lt;n; i++)
+        cout &lt;&lt; &#34;x[&#34; &lt;&lt; i + 1 &lt;&lt; &#34;]=&#34; &lt;&lt; x[i] &lt;&lt; endl;
+    return;
+}
+
+
+int main()
+{
+    double a[3][3] = { 1,2,3,2,5,2,3,1,5 };
+    double b[3] = { 14,18,20 };
+    ALU(a, b);
+    return 0;
+}
+</code></pre><h2 id="34矩阵的直接lu分解法">3.4.矩阵的直接LU分解法<a hidden class="anchor" aria-hidden="true" href="#34矩阵的直接lu分解法">#</a></h2>
+<h2 id="35三对角线性方程组的追赶法">3.5.三对角线性方程组的追赶法<a hidden class="anchor" aria-hidden="true" href="#35三对角线性方程组的追赶法">#</a></h2>
+<h2 id="36迭代法求解线性方程组">3.6.迭代法求解线性方程组<a hidden class="anchor" aria-hidden="true" href="#36迭代法求解线性方程组">#</a></h2>
+<p>考虑求解线性方程组$Ax=b$，其中$A \in \mathbf{R}^{n \times n}$非奇异。将方程组化为$x = Hx+g$的等价形式，并构造一个收敛到解的迭代序列：$x^{(k+1)}=Hx^{(k)}+g$，其中${x^{(k)}}$为迭代序列，$H$为迭代矩阵。</p>
+<p>通过证明可以看到，对于任意初值序列，当$k \to \infty$时，如果${x^{(k)}}有唯一极限$x* \in \mathbf{R}^{n \times n}$，则称$H$为收敛矩阵，且此时$x*$恰为线性方程组$Ax=b$的解。这便是迭代法求解的基本思想，即构造收敛序列来逼近方程组近似的解。</p>
+<p>显然，迭代解法的收敛性以及误差估计的问题至关重要，因为这决定了收敛法是否有效。</p>
+<p>迭代矩阵$H$为收敛矩阵，当且仅当$H$的谱半径$\rho(H) &lt; 1$</p>
+<h2 id="37雅可比迭代法">3.7.雅可比迭代法<a hidden class="anchor" aria-hidden="true" href="#37雅可比迭代法">#</a></h2>
+<p>(1) 迭代格式：</p>
+<p>任取$x_i^{(0)}(i=1,2,3,&hellip;,n)$,依次求解：$x_i^{(k+1)}(k=0,1,&hellip;)$</p>
+<p>$$
+a_{11}x_1^{(k+1)} + a_{12}x_2^{(k)} + a_{13}x_3^{(k)} + &hellip; + a_{1n}x_n^{(k)} = b_1
+$$</p>
+<p>$$
+a_{21}x_1^{(k+1)} + a_{22}x_2^{(k)} + a_{23}x_3^{(k)} + &hellip; + a_{2n}x_n^{(k)} = b_2
+$$</p>
+<p>$$
+a_{n1}x_1^{(k+1)} + a_{n2}x_2^{(k)} + a_{n3}x_3^{(k)} + &hellip; + a_{nn}x_n^{(k)} = b_n
+$$</p>
+<p>产生迭代格式：</p>
+<p>$$
+x_1^{(k+1)} = -\frac{1}{a_{11}}(a_{12}x_2^{(k)} + a_{13}x_3^{(k)} + &hellip; + a_{1n}x_n^{(k)}-b_1)
+$$</p>
+<p>$$
+x_2^{(k+1)} = -\frac{1}{a_{21}}(a_{22}x_1^{(k)} + a_{23}x_3^{(k)} + &hellip; + a_{2n}x_n^{(k)}-b_2)
+$$</p>
+<p>$$
+x_n^{(k+1)} = -\frac{1}{a_{21}}(a_{22}x_1^{(k)} + a_{23}x_2^{(k)} + &hellip; + a_{2n}x_{n-1}^{(k)}-b_2)
+$$</p>
+<p>已知$D = diag(a_{11},&hellip;,a_{nn})$ 为对角矩阵，我们称这一迭代格式为求解方程组 $Ax = b$ Jacobi迭代，其相应的矩阵形式为：</p>
+<p>$$
+x^{(k+1)} = (I - D^{-1}A)x^{(k)} + D^{-1}b
+$$</p>
+<h2 id="38高斯-赛德尔迭代法">3.8.高斯-赛德尔迭代法<a hidden class="anchor" aria-hidden="true" href="#38高斯-赛德尔迭代法">#</a></h2>
+<h1 id="4插值算法">4.插值算法<a hidden class="anchor" aria-hidden="true" href="#4插值算法">#</a></h1>
+<h2 id="41线性插值">4.1.线性插值<a hidden class="anchor" aria-hidden="true" href="#41线性插值">#</a></h2>
+<p>$\quad$ 单线性插值是在一个方向上进行线性插值,比如X方向。假设我们已知坐标$(x_0,y_0)$ 与$(x_1,y_1)$，要得到$[x_0,x_1]$ 区间内某一位置$x$ 在直线上的值。根据图示，我们得到：</p>
+<p>$$
+\frac{y - y_0}{x - x_0} = \frac{y_1 - y_0}{x_1 - x_0}
+$$</p>
+<p>$\quad$ 由于$x$值已经，所以可以从公式得到$y$的值：</p>
+<p>$$
+y = y_0 + (x - x_0)\frac{y_1 - y_0}{x_1 - x_0} = y_0 + \frac{(x - x_0)y_1 - (x - x_0)y_0}{x_1 - x_0}
+$$</p>
+<p>$\quad$ 已知$y$求$x$的过程与以上过程相同，只是$x$与$y$要进行交换</p>
+<h2 id="42双线性插值">4.2.双线性插值<a hidden class="anchor" aria-hidden="true" href="#42双线性插值">#</a></h2>
+<p>$\quad$ 双线性插值是有两个变量的插值函数的单线性插值扩展,器核心思想是在两个方向上分别进行一次线性插值.</p>
+<p>$$
+f(R_1) \approx \frac{x_2 - x}{x_2 - x_1}f(Q_{11}) + \frac{x - x_1}{x_2 - x_1}f(Q_{21}) \quad where \quad R_1 = (x,y_1)
+$$</p>
+<p>$$
+f(R_2) \approx \frac{x_2 - x}{x_2 - x_1}f(Q_{12}) + \frac{x - x_1}{x_2 - x_1}f(Q_{22}) \quad where \quad R_2 = (x,y_2)
+$$</p>
+<p>$$
+f(P) \approx \frac{y_2 - y}{y_2 - y_1}f(R_1) + \frac{y - y_1}{y_2 - y_1}f(R_2)
+$$</p>
+<h2 id="43拉个朗日插值">4.3.拉个朗日插值<a hidden class="anchor" aria-hidden="true" href="#43拉个朗日插值">#</a></h2>
+<p>$\quad$ 设函数$f(x)$在区别$[a,b]$上有定义，且已经在点$a \leq x_0 &lt; x_1 &lt; x_2 &lt; &hellip; &lt; x_n \leq b$上的函数数值$y_0,y_1,&hellip;,y_n$，求构造一个次数不超过$n$的插值多项式</p>
+<p>$L_n(x) = a_0 + a_1x + &hellip; + a_nx^n$</p>
+<p>使得$L_n(x_i) = y_i(i = 0,1,2,&hellip;,n)$成立</p>
+<p>$$
+n = 1
+$$</p>
+<p>$f(x)$ 在区间$[x_k,x_{k+1}]$端点处的函数值$f(x_k)$和$f(x_{k+1})$，求构造函数一个线性插值多项式$L_1(x)$使得</p>
+<p>$$
+L_1(x_k) = y_k = f(x_k)
+$$</p>
+<p>$$
+L_1(x_{k+1}) = y_{k+1} = f(x_{k+1})
+$$</p>
+<p>成立，由直线的点斜式可以得到：</p>
+<p>$$
+L_1(x) = y_k + \frac{y_{k+1} - y_k}{x_{k+1} - x_k}(x - x_k) = l_k(x)y_k + l_{k+1}(x)y_{k+1}
+$$</p>
+<p>其中 $l_k(x) = \frac{x - x_{k+1}}{x_k - x_{k+1}}，l_{k+1}(x) = \frac{x - x_k}{x_{k+1} - x_k}$，这里$l_k(x)$和$l_{k+1}(x)$称作线性插值基函数。</p>
+<p>$$
+n = 2
+$$</p>
+<p>已知$f(x)在点x_{k-1},x_k,x_{k+1}$上的函数值</p>
+<p>$$
+f(x_{k-1}),f(x_k),f(x_{k+1})
+$$</p>
+<p>，求构造一个二次插值多项式$L_2(x)$，使得</p>
+<p>$$
+L_2(x_{k-1}) = y_{k-1} = f(x_{k-1})
+$$</p>
+<p>$$
+L_2(x_k) = y_k = f(x_k)
+$$</p>
+<p>$$
+L_2(x_{k+1}) = y_{k+1} = f(x_{k+1})
+$$</p>
+<p>成立，构造</p>
+<p>$$
+L_2(x) = y_{k-1}l_{k-1}(x) + y_kl_k(x) + y_{k+1}l_{k+1}(x)
+$$</p>
+<p>易得</p>
+<p>$$
+l_{k-1}(x) = \frac{(x - x_k)(x - x_{k+1})}{(x_{k-1} - x_k)(x_{k-1} - x_{k+1})}
+$$</p>
+<p>$$
+l_k(x) = \frac{(x - x_{k-1})(x - x_{k+1})}{(x_k - x_{k+1})(x_k - x_{k+1})}
+$$</p>
+<p>$$
+l_{k+1}(x) = \frac{(x - x_{k-1})(x - x_k)}{(x_{k+1} - x_{k-1})(x_{k+1} - x_k)}
+$$</p>
+<p>一般情况：</p>
+<p>假设$L_n(x) = l_0(x)y_0 + l_1(x)y_1 + &hellip; + l_n(x)y_n$</p>
+<p>其中$l_i(x)(i=0,1,2,&hellip;,n)$为$n$次多项式，称作$n$次插值基函数，且满足：</p>
+<p>$$
+l_i(x_j) =
+\begin{cases}
+1, x_j = x_i \
+0, x_j \neq x_i
+\end{cases} ,(i=0,1,2,&hellip;,n)
+$$</p>
+<p>易得</p>
+<p>$$
+l_i(x) = \prod_{j = 0,j \neq i}^{n}{\frac{x - x_j}{x_i - x_j}}
+$$</p>
+<h2 id="44牛顿插值">4.4.牛顿插值<a hidden class="anchor" aria-hidden="true" href="#44牛顿插值">#</a></h2>
+<ul>
+<li>差商</li>
+</ul>
+<p>设函数$f(x)$，已知其$n$个插值节点为$(x_1,y_1),(x_2,y_2),(x_3,y_3),&hellip;,(x_n,y_n)$，我们定义：</p>
+<p>$$
+[一阶差商]
+$$</p>
+<p>$$
+f[x_i,x_j] = \frac{f(x_i) - f(x_j)}{x_i - x_j} \quad (i \neq j,x_i \neq x_j)
+$$</p>
+<p>$$
+[二阶差商]
+$$</p>
+<p>$$
+f[x_i,x_j,x_k] = \frac{f[x_i,x_j] - f[x_j,x_k]}{x_i - x_k} \quad (i \neq k)
+$$</p>
+<p>$$
+[n阶差商]
+$$</p>
+<p>$$
+f[x_0,x_1,&hellip;,x_n] = \frac{f[x_0,x_1,&hellip;,x_{n-1}] - f[x_1,x_2,&hellip;,x_n]}{x_0 - x_n}
+$$</p>
+<p>基于差商的定义，我们可以得到下面的公式：</p>
+<p>$$
+f(x) = f(x_0) + f[x,x_0](x - x_0)
+$$</p>
+<p>$$
+f[x,x_0] = f[x_0,x_1] + f[x,x_0,x_1](x - x_1)
+$$</p>
+<p>$$
+&hellip;
+$$</p>
+<p>$$
+f[x,x_0,x_1,&hellip;,x_{n-1}] = f[x_0,x_1,&hellip;,x_n] + f[x,x_0,x_1,&hellip;,x_n](x - x_n)
+$$</p>
+<p>不断消去回代可以得到：</p>
+<p>$$
+f(x) = \sum_{i = 0}^{n}{f<a href="x-x_0">x_0,&hellip;,x_i</a>&hellip;(x - x_i)}
+$$</p>
+<p>这个时候上式有两部分组成，牛顿插值逼近函数$P(x)$，误差函数$R(x)$，去掉就可以得到：</p>
+<p>$$
+N(x) = f(x_0) + f[x_0,x_1](x - x_0) + &hellip; + f[x_0,&hellip;,x_n](x - x_0)&hellip;(x - x_{n-1})
+$$</p>
+<h1 id="5数值微分和积分">5.数值微分和积分<a hidden class="anchor" aria-hidden="true" href="#5数值微分和积分">#</a></h1>
+<h2 id="51数值微分与计算方法">5.1.数值微分与计算方法<a hidden class="anchor" aria-hidden="true" href="#51数值微分与计算方法">#</a></h2>
+<h2 id="52数值积分与计算方法">5.2.数值积分与计算方法<a hidden class="anchor" aria-hidden="true" href="#52数值积分与计算方法">#</a></h2>
+<h1 id="6数值逼近">6.数值逼近<a hidden class="anchor" aria-hidden="true" href="#6数值逼近">#</a></h1>
+<h2 id="61曲线和曲面的拟合">6.1.曲线和曲面的拟合<a hidden class="anchor" aria-hidden="true" href="#61曲线和曲面的拟合">#</a></h2>
+<p>我们在这里会介绍下面几种拟合方式：</p>
+<ol>
+<li>
+<p>多项式拟合</p>
+</li>
+<li>
+<p>样条插值</p>
+</li>
+<li>
+<p>最小二乘法</p>
+</li>
+</ol>
+<ul>
+<li>多项式拟合</li>
+</ul>
+<p>$\quad$ 假设有一组数据点，包含$m$个点，为${(x_i,y_i)},i=1,2,..,m$</p>
+<p>$\quad$ 我们可以让样本点的分布划成一个$n$次多项式</p>
+<p>$$\hat{y} = \sum_{i=0}^{n}{a_ix^{n-i}}$$</p>
+<p>$\quad$ 可以看到，$n$ 次多项式有$a_0$到$a_n$这$n+1$个未知的拟合系数，我们要做的就是求出这$n+1$个拟合系数</p>
+<p>$\quad$ 我们把样本点的横坐标值$x_i$，带入假定的多项式$\hat{y}$，得$n$次多项式在给定样本点的横坐标处的纵坐标为：</p>
+<p>$$\hat{y}<em>i = a_0x_i^n + a_1x_i^{n-1} + a_2x_i^{n-2} + &hellip; + a</em>{n-1}x_i + a_n$$</p>
+<p>我们需要一个指标来评判所有的$\hat{y}_i$和样本点中的$y_i$相差多少，可以采用残差平方和来表征。</p>
+<p>$$\epsilon = \sum_{i=1}^{m}{(\hat{y} - y_i)^2} = \sum_{i=1}^{m}{[(a_0x_i^{n}+a_1x_i^{n-1}+a_2x_i^{n-2}+&hellip;+a_{n-1}x_i+a_n)-y_i]^2}$$</p>
+<p>$\quad$ 回到求最佳拟合系数的问题，如果有一组拟合系数让$\epsilon$最小，那这组拟合系数我们就可以认为是最好的。</p>
+<p>$\quad$ 那么怎么求呢，我们可以对$\epsilon$分别求如下$n+1$次偏导，并令每个偏导为0。(令偏导为0求多元函数的极值，是高中的常见操作了。下式中的$\frac{\partial \epsilon}{\partial a_j}$九二一证明是关于$a_j$的单调增加的一次函数，所以可以证明极值是极小值)</p>
+<p>$$\begin{cases}
+\frac{\partial \epsilon}{\partial a_0} = 0 \
+\frac{\partial \epsilon}{\partial a_1} = 0 \
+&hellip; \
+\frac{\partial \epsilon}{\partial a_n} = 0 \
+\end{cases}$$</p>
+<p>其中，上述方程组的某一项，可以展开写成：</p>
+<p>$$\frac{\partial \epsilon}{\partial a_j} = \sum_{i=1}^{m}{2x_i^{n-j}[(a_0x_i^n+a_1x_i^{n-1}+a_2x_i^{n-2}+&hellip;+a_{n-1}x_i+a_n)-y_i]}=0$$</p>
+<p>同理，上述方程组中的其他项也可以展开为包含拟合系数$a_0$到$a_n$的等式。那么，方程组中的$n+1$个灯饰就可以求出这个$n+1$个拟合系数。</p>
+<p>这样就可以得到一组让$\epsilon$最小的拟合系数，带回$\hat{y}$的表达式就拟合完啦。</p>
+<h2 id="62正交多项式与函数逼近">6.2.正交多项式与函数逼近<a hidden class="anchor" aria-hidden="true" href="#62正交多项式与函数逼近">#</a></h2>
+
+
+  </div>
+
+  <footer class="post-footer">
+    <ul class="post-tags">
+    </ul>
+<nav class="paginav">
+  <a class="prev" href="http://knightsnape.github.io/public/posts/navigation_algorithm/">
+    <span class="title">« Prev</span>
+    <br>
+    <span>Navigation Algorithm</span>
+  </a>
+</nav>
+
+
+<ul class="share-buttons">
+    <li>
+        <a target="_blank" rel="noopener noreferrer" aria-label="share  on x"
+            href="https://x.com/intent/tweet/?text=&amp;url=http%3a%2f%2fknightsnape.github.io%2fpublic%2fposts%2fmath_numerical_analysis%2f&amp;hashtags=">
+            <svg version="1.1" viewBox="0 0 512 512" xml:space="preserve" height="30px" width="30px" fill="currentColor">
+                <path
+                    d="M512 62.554 L 512 449.446 C 512 483.97 483.97 512 449.446 512 L 62.554 512 C 28.03 512 0 483.97 0 449.446 L 0 62.554 C 0 28.03 28.029 0 62.554 0 L 449.446 0 C 483.971 0 512 28.03 512 62.554 Z M 269.951 190.75 L 182.567 75.216 L 56 75.216 L 207.216 272.95 L 63.9 436.783 L 125.266 436.783 L 235.9 310.383 L 332.567 436.783 L 456 436.783 L 298.367 228.367 L 432.367 75.216 L 371.033 75.216 Z M 127.633 110 L 164.101 110 L 383.481 400.065 L 349.5 400.065 Z" />
+            </svg>
+        </a>
+    </li>
+    <li>
+        <a target="_blank" rel="noopener noreferrer" aria-label="share  on linkedin"
+            href="https://www.linkedin.com/shareArticle?mini=true&amp;url=http%3a%2f%2fknightsnape.github.io%2fpublic%2fposts%2fmath_numerical_analysis%2f&amp;title=&amp;summary=&amp;source=http%3a%2f%2fknightsnape.github.io%2fpublic%2fposts%2fmath_numerical_analysis%2f">
+            <svg version="1.1" viewBox="0 0 512 512" xml:space="preserve" height="30px" width="30px" fill="currentColor">
+                <path
+                    d="M449.446,0c34.525,0 62.554,28.03 62.554,62.554l0,386.892c0,34.524 -28.03,62.554 -62.554,62.554l-386.892,0c-34.524,0 -62.554,-28.03 -62.554,-62.554l0,-386.892c0,-34.524 28.029,-62.554 62.554,-62.554l386.892,0Zm-288.985,423.278l0,-225.717l-75.04,0l0,225.717l75.04,0Zm270.539,0l0,-129.439c0,-69.333 -37.018,-101.586 -86.381,-101.586c-39.804,0 -57.634,21.891 -67.617,37.266l0,-31.958l-75.021,0c0.995,21.181 0,225.717 0,225.717l75.02,0l0,-126.056c0,-6.748 0.486,-13.492 2.474,-18.315c5.414,-13.475 17.767,-27.434 38.494,-27.434c27.135,0 38.007,20.707 38.007,51.037l0,120.768l75.024,0Zm-307.552,-334.556c-25.674,0 -42.448,16.879 -42.448,39.002c0,21.658 16.264,39.002 41.455,39.002l0.484,0c26.165,0 42.452,-17.344 42.452,-39.002c-0.485,-22.092 -16.241,-38.954 -41.943,-39.002Z" />
+            </svg>
+        </a>
+    </li>
+    <li>
+        <a target="_blank" rel="noopener noreferrer" aria-label="share  on reddit"
+            href="https://reddit.com/submit?url=http%3a%2f%2fknightsnape.github.io%2fpublic%2fposts%2fmath_numerical_analysis%2f&title=">
+            <svg version="1.1" viewBox="0 0 512 512" xml:space="preserve" height="30px" width="30px" fill="currentColor">
+                <path
+                    d="M449.446,0c34.525,0 62.554,28.03 62.554,62.554l0,386.892c0,34.524 -28.03,62.554 -62.554,62.554l-386.892,0c-34.524,0 -62.554,-28.03 -62.554,-62.554l0,-386.892c0,-34.524 28.029,-62.554 62.554,-62.554l386.892,0Zm-3.446,265.638c0,-22.964 -18.616,-41.58 -41.58,-41.58c-11.211,0 -21.361,4.457 -28.841,11.666c-28.424,-20.508 -67.586,-33.757 -111.204,-35.278l18.941,-89.121l61.884,13.157c0.756,15.734 13.642,28.29 29.56,28.29c16.407,0 29.706,-13.299 29.706,-29.701c0,-16.403 -13.299,-29.702 -29.706,-29.702c-11.666,0 -21.657,6.792 -26.515,16.578l-69.105,-14.69c-1.922,-0.418 -3.939,-0.042 -5.585,1.036c-1.658,1.073 -2.811,2.761 -3.224,4.686l-21.152,99.438c-44.258,1.228 -84.046,14.494 -112.837,35.232c-7.468,-7.164 -17.589,-11.591 -28.757,-11.591c-22.965,0 -41.585,18.616 -41.585,41.58c0,16.896 10.095,31.41 24.568,37.918c-0.639,4.135 -0.99,8.328 -0.99,12.576c0,63.977 74.469,115.836 166.33,115.836c91.861,0 166.334,-51.859 166.334,-115.836c0,-4.218 -0.347,-8.387 -0.977,-12.493c14.564,-6.47 24.735,-21.034 24.735,-38.001Zm-119.474,108.193c-20.27,20.241 -59.115,21.816 -70.534,21.816c-11.428,0 -50.277,-1.575 -70.522,-21.82c-3.007,-3.008 -3.007,-7.882 0,-10.889c3.003,-2.999 7.882,-3.003 10.885,0c12.777,12.781 40.11,17.317 59.637,17.317c19.522,0 46.86,-4.536 59.657,-17.321c3.016,-2.999 7.886,-2.995 10.885,0.008c3.008,3.011 3.003,7.882 -0.008,10.889Zm-5.23,-48.781c-16.373,0 -29.701,-13.324 -29.701,-29.698c0,-16.381 13.328,-29.714 29.701,-29.714c16.378,0 29.706,13.333 29.706,29.714c0,16.374 -13.328,29.698 -29.706,29.698Zm-160.386,-29.702c0,-16.381 13.328,-29.71 29.714,-29.71c16.369,0 29.689,13.329 29.689,29.71c0,16.373 -13.32,29.693 -29.689,29.693c-16.386,0 -29.714,-13.32 -29.714,-29.693Z" />
+            </svg>
+        </a>
+    </li>
+    <li>
+        <a target="_blank" rel="noopener noreferrer" aria-label="share  on facebook"
+            href="https://facebook.com/sharer/sharer.php?u=http%3a%2f%2fknightsnape.github.io%2fpublic%2fposts%2fmath_numerical_analysis%2f">
+            <svg version="1.1" viewBox="0 0 512 512" xml:space="preserve" height="30px" width="30px" fill="currentColor">
+                <path
+                    d="M449.446,0c34.525,0 62.554,28.03 62.554,62.554l0,386.892c0,34.524 -28.03,62.554 -62.554,62.554l-106.468,0l0,-192.915l66.6,0l12.672,-82.621l-79.272,0l0,-53.617c0,-22.603 11.073,-44.636 46.58,-44.636l36.042,0l0,-70.34c0,0 -32.71,-5.582 -63.982,-5.582c-65.288,0 -107.96,39.569 -107.96,111.204l0,62.971l-72.573,0l0,82.621l72.573,0l0,192.915l-191.104,0c-34.524,0 -62.554,-28.03 -62.554,-62.554l0,-386.892c0,-34.524 28.029,-62.554 62.554,-62.554l386.892,0Z" />
+            </svg>
+        </a>
+    </li>
+    <li>
+        <a target="_blank" rel="noopener noreferrer" aria-label="share  on whatsapp"
+            href="https://api.whatsapp.com/send?text=%20-%20http%3a%2f%2fknightsnape.github.io%2fpublic%2fposts%2fmath_numerical_analysis%2f">
+            <svg version="1.1" viewBox="0 0 512 512" xml:space="preserve" height="30px" width="30px" fill="currentColor">
+                <path
+                    d="M449.446,0c34.525,0 62.554,28.03 62.554,62.554l0,386.892c0,34.524 -28.03,62.554 -62.554,62.554l-386.892,0c-34.524,0 -62.554,-28.03 -62.554,-62.554l0,-386.892c0,-34.524 28.029,-62.554 62.554,-62.554l386.892,0Zm-58.673,127.703c-33.842,-33.881 -78.847,-52.548 -126.798,-52.568c-98.799,0 -179.21,80.405 -179.249,179.234c-0.013,31.593 8.241,62.428 23.927,89.612l-25.429,92.884l95.021,-24.925c26.181,14.28 55.659,21.807 85.658,21.816l0.074,0c98.789,0 179.206,-80.413 179.247,-179.243c0.018,-47.895 -18.61,-92.93 -52.451,-126.81Zm-126.797,275.782l-0.06,0c-26.734,-0.01 -52.954,-7.193 -75.828,-20.767l-5.441,-3.229l-56.386,14.792l15.05,-54.977l-3.542,-5.637c-14.913,-23.72 -22.791,-51.136 -22.779,-79.287c0.033,-82.142 66.867,-148.971 149.046,-148.971c39.793,0.014 77.199,15.531 105.329,43.692c28.128,28.16 43.609,65.592 43.594,105.4c-0.034,82.149 -66.866,148.983 -148.983,148.984Zm81.721,-111.581c-4.479,-2.242 -26.499,-13.075 -30.604,-14.571c-4.105,-1.495 -7.091,-2.241 -10.077,2.241c-2.986,4.483 -11.569,14.572 -14.182,17.562c-2.612,2.988 -5.225,3.364 -9.703,1.12c-4.479,-2.241 -18.91,-6.97 -36.017,-22.23c-13.314,-11.876 -22.304,-26.542 -24.916,-31.026c-2.612,-4.484 -0.279,-6.908 1.963,-9.14c2.016,-2.007 4.48,-5.232 6.719,-7.847c2.24,-2.615 2.986,-4.484 4.479,-7.472c1.493,-2.99 0.747,-5.604 -0.374,-7.846c-1.119,-2.241 -10.077,-24.288 -13.809,-33.256c-3.635,-8.733 -7.327,-7.55 -10.077,-7.688c-2.609,-0.13 -5.598,-0.158 -8.583,-0.158c-2.986,0 -7.839,1.121 -11.944,5.604c-4.105,4.484 -15.675,15.32 -15.675,37.364c0,22.046 16.048,43.342 18.287,46.332c2.24,2.99 31.582,48.227 76.511,67.627c10.685,4.615 19.028,7.371 25.533,9.434c10.728,3.41 20.492,2.929 28.209,1.775c8.605,-1.285 26.499,-10.833 30.231,-21.295c3.732,-10.464 3.732,-19.431 2.612,-21.298c-1.119,-1.869 -4.105,-2.99 -8.583,-5.232Z" />
+            </svg>
+        </a>
+    </li>
+    <li>
+        <a target="_blank" rel="noopener noreferrer" aria-label="share  on telegram"
+            href="https://telegram.me/share/url?text=&amp;url=http%3a%2f%2fknightsnape.github.io%2fpublic%2fposts%2fmath_numerical_analysis%2f">
+            <svg version="1.1" xml:space="preserve" viewBox="2 2 28 28" height="30px" width="30px" fill="currentColor">
+                <path
+                    d="M26.49,29.86H5.5a3.37,3.37,0,0,1-2.47-1,3.35,3.35,0,0,1-1-2.47V5.48A3.36,3.36,0,0,1,3,3,3.37,3.37,0,0,1,5.5,2h21A3.38,3.38,0,0,1,29,3a3.36,3.36,0,0,1,1,2.46V26.37a3.35,3.35,0,0,1-1,2.47A3.38,3.38,0,0,1,26.49,29.86Zm-5.38-6.71a.79.79,0,0,0,.85-.66L24.73,9.24a.55.55,0,0,0-.18-.46.62.62,0,0,0-.41-.17q-.08,0-16.53,6.11a.59.59,0,0,0-.41.59.57.57,0,0,0,.43.52l4,1.24,1.61,4.83a.62.62,0,0,0,.63.43.56.56,0,0,0,.4-.17L16.54,20l4.09,3A.9.9,0,0,0,21.11,23.15ZM13.8,20.71l-1.21-4q8.72-5.55,8.78-5.55c.15,0,.23,0,.23.16a.18.18,0,0,1,0,.06s-2.51,2.3-7.52,6.8Z" />
+            </svg>
+        </a>
+    </li>
+    <li>
+        <a target="_blank" rel="noopener noreferrer" aria-label="share  on ycombinator"
+            href="https://news.ycombinator.com/submitlink?t=&u=http%3a%2f%2fknightsnape.github.io%2fpublic%2fposts%2fmath_numerical_analysis%2f">
+            <svg version="1.1" xml:space="preserve" width="30px" height="30px" viewBox="0 0 512 512" fill="currentColor"
+                xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape">
+                <path
+                    d="M449.446 0C483.971 0 512 28.03 512 62.554L512 449.446C512 483.97 483.97 512 449.446 512L62.554 512C28.03 512 0 483.97 0 449.446L0 62.554C0 28.03 28.029 0 62.554 0L449.446 0ZM183.8767 87.9921H121.8427L230.6673 292.4508V424.0079H281.3328V292.4508L390.1575 87.9921H328.1233L256 238.2489z" />
+            </svg>
+        </a>
+    </li>
+</ul>
+
+  </footer>
+</article>
+    </main>
+    
+<footer class="footer">
+    <span>&copy; 2024 <a href="http://knightsnape.github.io/public/">PaperMod</a></span>
+    <span>
+        Powered by
+        <a href="https://gohugo.io/" rel="noopener noreferrer" target="_blank">Hugo</a> &
+        <a href="https://github.com/adityatelange/hugo-PaperMod/" rel="noopener" target="_blank">PaperMod</a>
+    </span>
+</footer>
+<a href="#top" aria-label="go to top" title="Go to Top (Alt + G)" class="top-link" id="top-link" accesskey="g">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 6" fill="currentColor">
+        <path d="M12 6H0l6-6z" />
+    </svg>
+</a>
+
+<script>
+    let menu = document.getElementById('menu')
+    if (menu) {
+        menu.scrollLeft = localStorage.getItem("menu-scroll-position");
+        menu.onscroll = function () {
+            localStorage.setItem("menu-scroll-position", menu.scrollLeft);
+        }
+    }
+
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener("click", function (e) {
+            e.preventDefault();
+            var id = this.getAttribute("href").substr(1);
+            if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView({
+                    behavior: "smooth"
+                });
+            } else {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView();
+            }
+            if (id === "top") {
+                history.replaceState(null, null, " ");
+            } else {
+                history.pushState(null, null, `#${id}`);
+            }
+        });
+    });
+
+</script>
+<script>
+    var mybutton = document.getElementById("top-link");
+    window.onscroll = function () {
+        if (document.body.scrollTop > 800 || document.documentElement.scrollTop > 800) {
+            mybutton.style.visibility = "visible";
+            mybutton.style.opacity = "1";
+        } else {
+            mybutton.style.visibility = "hidden";
+            mybutton.style.opacity = "0";
+        }
+    };
+
+</script>
+<script>
+    document.getElementById("theme-toggle").addEventListener("click", () => {
+        if (document.body.className.includes("dark")) {
+            document.body.classList.remove('dark');
+            localStorage.setItem("pref-theme", 'light');
+        } else {
+            document.body.classList.add('dark');
+            localStorage.setItem("pref-theme", 'dark');
+        }
+    })
+
+</script>
+<script>
+    document.querySelectorAll('pre > code').forEach((codeblock) => {
+        const container = codeblock.parentNode.parentNode;
+
+        const copybutton = document.createElement('button');
+        copybutton.classList.add('copy-code');
+        copybutton.innerHTML = 'copy';
+
+        function copyingDone() {
+            copybutton.innerHTML = 'copied!';
+            setTimeout(() => {
+                copybutton.innerHTML = 'copy';
+            }, 2000);
+        }
+
+        copybutton.addEventListener('click', (cb) => {
+            if ('clipboard' in navigator) {
+                navigator.clipboard.writeText(codeblock.textContent);
+                copyingDone();
+                return;
+            }
+
+            const range = document.createRange();
+            range.selectNodeContents(codeblock);
+            const selection = window.getSelection();
+            selection.removeAllRanges();
+            selection.addRange(range);
+            try {
+                document.execCommand('copy');
+                copyingDone();
+            } catch (e) { };
+            selection.removeRange(range);
+        });
+
+        if (container.classList.contains("highlight")) {
+            container.appendChild(copybutton);
+        } else if (container.parentNode.firstChild == container) {
+            
+        } else if (codeblock.parentNode.parentNode.parentNode.parentNode.parentNode.nodeName == "TABLE") {
+            
+            codeblock.parentNode.parentNode.parentNode.parentNode.parentNode.appendChild(copybutton);
+        } else {
+            
+            codeblock.parentNode.appendChild(copybutton);
+        }
+    });
+</script>
+</body>
+
+</html>
