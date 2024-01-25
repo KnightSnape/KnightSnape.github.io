@@ -5,25 +5,10 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <meta name="robots" content="index, follow">
-<title>PaperMod</title>
-<meta name="keywords" content="">
-<meta name="description" content="数值分析 前言 $\quad$ 数值分析主要考虑问题的数值解方面的内容, 包括但不限于数值算法的构建, 误差传播的影响, 计算复杂度的估算以及高效可靠的计算机的实现. 虽然对于不同的问题有不同的数值模型来构建, 但是他们一般都具有一些共同点:
-$\quad$ 数值分析一般会以线性代数, 高等数学, 实分析和泛函分析等内容为基础或者分析工具
-$\quad$ 如果一个问题不能直接求解, 尝试考虑一个近似的可解的问题
-$\quad$ 稳定性. 这里的稳定性是指模型问题的解对初始数据的敏感度, 也就是说, 解因为初始数据的微小改变而产生的变化, 变化越小越稳定.
-数值分析的研究领域非常广泛, 并且由于现代种类交叉学科的发展, 数值分析的边界变得越来越模糊. 但是主要的内容包含如下几个方面:
-数值线性代数 $\quad$ 主要研究内容主要涉及线性方程组算法研究, 特征值和相关数值算法研究
-非线性方程组 $\quad$ 非线性方程组的求解一般是以一系列近似的线性问题为工具, 经典的方法包括二分法, 不动点迭代, 最速下降法和牛顿法等
-逼近理论 $\quad$ 逼近理论主要考虑如何利用简单的函数来逼近复杂函数, 并且如何给出定量误差估计
-1.数值计算的误差
-2.内积空间与正交分解
-3.线性方程组问题
-3.1.高斯消元法 3.2.列主元消去法 3.3.矩阵的三角分解法 3.4.矩阵的直接LU分解法 3.5.三对角线性方程组的追赶法 3.6.迭代法求解线性方程组 3.7.雅可比迭代法 3.8.高斯-赛德尔迭代法 4.插值算法
-4.1.线性插值 4.2.双线性插值 4.3.拉格朗日插值 4.4.牛顿插值 5.数值微分和积分
-5.1.数值微分与计算方法 5.2.数值积分与计算方法 6.数值逼近
-6.1.曲线和曲面的拟合 6.2.正交多项式与函数逼近 1.数值计算的误差 $\quad$既然直接聊到了误差，那么就直接讲其分类以及来源:
-模型误差：实际问题和对其进行抽象，简化后得到的数学模型之间存在的误差 观测误差：由于精度限制，观察和测量的时候产生的误差 舍入误差：计算机字长的限制，所能表示的数只能有有限的位数，后面的部分按照不同的舍入规则舍去产生的误差。 截断/方法误差：得不到精确解的数学模型通常用数值方法求近似解，二者之间的误差，通常用有限过程对无穷进行截断，比如：泰勒公式的近似代替如下： $$ P_n(x) = f(0) &#43; \frac{f`(0)}{1!">
-<meta name="author" content="Theme PaperMod">
+<title>Math Numerical Analysis | PaperMod</title>
+<meta name="keywords" content="math">
+<meta name="description" content="The total result of math numerical analysis">
+<meta name="author" content="KnightSnape">
 <link rel="canonical" href="http://knightsnape.github.io/public/posts/math_numerical_analysis/">
 <link crossorigin="anonymous" href="/public/assets/css/stylesheet.5ff2630c4d1b3e25bc21f0ecd96681dbcf58219e741fa627857820b5485cb770.css" integrity="sha256-X/JjDE0bPiW8IfDs2WaB289YIZ50H6YnhXggtUhct3A=" rel="preload stylesheet" as="style">
 <link rel="icon" href="http://knightsnape.github.io/public/favicon.ico">
@@ -88,23 +73,8 @@ document.addEventListener("DOMContentLoaded", function() {
     });
 });
 </script>
-<meta property="og:title" content="" />
-<meta property="og:description" content="数值分析 前言 $\quad$ 数值分析主要考虑问题的数值解方面的内容, 包括但不限于数值算法的构建, 误差传播的影响, 计算复杂度的估算以及高效可靠的计算机的实现. 虽然对于不同的问题有不同的数值模型来构建, 但是他们一般都具有一些共同点:
-$\quad$ 数值分析一般会以线性代数, 高等数学, 实分析和泛函分析等内容为基础或者分析工具
-$\quad$ 如果一个问题不能直接求解, 尝试考虑一个近似的可解的问题
-$\quad$ 稳定性. 这里的稳定性是指模型问题的解对初始数据的敏感度, 也就是说, 解因为初始数据的微小改变而产生的变化, 变化越小越稳定.
-数值分析的研究领域非常广泛, 并且由于现代种类交叉学科的发展, 数值分析的边界变得越来越模糊. 但是主要的内容包含如下几个方面:
-数值线性代数 $\quad$ 主要研究内容主要涉及线性方程组算法研究, 特征值和相关数值算法研究
-非线性方程组 $\quad$ 非线性方程组的求解一般是以一系列近似的线性问题为工具, 经典的方法包括二分法, 不动点迭代, 最速下降法和牛顿法等
-逼近理论 $\quad$ 逼近理论主要考虑如何利用简单的函数来逼近复杂函数, 并且如何给出定量误差估计
-1.数值计算的误差
-2.内积空间与正交分解
-3.线性方程组问题
-3.1.高斯消元法 3.2.列主元消去法 3.3.矩阵的三角分解法 3.4.矩阵的直接LU分解法 3.5.三对角线性方程组的追赶法 3.6.迭代法求解线性方程组 3.7.雅可比迭代法 3.8.高斯-赛德尔迭代法 4.插值算法
-4.1.线性插值 4.2.双线性插值 4.3.拉格朗日插值 4.4.牛顿插值 5.数值微分和积分
-5.1.数值微分与计算方法 5.2.数值积分与计算方法 6.数值逼近
-6.1.曲线和曲面的拟合 6.2.正交多项式与函数逼近 1.数值计算的误差 $\quad$既然直接聊到了误差，那么就直接讲其分类以及来源:
-模型误差：实际问题和对其进行抽象，简化后得到的数学模型之间存在的误差 观测误差：由于精度限制，观察和测量的时候产生的误差 舍入误差：计算机字长的限制，所能表示的数只能有有限的位数，后面的部分按照不同的舍入规则舍去产生的误差。 截断/方法误差：得不到精确解的数学模型通常用数值方法求近似解，二者之间的误差，通常用有限过程对无穷进行截断，比如：泰勒公式的近似代替如下： $$ P_n(x) = f(0) &#43; \frac{f`(0)}{1!" />
+<meta property="og:title" content="Math Numerical Analysis" />
+<meta property="og:description" content="The total result of math numerical analysis" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="http://knightsnape.github.io/public/posts/math_numerical_analysis/" /><meta property="og:image" content="http://knightsnape.github.io/public/images/papermod-cover.png"/><meta property="article:section" content="posts" />
 
@@ -114,23 +84,8 @@ $\quad$ 稳定性. 这里的稳定性是指模型问题的解对初始数据的�
 <meta name="twitter:card" content="summary_large_image"/>
 <meta name="twitter:image" content="http://knightsnape.github.io/public/images/papermod-cover.png"/>
 
-<meta name="twitter:title" content=""/>
-<meta name="twitter:description" content="数值分析 前言 $\quad$ 数值分析主要考虑问题的数值解方面的内容, 包括但不限于数值算法的构建, 误差传播的影响, 计算复杂度的估算以及高效可靠的计算机的实现. 虽然对于不同的问题有不同的数值模型来构建, 但是他们一般都具有一些共同点:
-$\quad$ 数值分析一般会以线性代数, 高等数学, 实分析和泛函分析等内容为基础或者分析工具
-$\quad$ 如果一个问题不能直接求解, 尝试考虑一个近似的可解的问题
-$\quad$ 稳定性. 这里的稳定性是指模型问题的解对初始数据的敏感度, 也就是说, 解因为初始数据的微小改变而产生的变化, 变化越小越稳定.
-数值分析的研究领域非常广泛, 并且由于现代种类交叉学科的发展, 数值分析的边界变得越来越模糊. 但是主要的内容包含如下几个方面:
-数值线性代数 $\quad$ 主要研究内容主要涉及线性方程组算法研究, 特征值和相关数值算法研究
-非线性方程组 $\quad$ 非线性方程组的求解一般是以一系列近似的线性问题为工具, 经典的方法包括二分法, 不动点迭代, 最速下降法和牛顿法等
-逼近理论 $\quad$ 逼近理论主要考虑如何利用简单的函数来逼近复杂函数, 并且如何给出定量误差估计
-1.数值计算的误差
-2.内积空间与正交分解
-3.线性方程组问题
-3.1.高斯消元法 3.2.列主元消去法 3.3.矩阵的三角分解法 3.4.矩阵的直接LU分解法 3.5.三对角线性方程组的追赶法 3.6.迭代法求解线性方程组 3.7.雅可比迭代法 3.8.高斯-赛德尔迭代法 4.插值算法
-4.1.线性插值 4.2.双线性插值 4.3.拉格朗日插值 4.4.牛顿插值 5.数值微分和积分
-5.1.数值微分与计算方法 5.2.数值积分与计算方法 6.数值逼近
-6.1.曲线和曲面的拟合 6.2.正交多项式与函数逼近 1.数值计算的误差 $\quad$既然直接聊到了误差，那么就直接讲其分类以及来源:
-模型误差：实际问题和对其进行抽象，简化后得到的数学模型之间存在的误差 观测误差：由于精度限制，观察和测量的时候产生的误差 舍入误差：计算机字长的限制，所能表示的数只能有有限的位数，后面的部分按照不同的舍入规则舍去产生的误差。 截断/方法误差：得不到精确解的数学模型通常用数值方法求近似解，二者之间的误差，通常用有限过程对无穷进行截断，比如：泰勒公式的近似代替如下： $$ P_n(x) = f(0) &#43; \frac{f`(0)}{1!"/>
+<meta name="twitter:title" content="Math Numerical Analysis"/>
+<meta name="twitter:description" content="The total result of math numerical analysis"/>
 
 
 <script type="application/ld+json">
@@ -147,7 +102,7 @@ $\quad$ 稳定性. 这里的稳定性是指模型问题的解对初始数据的�
     {
       "@type": "ListItem",
       "position":  2 ,
-      "name": "",
+      "name": "Math Numerical Analysis",
       "item": "http://knightsnape.github.io/public/posts/math_numerical_analysis/"
     }
   ]
@@ -157,11 +112,11 @@ $\quad$ 稳定性. 这里的稳定性是指模型问题的解对初始数据的�
 {
   "@context": "https://schema.org",
   "@type": "BlogPosting",
-  "headline": "",
-  "name": "",
-  "description": "数值分析 前言 $\\quad$ 数值分析主要考虑问题的数值解方面的内容, 包括但不限于数值算法的构建, 误差传播的影响, 计算复杂度的估算以及高效可靠的计算机的实现. 虽然对于不同的问题有不同的数值模型来构建, 但是他们一般都具有一些共同点:\n$\\quad$ 数值分析一般会以线性代数, 高等数学, 实分析和泛函分析等内容为基础或者分析工具\n$\\quad$ 如果一个问题不能直接求解, 尝试考虑一个近似的可解的问题\n$\\quad$ 稳定性. 这里的稳定性是指模型问题的解对初始数据的敏感度, 也就是说, 解因为初始数据的微小改变而产生的变化, 变化越小越稳定.\n数值分析的研究领域非常广泛, 并且由于现代种类交叉学科的发展, 数值分析的边界变得越来越模糊. 但是主要的内容包含如下几个方面:\n数值线性代数 $\\quad$ 主要研究内容主要涉及线性方程组算法研究, 特征值和相关数值算法研究\n非线性方程组 $\\quad$ 非线性方程组的求解一般是以一系列近似的线性问题为工具, 经典的方法包括二分法, 不动点迭代, 最速下降法和牛顿法等\n逼近理论 $\\quad$ 逼近理论主要考虑如何利用简单的函数来逼近复杂函数, 并且如何给出定量误差估计\n1.数值计算的误差\n2.内积空间与正交分解\n3.线性方程组问题\n3.1.高斯消元法 3.2.列主元消去法 3.3.矩阵的三角分解法 3.4.矩阵的直接LU分解法 3.5.三对角线性方程组的追赶法 3.6.迭代法求解线性方程组 3.7.雅可比迭代法 3.8.高斯-赛德尔迭代法 4.插值算法\n4.1.线性插值 4.2.双线性插值 4.3.拉格朗日插值 4.4.牛顿插值 5.数值微分和积分\n5.1.数值微分与计算方法 5.2.数值积分与计算方法 6.数值逼近\n6.1.曲线和曲面的拟合 6.2.正交多项式与函数逼近 1.数值计算的误差 $\\quad$既然直接聊到了误差，那么就直接讲其分类以及来源:\n模型误差：实际问题和对其进行抽象，简化后得到的数学模型之间存在的误差 观测误差：由于精度限制，观察和测量的时候产生的误差 舍入误差：计算机字长的限制，所能表示的数只能有有限的位数，后面的部分按照不同的舍入规则舍去产生的误差。 截断/方法误差：得不到精确解的数学模型通常用数值方法求近似解，二者之间的误差，通常用有限过程对无穷进行截断，比如：泰勒公式的近似代替如下： $$ P_n(x) = f(0) + \\frac{f`(0)}{1!",
+  "headline": "Math Numerical Analysis",
+  "name": "Math Numerical Analysis",
+  "description": "The total result of math numerical analysis",
   "keywords": [
-    
+    "math"
   ],
   "articleBody": "数值分析 前言 $\\quad$ 数值分析主要考虑问题的数值解方面的内容, 包括但不限于数值算法的构建, 误差传播的影响, 计算复杂度的估算以及高效可靠的计算机的实现. 虽然对于不同的问题有不同的数值模型来构建, 但是他们一般都具有一些共同点:\n$\\quad$ 数值分析一般会以线性代数, 高等数学, 实分析和泛函分析等内容为基础或者分析工具\n$\\quad$ 如果一个问题不能直接求解, 尝试考虑一个近似的可解的问题\n$\\quad$ 稳定性. 这里的稳定性是指模型问题的解对初始数据的敏感度, 也就是说, 解因为初始数据的微小改变而产生的变化, 变化越小越稳定.\n数值分析的研究领域非常广泛, 并且由于现代种类交叉学科的发展, 数值分析的边界变得越来越模糊. 但是主要的内容包含如下几个方面:\n数值线性代数 $\\quad$ 主要研究内容主要涉及线性方程组算法研究, 特征值和相关数值算法研究\n非线性方程组 $\\quad$ 非线性方程组的求解一般是以一系列近似的线性问题为工具, 经典的方法包括二分法, 不动点迭代, 最速下降法和牛顿法等\n逼近理论 $\\quad$ 逼近理论主要考虑如何利用简单的函数来逼近复杂函数, 并且如何给出定量误差估计\n1.数值计算的误差\n2.内积空间与正交分解\n3.线性方程组问题\n3.1.高斯消元法 3.2.列主元消去法 3.3.矩阵的三角分解法 3.4.矩阵的直接LU分解法 3.5.三对角线性方程组的追赶法 3.6.迭代法求解线性方程组 3.7.雅可比迭代法 3.8.高斯-赛德尔迭代法 4.插值算法\n4.1.线性插值 4.2.双线性插值 4.3.拉格朗日插值 4.4.牛顿插值 5.数值微分和积分\n5.1.数值微分与计算方法 5.2.数值积分与计算方法 6.数值逼近\n6.1.曲线和曲面的拟合 6.2.正交多项式与函数逼近 1.数值计算的误差 $\\quad$既然直接聊到了误差，那么就直接讲其分类以及来源:\n模型误差：实际问题和对其进行抽象，简化后得到的数学模型之间存在的误差 观测误差：由于精度限制，观察和测量的时候产生的误差 舍入误差：计算机字长的限制，所能表示的数只能有有限的位数，后面的部分按照不同的舍入规则舍去产生的误差。 截断/方法误差：得不到精确解的数学模型通常用数值方法求近似解，二者之间的误差，通常用有限过程对无穷进行截断，比如：泰勒公式的近似代替如下： $$ P_n(x) = f(0) + \\frac{f`(0)}{1!}x + \\frac{f``(0)}{2!}x^2 + … + \\frac{f^{n}(0)}{n!}x^n $$\n则截断误差为:\n$$ R_n(x) = f(x) - P_n(x) = \\frac{f^{n+1}(\\xi)}{(n+1)!}x^{n+1} $$\n其中$\\xi \\in (0,x)$\n定义1: 设$x$为准确值，$x^$为$x$的一个近似值，称$E(x^) = x^* - x$为近似值的绝对误差，简称误差\n实际上，准确值$x$通常无法求得甚至未知，因此上面的$E(x^)$往往也无法求得，只能知道其绝对值的某个上界$\\varepsilon(x) \\ge E(x^) = |x^ - x|$，数值$\\varepsilon(x*)$称为$x^*$的(绝对)误差限。\n但是一个测量值的精确程度除了与绝对误差限有关外，还和该量的大小有关，由此引入相对误差限：\n定义2: 设$x$为准确值，$x^$为$x$的一个近似值，称$\\frac{E(x^)}{x} = \\frac{x^* - x}{x}$为近似值x^的相对误差，简记为E_r，$\\varepsilon_r(x^) \\ge |E_r(x^)|$为$x^$的相对误差限\n两种误差限制的关系为:$\\varepsilon_r = \\frac{\\varepsilon}{|x^*|}$\n定义3: 若$x^$为$x$的近似值，其绝对误差的绝对值不超过某一位数字的半个单位，而该位数字到$x^$的第一位非零数字共有n位，则称用$x^$近似$x$时具有$n$位有效数字，简称$x^$有$n$位有效数字。\n有效数字与绝对误差限的关系：\n$x$的近似值$x^*$的规格化形式可以写作：\n$$ x^* = \\pm0.a_1a_2…a_k \\times 10^m $$\n其中$m$是整数，$a_i$是0-9中的一个数字且$a_1=0$,则上式具有n位($n \\leq k$)有效数字当且仅当$|E| = |x^* - x| \\leq 0.5 \\times 10^{m - n}$\n$x^*$有n位有效数字，则相对误差限:\n$$ e_r^* \\leq \\frac{1}{2a_1} \\times 10^{1-n} $$\n反之相对误差限:\n$$ e_r^* \\leq \\frac{1}{2(a_1+1)} \\times 10^{1-n} $$\n数值运算的误差估计：\n$$ \\varepsilon(x_1^* + x_2^) = \\varepsilon(x_1^) + \\varepsilon(x_2^*) $$\n$$ \\varepsilon (x_1^x_2^) \\approx |x_1^|\\varepsilon(x_2^) + |x_2^|\\varepsilon(x_1^) $$\n$$ \\varepsilon(\\frac{x_1^}{x_2^}) \\approx \\frac{|x_1^|\\varepsilon(x_2^) + |x_2^|\\varepsilon(x_1^)}{|x_2^*|^2} $$\n一般地，自变量有误差时，计算函数值也产生误差，误差限可利用函数的泰勒展开式进行估计，\n$$ \\varepsilon(f(x^)) = f(x) - f(x^) = f`(x^)(x - x^) + \\frac{f``(\\xi)}{2}(x - x^*)^2 $$\n其中$\\xi$介于$x$和$x^*$之间\n取绝对值并假定$f`(x^)$和$f``(x^)$比值不大，忽略$\\varepsilon(x^*)$的高阶项，有：\n$$ \\varepsilon(f(x^)) \\approx |f`(x^)|\\varepsilon(x^*) $$\n多元函数同理\n四则运算的稳定性问题：\n防止大数吃小数(计算机位数有限造成)-\u003e求和时从小到大相加，可使和的误差减小 做减法时避免相近数相减-\u003e使用有理化，三角变换等 避免小数作为除数和大数作为乘数 提高算法效率问题：\n减少运算次数(多项式计算的秦九韶算法) 病态问题 定义4: 对数学问题本身如果输入数据有微小扰动，引起输出数据的很大扰动，即病态问题\n计算函数值$f(x)$，当$x$有扰动，$\\delta = x - x^$，相对误差$\\frac{\\delta}{x}$，函数值相对误差$\\frac{f(x) - f(x^)}{f(x)}$，相对误差比值为:$\\frac{\\frac{f(x) - f(x^*)}{f(x)}}{\\frac{\\delta}{x}} \\approx \\frac{xf`(x)}{f(x)} = C_p$ 其中$C_p$为计算函数值问题的条件数\n2.内积空间与正交分解 矢量的模与赋范空间 向量的模是线性空间中不存在的概念，它就是向量的大小，对于几何而言反映为有向线段的长短，其满足如下性质：\n1.正定性:$||\\mathbf{a}|| \u003e 0 , ||\\mathbf{0}|| = 0$ 2.正齐次性:$||\\lambda\\mathbf{a}||=|\\lambda|||\\mathbf{a}||$ 3.三角不等式:$||\\mathbf{a}+\\mathbf{b}|| \\leq ||a|| + ||b||$\n矢量的模运算可以看成是$R^3$空间到$R$的映射，也可以看成一维实数的绝对值在二维和三维空间的推广。我们可以进一步推广到n维向量的模场：\n$$ ||\\mathbf{v}|| = \\sqrt{\\sum_{i=1}^{n}{x_i^2}} $$\n更一般的，我们不需要定义计算元素“长短”的公式，我们只需要定义计算元素“长短”的运算所满足的条件。比如我们在线性空间中，定义范数(norm)运算，记为$||·||$，使之满足上面的正定性，正齐次性，三角不等式，我们就得到了一个新的代数结构——赋范线性空间。\n矢量的单位化: 单位向量是定义为模长为1的向量,那么任意向量的单位化:\n$$ normalize(\\mathbf{a}) = \\frac{\\mathbf{a}}{||\\mathbf{a}||} $$\n单位化也常称归一化，规范化。单位化向量在几何和物理中，特指向量的方向。单位向量和原向量线性相关\n赋范线性空间的定义：$V$是数域$F$上的线性空间，映射$||·||:V \\to F$满足\n1.正定性: $||\\mathbf{\\xi}|| \u003e 0, ||\\mathbf{0}|| = 0$\n2.正齐次性：$||k\\xi||=|k|||\\xi||,k \\in F$\n3.三角不等式 $||\\xi_1 + \\xi_2|| \\leq ||\\xi_1|| + ||\\xi_2||$\n比如，在线性空间与线性变换中，我们知道所有在闭区间$[a,b]$上连续的函数构成一个线性空间$C[a,b]$，我们可以定义三种常用的范数，使之构成赋范线性空间。那么可以定义函数的范数：\n1.$\\infty - $范数:$||f(x)||\\infty=max{a \\leq x \\leq b}|f(x)|$\n2.$1 - $范数:$||f(x)||1 = \\int{a}^{b}|f(x)|dx$\n3.$2 - $范数:$||f(x)||2 = \\sqrt{\\int{a}^{b}{(f(x))^2}dx}$\n类比于向量的单位化，与函数范数的定义，我们可以得到函数的单位化：单位函数是范数为1的函数，那么函数的单位化：\n$$ normalize[f(x)] = \\frac{f(x)}{||f(x)||} $$\n单位函数的反映在函数图像上，保留了原函数的“起伏”形状。也即单位函数与原函数线性相关，而且导函数与原函数都线性相关：\n$$ (\\frac{f(x)}{||f(x)||})=\\frac{1}{||f(x)||}f(x)=kf`(x) $$\n$$ \\int{\\frac{f(x)}{f`(x)}dx}=\\frac{1}{||f(x)||}\\int{f(x)dx}=k\\int{f(x)dx} $$\n范数是模的抽象，是数学上衡量元素“长短”的一般概念，如果是更一般的集合，只要范数运算满足正定性、正齐次性、三角不等式，那么就称它为赋范空间。\n向量的内积和内积空间 熟悉的内积公式为：\n$$ \\mathbf{a}·\\mathbf{b} = ||\\mathbf{a}||||\\mathbf{b}||cos\u003c\\mathbf{a},\\mathbf{b}\u003e $$\n通过内积运算，也建立一个从矢量到标量的映射。矢量内积最重要的几何意义是反应了两矢量的夹角$\\alpha$，所以我们也常常使用矢量内积计算两矢量的夹角：\n$$ \\cos{\\alpha} = \\frac{\\mathbf{a}·\\mathbf{b}}{||\\mathbf{a}||||\\mathbf{b}||} $$\n因为$-1 \\leq cos\\alpha \\leq -1$，所以有 $|\\mathbf{a}·\\mathbf{b}| \\leq ||\\mathbf{a}||||\\mathbf{b}||$\n这个不等式就是柯西-布涅柯夫斯基不等式。\n由定义，我们还可以从内积公式中得到向量模的计算公式：\n$$ ||\\mathbf{a}|| = \\sqrt{\\mathbf{a}·\\mathbf{a}} $$\n内积空间的定义： $V$ 是数域$F$上的线性空间，在$V$上定义内积运算$(\\alpha,\\beta)$，对$\\forall \\alpha,\\beta \\in V$，都有$F$中的一个元素与之对应。它具有以下性质:\n共轭对称性：$(\\alpha,\\beta) = \\overline{(\\beta,\\alpha)}$ 数乘结合律: $(k\\alpha,\\beta) = k(\\alpha,\\beta)$ 加法分配律: $(\\alpha + \\beta,\\gamma) = (\\alpha,\\gamma) + (\\beta,\\gamma)$ 正定性: $(\\alpha,\\alpha) \\geq 0$，当且仅当$\\alpha = 0$时$(\\alpha,\\alpha) = 0$ 由定义，内积空间一定是线性空间。\n正交 定义： 如果$(\\alpha,\\beta)=0$，称$\\alpha,\\beta$正交。正交是垂直的推广，只有在内积空间中才有意义。两正交元素是线性无关的。\n正交基与标准正交基：在内积空间，一组非零的元素，如果它们两两正交，就称为正交元素组。在$n$维内积空间中，有$n$个两两正交的元素，称为正交基，如果正交基的元素都是单位元素，则称为标准正交基。设$\\epsilon_1,\\epsilon_2,…,\\epsilon_n$是一组正交基，那么：\n$$ (\\epsilon_i,\\epsilon_j) = \\left{ \\begin{aligned} \u0026E_i,when \\quad i=j \\ \u00260,when \\quad i \\neq j \\ \\end{aligned} \\right. $$\n当$E_i=1$时，就是标准正交基。一组基为标准正交基的充要条件是，它的度量矩阵为单位矩阵。在标准正交基下，内积公式可以简化为：\n$$ (\\alpha,\\beta) = \\sum_{i=1}^{n}{\\sum_{j=1}^{n}{x_iy_i}} = X_TY $$\n定理(施密特(Schimidt)正交化)： 通过$n$维欧式空间中任意一组线性无关的向量组${\\epsilon_i}$，都可以找到一组标准的正交基${\\eta_i}$\n逐个正交化，令$\\beta_1 = \\epsilon_1$\n因为\\beta_i是${\\epsilon_i}$的线性组合，那么我们可以构造递推公式：\n$$ \\beta_i = \\epsilon_i - \\sum_{j=1}^{i-1}{k_j\\beta_j},i \u003e 1 $$\n其中\n$$ k_j = \\frac{(\\epsilon_{i+1},\\beta_i)}{(\\beta_i,\\beta_i)} $$\n再逐个归一化：\n$$ \\eta_i = \\frac{\\beta_i}{|\\beta_i|},i=1,2,…,n $$\n3.线性方程组问题 3.1.高斯消元法 你一定会解简单的线性方程组，比如下面这样的：\n$$ 2x_1 + 4x_2 - 2x_3 = 2 $$\n$$ 4x_1 + 9x_2 - 3x_3 = 8 $$\n$$ -2x_1 - 3x_2 + 7x_3 = 10 $$\n你一定知道，消元的过程就是解方程的过程。对于上面的方程组， $(1) + (3),(1) \\times 2 - (2)$ 可以消掉$x_1$，得到两个方程进一步可以消掉$x_2$ 或 $x_3$，进而解得结果\n这个过程可以用矩阵描述，表达的是相同含义。\n把方程组左边变量得系数放进矩阵：\n$$ A = \\begin{bmatrix} 2 \u0026 4 \u0026 -2\\ 4 \u0026 9 \u0026 -3\\ -2 \u0026 -3 \u0026 7 \\end{bmatrix} $$\n把方程组右边的数字放入矩阵：\n$$ b = \\begin{bmatrix} 2 \\ 8 \\ 10 \\end{bmatrix} $$\n原方程可以写成：\n$$ Ax = b $$\n接下来进行高斯消元得过程，由于等十之间得加减法同时操作等式两边，以上两个矩阵$A,b$的行变换需要同时进行，故把它们放进同一个矩阵：\n$$ A` = \\begin{bmatrix} 2 \u0026 4 \u0026 -2 \u0026 2\\ 4 \u0026 9 \u0026 -3 \u0026 8\\ -2 \u0026 -3 \u0026 7 \u0026 10 \\end{bmatrix} $$\n先消掉$(2)$,$(3)$中的$x_1$，也就是把矩阵第2，3行的第一列变成0。可以实现这样的效果：\n$$ A^{(1)} = \\begin{bmatrix} 2 \u0026 4 \u0026 -2 \u0026 2\\ 0 \u0026 1 \u0026 1 \u0026 4\\ 0 \u0026 1 \u0026 5 \u0026 12 \\end{bmatrix} $$\n相当于保持第一个方程不变，使用第一个方程。在第2,3中消去了$x_1$，新的2,3方程如下：\n$$ x_2 + x_3 = 4 $$\n$$ x_2 + 5x_3 = 12 $$\n上面的操作可以看出，把矩阵的一行乘上某个数字，再加/减到另一行，可以看作把方程组中的两个方程拿出来，让他们的等式两边相互加减，就是我们熟悉的消元手法！\n3.2.列主元消去法 列主元素消去法是为控制舍入误差而提出来的一种算法，列主元素消去法计算基本上能控制舍入误差的影响，其基本思想是：在进行第 $k(k=1,2,…,n-1)$步消元时，从第k列的 akk及其以下的各元素中选取绝对值最大的元素，然后通过行变换将它交换到主元素akk的位置上，再进行消元。\n优点 高斯消去法从第k步到第k+1步的消元过程，必须满足条件a(kk)不等于零 （kk指下标）。而这个元素 即被称为第k步的主元(素)。显然，高斯消去法是按方程排列的自然顺序产生主元的，这样，一旦出现 计算就归于失败，而且即使a(kk)不等于零 （kk指下标） ，但若其绝对值很小，也将会因用它作除数，引起其他元素的数量级及舍人误差急剧增大，导致最终计算结果不可靠。为了避免在高斯消去法应用中可能出现的这类问题，就发展形成了列主元、全主元等多种消去法。这些方法的基本点在于对高斯消去法的过程作某些技术性修改，全面或局部地选取绝对值最大的元素为主元素，从而构成了相应的主元(素)消去法。列主元(素)消去法以处理简单、相对计算量小的特点，在各类主元消去法中得到最为广泛的应用。\n算法流程 本算法将消元结果覆盖$A$，乘数$m_{jk}$ ，冲掉$a_{ik}$，解x存放在b内。\n对于$k=1,2,3….n$，依次做到第五步 按列选主元，即确定$i_k$，使得 $$ |a_{i_k,k}| = max_{k \\leq i \\leq n}|a_{ik}| $$\n如果$a_{i_k,k} = 0，则输出无解$ 如果$i_k = k$，则转向5，否则换行 $$ a_{kj} \\Leftrightarrow a_{i_k,k} (j=k,k+1,…,n) $$\n$$ b_k \\Leftrightarrow b_{i_k} $$\n消元过程： $$ a_{ik} \\leftarrow m_{ik} = \\frac{a_{ik}}{a_{kk}}, (i=k+1,…,n) $$\n$$ a_{ij} \\leftarrow a_{ij} - m_{ik}a_{kj} (i,j=k+1,…,m) $$\n$$ b_i \\leftarrow b_i - m_{ik}b_k, (i=k+1,…,n) $$\n如果$a_{00} = 0$，则停机 回代求解 $$ b_n \\leftarrow \\frac{b_n}{a_{nm}} $$\n$$ b_i \\leftarrow \\frac{b_i - \\sum_{j=i+1}^{n}{a_{ij}b_j}}{a_{ii}},(i=n-1,…,2,1) $$\n输出结果x. 3.3.矩阵的三角分解法 假设我们有这样的方程：\n$$ 2x_1 + x_2 + x_3 = 4 $$\n$$ 4_x1 + 3x_2 + 3x_3 + x_4 = 11 $$\n$$ 8x_1 + 7x_2 + 9x_3 + 5x_4 = 29 $$\n$$ 6x_1 + 7x_2 + 9x_3 + 8x_4 = 30 $$\n通过高斯消元法，获得等价问题:\n$$ 2x_1 + x_2 + x_3 = 4 $$\n$$ x_2 + x_3 + x_4 = 3 $$\n$$ 2x_3 + 2x_4 = 4 $$\n$$ 2x_4 = 2 $$\n这样的消元过程如果写成矩阵相乘的过程，那么如下所示：\n$$ L_1A = \\begin{bmatrix} 1 \u0026 \u0026 \u0026 \\ -2 \u0026 1 \u0026 \u0026 \\ -4 \u0026 \u0026 1 \u0026 \\ -3\u0026 \u0026 \u0026 1 \\end{bmatrix}\\begin{bmatrix} 2 \u0026 1 \u0026 1 \u0026 0\\ 0 \u0026 1 \u0026 1 \u0026 1\\ 8 \u0026 7 \u0026 9 \u0026 5 \\ 6 \u0026 7 \u0026 9 \u0026 8 \\end{bmatrix} = \\begin{bmatrix} 2 \u0026 1 \u0026 1 \u0026 0\\ 0 \u0026 1 \u0026 1 \u0026 1\\ 0 \u0026 3 \u0026 5 \u0026 5 \\ 0 \u0026 4 \u0026 6 \u0026 8 \\end{bmatrix} $$\n第二次消元意味着\n$$ L_2L_1A = \\begin{bmatrix} 1 \u0026 \u0026 \u0026 \\ \u0026 1 \u0026 \u0026 \\ \u0026 -3 \u0026 1 \u0026 \\ \u0026 -4 \u0026 \u0026 1 \\end{bmatrix}\\begin{bmatrix} 2 \u0026 1 \u0026 1 \u0026 0\\ 0 \u0026 1 \u0026 1 \u0026 1\\ 8 \u0026 7 \u0026 9 \u0026 5 \\ 6 \u0026 7 \u0026 9 \u0026 8 \\end{bmatrix} = \\begin{bmatrix} 2 \u0026 1 \u0026 1 \u0026 0\\ 0 \u0026 1 \u0026 1 \u0026 1\\ 0 \u0026 0 \u0026 2 \u0026 2 \\ 0 \u0026 0 \u0026 2 \u0026 4 \\end{bmatrix} $$\n第三次消元意味着\n$$ L_3L_2L_1A = \\begin{bmatrix} 1 \u0026 \u0026 \u0026 \\ \u0026 1 \u0026 \u0026 \\ \u0026 \u0026 1 \u0026 \\ \u0026 \u0026 -1 \u0026 1 \\end{bmatrix} \\begin{bmatrix} 2 \u0026 1 \u0026 1 \u0026 0\\ 0 \u0026 1 \u0026 1 \u0026 1\\ 8 \u0026 7 \u0026 9 \u0026 5 \\ 6 \u0026 7 \u0026 9 \u0026 8 \\end{bmatrix} = \\begin{bmatrix} 2 \u0026 1 \u0026 1 \u0026 0\\ 0 \u0026 1 \u0026 1 \u0026 1\\ 0 \u0026 0 \u0026 2 \u0026 2 \\ 0 \u0026 0 \u0026 0 \u0026 2 \\end{bmatrix} = U $$\n通过上述过程得到了LU分解的基本形式。\n对于n阶方阵A，如果存在n阶单位下三角矩阵L和n阶上三角形矩阵U，使得A=LU，则称其为矩阵A的LU分解，也称为Doolittle分解。\n对于Gauss消去法和LU分解法的乘法计算计算量都是在$\\frac{n^3}{3}$ 量级，这个就是分解过程的乘法计算量，推导过程可以模拟一下高斯消去法的整体过程，就可以得到如下的等式，\n$$ \\sum_{k=1}^{n-1}(n-k)(n-k+2) = \\frac{1}{3}n^3 + \\frac{1}{2}n^2 - \\frac{5}{6}n $$\n$$ \\sum_{k=1}^{n}(n-k+1)=\\frac{n(n+1)}{2} $$\n#include using namespace std; const int n = 3; //矩阵的ALU分解 void ALU(double a[n][n], double b[n]) { double l[n][n] = { 0 }; double u[n][n] = { 0 }; int i, r, k; //进行U的第一行的赋值 for (i = 0; i",
   "wordCount" : "1920",
@@ -170,7 +125,7 @@ $\quad$ 稳定性. 这里的稳定性是指模型问题的解对初始数据的�
   "dateModified": "0001-01-01T00:00:00Z",
   "author":{
     "@type": "Person",
-    "name": "Theme PaperMod"
+    "name": "KnightSnape"
   },
   "mainEntityOfPage": {
     "@type": "WebPage",
@@ -252,13 +207,16 @@ $\quad$ 稳定性. 这里的稳定性是指模型问题的解对初始数据的�
   <header class="post-header">
     <div class="breadcrumbs"><a href="http://knightsnape.github.io/public/">Home</a>&nbsp;»&nbsp;<a href="http://knightsnape.github.io/public/posts/">Posts</a></div>
     <h1 class="post-title entry-hint-parent">
-      
+      Math Numerical Analysis
     </h1>
-    <div class="post-meta">10 min&nbsp;·&nbsp;Theme PaperMod&nbsp;|&nbsp;<a href="https://github.com/KnightSnape/posts/math_numerical_analysis.md" rel="noopener noreferrer" target="_blank">Suggest Changes</a>
+    <div class="post-description">
+      The total result of math numerical analysis
+    </div>
+    <div class="post-meta">10 min&nbsp;·&nbsp;KnightSnape&nbsp;|&nbsp;<a href="https://github.com/KnightSnape/posts/math_numerical_analysis.md" rel="noopener noreferrer" target="_blank">Suggest Changes</a>
 
 </div>
   </header> <div class="toc">
-    <details >
+    <details  open>
         <summary accesskey="c" title="(Alt + C)">
             <span class="details">Table of Contents</span>
         </summary>
@@ -1062,20 +1020,26 @@ $$</p>
 
   <footer class="post-footer">
     <ul class="post-tags">
+      <li><a href="http://knightsnape.github.io/public/tags/math/">math</a></li>
     </ul>
 <nav class="paginav">
-  <a class="prev" href="http://knightsnape.github.io/public/posts/navigation_algorithm/">
+  <a class="prev" href="http://knightsnape.github.io/public/posts/papermod/papermod-features/">
     <span class="title">« Prev</span>
     <br>
-    <span>Navigation Algorithm</span>
+    <span>Features / Mods</span>
+  </a>
+  <a class="next" href="http://knightsnape.github.io/public/posts/math_probability/">
+    <span class="title">Next »</span>
+    <br>
+    <span>Math Probability</span>
   </a>
 </nav>
 
 
 <ul class="share-buttons">
     <li>
-        <a target="_blank" rel="noopener noreferrer" aria-label="share  on x"
-            href="https://x.com/intent/tweet/?text=&amp;url=http%3a%2f%2fknightsnape.github.io%2fpublic%2fposts%2fmath_numerical_analysis%2f&amp;hashtags=">
+        <a target="_blank" rel="noopener noreferrer" aria-label="share Math Numerical Analysis on x"
+            href="https://x.com/intent/tweet/?text=Math%20Numerical%20Analysis&amp;url=http%3a%2f%2fknightsnape.github.io%2fpublic%2fposts%2fmath_numerical_analysis%2f&amp;hashtags=math">
             <svg version="1.1" viewBox="0 0 512 512" xml:space="preserve" height="30px" width="30px" fill="currentColor">
                 <path
                     d="M512 62.554 L 512 449.446 C 512 483.97 483.97 512 449.446 512 L 62.554 512 C 28.03 512 0 483.97 0 449.446 L 0 62.554 C 0 28.03 28.029 0 62.554 0 L 449.446 0 C 483.971 0 512 28.03 512 62.554 Z M 269.951 190.75 L 182.567 75.216 L 56 75.216 L 207.216 272.95 L 63.9 436.783 L 125.266 436.783 L 235.9 310.383 L 332.567 436.783 L 456 436.783 L 298.367 228.367 L 432.367 75.216 L 371.033 75.216 Z M 127.633 110 L 164.101 110 L 383.481 400.065 L 349.5 400.065 Z" />
@@ -1083,8 +1047,8 @@ $$</p>
         </a>
     </li>
     <li>
-        <a target="_blank" rel="noopener noreferrer" aria-label="share  on linkedin"
-            href="https://www.linkedin.com/shareArticle?mini=true&amp;url=http%3a%2f%2fknightsnape.github.io%2fpublic%2fposts%2fmath_numerical_analysis%2f&amp;title=&amp;summary=&amp;source=http%3a%2f%2fknightsnape.github.io%2fpublic%2fposts%2fmath_numerical_analysis%2f">
+        <a target="_blank" rel="noopener noreferrer" aria-label="share Math Numerical Analysis on linkedin"
+            href="https://www.linkedin.com/shareArticle?mini=true&amp;url=http%3a%2f%2fknightsnape.github.io%2fpublic%2fposts%2fmath_numerical_analysis%2f&amp;title=Math%20Numerical%20Analysis&amp;summary=Math%20Numerical%20Analysis&amp;source=http%3a%2f%2fknightsnape.github.io%2fpublic%2fposts%2fmath_numerical_analysis%2f">
             <svg version="1.1" viewBox="0 0 512 512" xml:space="preserve" height="30px" width="30px" fill="currentColor">
                 <path
                     d="M449.446,0c34.525,0 62.554,28.03 62.554,62.554l0,386.892c0,34.524 -28.03,62.554 -62.554,62.554l-386.892,0c-34.524,0 -62.554,-28.03 -62.554,-62.554l0,-386.892c0,-34.524 28.029,-62.554 62.554,-62.554l386.892,0Zm-288.985,423.278l0,-225.717l-75.04,0l0,225.717l75.04,0Zm270.539,0l0,-129.439c0,-69.333 -37.018,-101.586 -86.381,-101.586c-39.804,0 -57.634,21.891 -67.617,37.266l0,-31.958l-75.021,0c0.995,21.181 0,225.717 0,225.717l75.02,0l0,-126.056c0,-6.748 0.486,-13.492 2.474,-18.315c5.414,-13.475 17.767,-27.434 38.494,-27.434c27.135,0 38.007,20.707 38.007,51.037l0,120.768l75.024,0Zm-307.552,-334.556c-25.674,0 -42.448,16.879 -42.448,39.002c0,21.658 16.264,39.002 41.455,39.002l0.484,0c26.165,0 42.452,-17.344 42.452,-39.002c-0.485,-22.092 -16.241,-38.954 -41.943,-39.002Z" />
@@ -1092,8 +1056,8 @@ $$</p>
         </a>
     </li>
     <li>
-        <a target="_blank" rel="noopener noreferrer" aria-label="share  on reddit"
-            href="https://reddit.com/submit?url=http%3a%2f%2fknightsnape.github.io%2fpublic%2fposts%2fmath_numerical_analysis%2f&title=">
+        <a target="_blank" rel="noopener noreferrer" aria-label="share Math Numerical Analysis on reddit"
+            href="https://reddit.com/submit?url=http%3a%2f%2fknightsnape.github.io%2fpublic%2fposts%2fmath_numerical_analysis%2f&title=Math%20Numerical%20Analysis">
             <svg version="1.1" viewBox="0 0 512 512" xml:space="preserve" height="30px" width="30px" fill="currentColor">
                 <path
                     d="M449.446,0c34.525,0 62.554,28.03 62.554,62.554l0,386.892c0,34.524 -28.03,62.554 -62.554,62.554l-386.892,0c-34.524,0 -62.554,-28.03 -62.554,-62.554l0,-386.892c0,-34.524 28.029,-62.554 62.554,-62.554l386.892,0Zm-3.446,265.638c0,-22.964 -18.616,-41.58 -41.58,-41.58c-11.211,0 -21.361,4.457 -28.841,11.666c-28.424,-20.508 -67.586,-33.757 -111.204,-35.278l18.941,-89.121l61.884,13.157c0.756,15.734 13.642,28.29 29.56,28.29c16.407,0 29.706,-13.299 29.706,-29.701c0,-16.403 -13.299,-29.702 -29.706,-29.702c-11.666,0 -21.657,6.792 -26.515,16.578l-69.105,-14.69c-1.922,-0.418 -3.939,-0.042 -5.585,1.036c-1.658,1.073 -2.811,2.761 -3.224,4.686l-21.152,99.438c-44.258,1.228 -84.046,14.494 -112.837,35.232c-7.468,-7.164 -17.589,-11.591 -28.757,-11.591c-22.965,0 -41.585,18.616 -41.585,41.58c0,16.896 10.095,31.41 24.568,37.918c-0.639,4.135 -0.99,8.328 -0.99,12.576c0,63.977 74.469,115.836 166.33,115.836c91.861,0 166.334,-51.859 166.334,-115.836c0,-4.218 -0.347,-8.387 -0.977,-12.493c14.564,-6.47 24.735,-21.034 24.735,-38.001Zm-119.474,108.193c-20.27,20.241 -59.115,21.816 -70.534,21.816c-11.428,0 -50.277,-1.575 -70.522,-21.82c-3.007,-3.008 -3.007,-7.882 0,-10.889c3.003,-2.999 7.882,-3.003 10.885,0c12.777,12.781 40.11,17.317 59.637,17.317c19.522,0 46.86,-4.536 59.657,-17.321c3.016,-2.999 7.886,-2.995 10.885,0.008c3.008,3.011 3.003,7.882 -0.008,10.889Zm-5.23,-48.781c-16.373,0 -29.701,-13.324 -29.701,-29.698c0,-16.381 13.328,-29.714 29.701,-29.714c16.378,0 29.706,13.333 29.706,29.714c0,16.374 -13.328,29.698 -29.706,29.698Zm-160.386,-29.702c0,-16.381 13.328,-29.71 29.714,-29.71c16.369,0 29.689,13.329 29.689,29.71c0,16.373 -13.32,29.693 -29.689,29.693c-16.386,0 -29.714,-13.32 -29.714,-29.693Z" />
@@ -1101,7 +1065,7 @@ $$</p>
         </a>
     </li>
     <li>
-        <a target="_blank" rel="noopener noreferrer" aria-label="share  on facebook"
+        <a target="_blank" rel="noopener noreferrer" aria-label="share Math Numerical Analysis on facebook"
             href="https://facebook.com/sharer/sharer.php?u=http%3a%2f%2fknightsnape.github.io%2fpublic%2fposts%2fmath_numerical_analysis%2f">
             <svg version="1.1" viewBox="0 0 512 512" xml:space="preserve" height="30px" width="30px" fill="currentColor">
                 <path
@@ -1110,8 +1074,8 @@ $$</p>
         </a>
     </li>
     <li>
-        <a target="_blank" rel="noopener noreferrer" aria-label="share  on whatsapp"
-            href="https://api.whatsapp.com/send?text=%20-%20http%3a%2f%2fknightsnape.github.io%2fpublic%2fposts%2fmath_numerical_analysis%2f">
+        <a target="_blank" rel="noopener noreferrer" aria-label="share Math Numerical Analysis on whatsapp"
+            href="https://api.whatsapp.com/send?text=Math%20Numerical%20Analysis%20-%20http%3a%2f%2fknightsnape.github.io%2fpublic%2fposts%2fmath_numerical_analysis%2f">
             <svg version="1.1" viewBox="0 0 512 512" xml:space="preserve" height="30px" width="30px" fill="currentColor">
                 <path
                     d="M449.446,0c34.525,0 62.554,28.03 62.554,62.554l0,386.892c0,34.524 -28.03,62.554 -62.554,62.554l-386.892,0c-34.524,0 -62.554,-28.03 -62.554,-62.554l0,-386.892c0,-34.524 28.029,-62.554 62.554,-62.554l386.892,0Zm-58.673,127.703c-33.842,-33.881 -78.847,-52.548 -126.798,-52.568c-98.799,0 -179.21,80.405 -179.249,179.234c-0.013,31.593 8.241,62.428 23.927,89.612l-25.429,92.884l95.021,-24.925c26.181,14.28 55.659,21.807 85.658,21.816l0.074,0c98.789,0 179.206,-80.413 179.247,-179.243c0.018,-47.895 -18.61,-92.93 -52.451,-126.81Zm-126.797,275.782l-0.06,0c-26.734,-0.01 -52.954,-7.193 -75.828,-20.767l-5.441,-3.229l-56.386,14.792l15.05,-54.977l-3.542,-5.637c-14.913,-23.72 -22.791,-51.136 -22.779,-79.287c0.033,-82.142 66.867,-148.971 149.046,-148.971c39.793,0.014 77.199,15.531 105.329,43.692c28.128,28.16 43.609,65.592 43.594,105.4c-0.034,82.149 -66.866,148.983 -148.983,148.984Zm81.721,-111.581c-4.479,-2.242 -26.499,-13.075 -30.604,-14.571c-4.105,-1.495 -7.091,-2.241 -10.077,2.241c-2.986,4.483 -11.569,14.572 -14.182,17.562c-2.612,2.988 -5.225,3.364 -9.703,1.12c-4.479,-2.241 -18.91,-6.97 -36.017,-22.23c-13.314,-11.876 -22.304,-26.542 -24.916,-31.026c-2.612,-4.484 -0.279,-6.908 1.963,-9.14c2.016,-2.007 4.48,-5.232 6.719,-7.847c2.24,-2.615 2.986,-4.484 4.479,-7.472c1.493,-2.99 0.747,-5.604 -0.374,-7.846c-1.119,-2.241 -10.077,-24.288 -13.809,-33.256c-3.635,-8.733 -7.327,-7.55 -10.077,-7.688c-2.609,-0.13 -5.598,-0.158 -8.583,-0.158c-2.986,0 -7.839,1.121 -11.944,5.604c-4.105,4.484 -15.675,15.32 -15.675,37.364c0,22.046 16.048,43.342 18.287,46.332c2.24,2.99 31.582,48.227 76.511,67.627c10.685,4.615 19.028,7.371 25.533,9.434c10.728,3.41 20.492,2.929 28.209,1.775c8.605,-1.285 26.499,-10.833 30.231,-21.295c3.732,-10.464 3.732,-19.431 2.612,-21.298c-1.119,-1.869 -4.105,-2.99 -8.583,-5.232Z" />
@@ -1119,8 +1083,8 @@ $$</p>
         </a>
     </li>
     <li>
-        <a target="_blank" rel="noopener noreferrer" aria-label="share  on telegram"
-            href="https://telegram.me/share/url?text=&amp;url=http%3a%2f%2fknightsnape.github.io%2fpublic%2fposts%2fmath_numerical_analysis%2f">
+        <a target="_blank" rel="noopener noreferrer" aria-label="share Math Numerical Analysis on telegram"
+            href="https://telegram.me/share/url?text=Math%20Numerical%20Analysis&amp;url=http%3a%2f%2fknightsnape.github.io%2fpublic%2fposts%2fmath_numerical_analysis%2f">
             <svg version="1.1" xml:space="preserve" viewBox="2 2 28 28" height="30px" width="30px" fill="currentColor">
                 <path
                     d="M26.49,29.86H5.5a3.37,3.37,0,0,1-2.47-1,3.35,3.35,0,0,1-1-2.47V5.48A3.36,3.36,0,0,1,3,3,3.37,3.37,0,0,1,5.5,2h21A3.38,3.38,0,0,1,29,3a3.36,3.36,0,0,1,1,2.46V26.37a3.35,3.35,0,0,1-1,2.47A3.38,3.38,0,0,1,26.49,29.86Zm-5.38-6.71a.79.79,0,0,0,.85-.66L24.73,9.24a.55.55,0,0,0-.18-.46.62.62,0,0,0-.41-.17q-.08,0-16.53,6.11a.59.59,0,0,0-.41.59.57.57,0,0,0,.43.52l4,1.24,1.61,4.83a.62.62,0,0,0,.63.43.56.56,0,0,0,.4-.17L16.54,20l4.09,3A.9.9,0,0,0,21.11,23.15ZM13.8,20.71l-1.21-4q8.72-5.55,8.78-5.55c.15,0,.23,0,.23.16a.18.18,0,0,1,0,.06s-2.51,2.3-7.52,6.8Z" />
@@ -1128,8 +1092,8 @@ $$</p>
         </a>
     </li>
     <li>
-        <a target="_blank" rel="noopener noreferrer" aria-label="share  on ycombinator"
-            href="https://news.ycombinator.com/submitlink?t=&u=http%3a%2f%2fknightsnape.github.io%2fpublic%2fposts%2fmath_numerical_analysis%2f">
+        <a target="_blank" rel="noopener noreferrer" aria-label="share Math Numerical Analysis on ycombinator"
+            href="https://news.ycombinator.com/submitlink?t=Math%20Numerical%20Analysis&u=http%3a%2f%2fknightsnape.github.io%2fpublic%2fposts%2fmath_numerical_analysis%2f">
             <svg version="1.1" xml:space="preserve" width="30px" height="30px" viewBox="0 0 512 512" fill="currentColor"
                 xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape">
                 <path

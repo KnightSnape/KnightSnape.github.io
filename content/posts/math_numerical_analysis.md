@@ -1,3 +1,15 @@
+---
+author: "KnightSnape"
+title: "Math Numerical Analysis"
+date: "2024-1-25"
+description: "The total result of math numerical analysis"
+tags: ["math"]
+aliases: ["migrate-from-jekyl"]
+ShowToc: true
+TocOpen: true
+weight: 2
+---
+
 # 数值分析
 
 ## 前言

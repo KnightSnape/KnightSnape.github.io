@@ -1,7 +1,7 @@
 ---
 author: "KnightSnape"
 title: "Math Probability"
-date: "2024-1-22"
+date: "2024-1-25"
 description: "The total result of math probabilitys"
 tags: ["math"]
 aliases: ["migrate-from-jekyl"]
