@@ -86,11 +86,11 @@ params:
   homeInfoParams:
     Title: "KnightSnapes"
     Content: >
-      👋 Welcome to demo page of Hugo's theme PaperMod!
+      👋 Welcome to KnightSnape's Blog
 
-      - **PaperMod**  is designed to be clean and simple but fast and responsive theme with useful feature-set that enhances UX.
-
-      - Feel free to show your support by giving us a star 🌟 on GitHub and sharing with your friends and social media .
+      - This page will record the KnightSnape's storage studies and experiences
+      
+      - Have fun and if you like it, thank you for giving me a star.
 
   editPost: 
     URL: "https://github.com/KnightSnape"
