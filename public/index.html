@@ -307,6 +307,44 @@ for (int i = 1; i &lt;= n; &#43;&#43;i) for (int j = i; j &lt;= n; &#43;&#43;j) 
   <footer class="entry-footer">19 min&nbsp;·&nbsp;KnightSnape</footer>
   <a class="entry-link" aria-label="post link to Navigation Algorithm" href="http://knightsnape.github.io/public/posts/navigation_algorithm/"></a>
 </article>
+
+<article class="post-entry"> 
+  <header class="entry-header">
+    <h2 class="entry-hint-parent">ThirdParty Test and Summary
+    </h2>
+  </header>
+  <div class="entry-content">
+    <p>C&#43;&#43;第三方库 前言 有关这个部分将是在我目前对我遇到的所有C&#43;&#43;第三方库的认知，测试以及相关的总结，由于自己实力很给，所以如果总结有误，请联系KnightSnape
+1.框架类
+1.1.Qt
+1.2.Boost
+2.数学类
+2.1.Eigen
+2.2.ceres-solver
+2.3.g2o
+3.机器人类
+3.1.PCL
+3.2.ROS/ROS2
+4.音频类
+4.1.groove
+4.2.OpenAL
+5.AI类
+5.1.BehaviorTree-CPP
+5.2.shark
+5.3.mlpack
+5.4.libtorch
+5.5.OpenCV
+5.6.OpenVINO
+6.参数和日志
+6.1.spdlog
+6.2.yaml-cpp
+6.3.nlohmann-json
+框架类 Qt Boost 数学类 Eigen 经典的线性代数库了，这个在有关机器人的所有方向上使用范围都是非常广的，除了图像级矩阵直接使用OpenCV之外，矩阵运算全用的是它。
+矩阵定义 #include &lt;Eigen/Dense&gt; Matrix&lt;double, 3, 3&gt; A; // Fixed rows and cols. Same as Matrix3d. Matrix&lt;double, 3, Dynamic&gt; B; // Fixed rows, dynamic cols. Matrix&lt;double, Dynamic, Dynamic&gt; C; // Full dynamic. Same as MatrixXd. Matrix&lt;double, 3, 3, RowMajor&gt; E; // Row major; default is column-major....</p>
+  </div>
+  <footer class="entry-footer">6 min&nbsp;·&nbsp;KnightSnape</footer>
+  <a class="entry-link" aria-label="post link to ThirdParty Test and Summary" href="http://knightsnape.github.io/public/posts/third_party_summary/"></a>
+</article>
     </main>
     
 <footer class="footer">

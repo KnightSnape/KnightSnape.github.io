@@ -1,0 +1,848 @@
+<!DOCTYPE html>
+<html lang="en" dir="auto">
+
+<head><meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="robots" content="index, follow">
+<title>ThirdParty Test and Summary | PaperMod</title>
+<meta name="keywords" content="ThirdParty">
+<meta name="description" content="Test and evaluate cpp ThirdParty and Summary It">
+<meta name="author" content="KnightSnape">
+<link rel="canonical" href="http://knightsnape.github.io/public/posts/third_party_summary/">
+<link crossorigin="anonymous" href="/public/assets/css/stylesheet.5ff2630c4d1b3e25bc21f0ecd96681dbcf58219e741fa627857820b5485cb770.css" integrity="sha256-X/JjDE0bPiW8IfDs2WaB289YIZ50H6YnhXggtUhct3A=" rel="preload stylesheet" as="style">
+<link rel="icon" href="http://knightsnape.github.io/public/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="http://knightsnape.github.io/public/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="http://knightsnape.github.io/public/favicon-32x32.png">
+<link rel="apple-touch-icon" href="http://knightsnape.github.io/public/apple-touch-icon.png">
+<link rel="mask-icon" href="http://knightsnape.github.io/public/safari-pinned-tab.svg">
+<meta name="theme-color" content="#2e2e33">
+<meta name="msapplication-TileColor" content="#2e2e33">
+<noscript>
+    <style>
+        #theme-toggle,
+        .top-link {
+            display: none;
+        }
+
+    </style>
+    <style>
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --theme: rgb(29, 30, 32);
+                --entry: rgb(46, 46, 51);
+                --primary: rgb(218, 218, 219);
+                --secondary: rgb(155, 156, 157);
+                --tertiary: rgb(65, 66, 68);
+                --content: rgb(196, 196, 197);
+                --code-block-bg: rgb(46, 46, 51);
+                --code-bg: rgb(55, 56, 62);
+                --border: rgb(51, 51, 51);
+            }
+
+            .list {
+                background: var(--theme);
+            }
+
+            .list:not(.dark)::-webkit-scrollbar-track {
+                background: 0 0;
+            }
+
+            .list:not(.dark)::-webkit-scrollbar-thumb {
+                border-color: var(--theme);
+            }
+        }
+
+    </style>
+</noscript>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.15.2/dist/katex.min.css" integrity="sha384-MlJdn/WNKDGXveldHDdyRP1R4CTHr3FeuDNfhsLPYrq2t0UBkUdK2jyTnXPEK1NQ" crossorigin="anonymous">
+
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.2/dist/katex.min.js" integrity="sha384-VQ8d8WVFw0yHhCk5E8I86oOhv48xLpnDZx5T9GogA/Y84DcCKWXDmSDfn13bzFZY" crossorigin="anonymous"></script>
+
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.2/dist/contrib/auto-render.min.js" integrity="sha384-+XBljXPPiv+OzfbB3cVmLHf4hdUFHlWNZN5spNQ7rmHTXpd7WvJum6fIACpNNfIR" crossorigin="anonymous"
+    onload="renderMathInElement(document.body);"></script>
+
+>
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+    renderMathInElement(document.body, {
+        delimiters: [
+            {left: "$$", right: "$$", display: true},
+            {left: "$", right: "$", display: false}
+        ]
+    });
+});
+</script>
+<meta property="og:title" content="ThirdParty Test and Summary" />
+<meta property="og:description" content="Test and evaluate cpp ThirdParty and Summary It" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="http://knightsnape.github.io/public/posts/third_party_summary/" /><meta property="og:image" content="http://knightsnape.github.io/public/images/papermod-cover.png"/><meta property="article:section" content="posts" />
+
+
+
+
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="http://knightsnape.github.io/public/images/papermod-cover.png"/>
+
+<meta name="twitter:title" content="ThirdParty Test and Summary"/>
+<meta name="twitter:description" content="Test and evaluate cpp ThirdParty and Summary It"/>
+
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position":  1 ,
+      "name": "Posts",
+      "item": "http://knightsnape.github.io/public/posts/"
+    }, 
+    {
+      "@type": "ListItem",
+      "position":  2 ,
+      "name": "ThirdParty Test and Summary",
+      "item": "http://knightsnape.github.io/public/posts/third_party_summary/"
+    }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "ThirdParty Test and Summary",
+  "name": "ThirdParty Test and Summary",
+  "description": "Test and evaluate cpp ThirdParty and Summary It",
+  "keywords": [
+    "ThirdParty"
+  ],
+  "articleBody": "C++第三方库 前言 有关这个部分将是在我目前对我遇到的所有C++第三方库的认知，测试以及相关的总结，由于自己实力很给，所以如果总结有误，请联系KnightSnape\n1.框架类\n1.1.Qt\n1.2.Boost\n2.数学类\n2.1.Eigen\n2.2.ceres-solver\n2.3.g2o\n3.机器人类\n3.1.PCL\n3.2.ROS/ROS2\n4.音频类\n4.1.groove\n4.2.OpenAL\n5.AI类\n5.1.BehaviorTree-CPP\n5.2.shark\n5.3.mlpack\n5.4.libtorch\n5.5.OpenCV\n5.6.OpenVINO\n6.参数和日志\n6.1.spdlog\n6.2.yaml-cpp\n6.3.nlohmann-json\n框架类 Qt Boost 数学类 Eigen 经典的线性代数库了，这个在有关机器人的所有方向上使用范围都是非常广的，除了图像级矩阵直接使用OpenCV之外，矩阵运算全用的是它。\n矩阵定义 #include Matrix\u003cdouble, 3, 3\u003e A; // Fixed rows and cols. Same as Matrix3d. Matrix\u003cdouble, 3, Dynamic\u003e B; // Fixed rows, dynamic cols. Matrix\u003cdouble, Dynamic, Dynamic\u003e C; // Full dynamic. Same as MatrixXd. Matrix\u003cdouble, 3, 3, RowMajor\u003e E; // Row major; default is column-major. Matrix3f P, Q, R; // 3x3 float matrix. Vector3f x, y, z; // 3x1 float matrix. RowVector3f a, b, c; // 1x3 float matrix. VectorXd v; // Dynamic column vector of doubles // Eigen // Matlab // comments x.size() // length(x) // vector size C.rows() // size(C,1) // number of rows C.cols() // size(C,2) // number of columns x(i) // x(i+1) // Matlab is 1-based C(i,j) // C(i+1,j+1) // ** Eigen 基础使用** // Basic usage // Eigen // Matlab // comments x.size() // length(x) // vector size C.rows() // size(C,1) // number of rows C.cols() // size(C,2) // number of columns x(i) // x(i+1) // Matlab is 1-based C(i, j) // C(i+1,j+1) // A.resize(4, 4); // Runtime error if assertions are on. B.resize(4, 9); // Runtime error if assertions are on. A.resize(3, 3); // Ok; size didn't change. B.resize(3, 9); // Ok; only dynamic cols changed. A \u003c\u003c 1, 2, 3, // Initialize A. The elements can also be 4, 5, 6, // matrices, which are stacked along cols 7, 8, 9; // and then the rows are stacked. B \u003c\u003c A, A, A; // B is three horizontally stacked A's. A.fill(10); // Fill A with all 10's. Eigen 特殊矩阵生成 // Eigen // Matlab MatrixXd::Identity(rows,cols) // eye(rows,cols) C.setIdentity(rows,cols) // C = eye(rows,cols) MatrixXd::Zero(rows,cols) // zeros(rows,cols) C.setZero(rows,cols) // C = ones(rows,cols) MatrixXd::Ones(rows,cols) // ones(rows,cols) C.setOnes(rows,cols) // C = ones(rows,cols) MatrixXd::Random(rows,cols) // rand(rows,cols)*2-1 // MatrixXd::Random returns uniform random numbers in (-1, 1). C.setRandom(rows,cols) // C = rand(rows,cols)*2-1 VectorXd::LinSpaced(size,low,high) // linspace(low,high,size)' v.setLinSpaced(size,low,high) // v = linspace(low,high,size)' Eigen 矩阵分块 // Matrix slicing and blocks. All expressions listed here are read/write. // Templated size versions are faster. Note that Matlab is 1-based (a size N // vector is x(1)...x(N)). // Eigen // Matlab x.head(n) // x(1:n) x.head\u003cn\u003e() // x(1:n) x.tail(n) // x(end - n + 1: end) x.tail\u003cn\u003e() // x(end - n + 1: end) x.segment(i, n) // x(i+1 : i+n) x.segment\u003cn\u003e(i) // x(i+1 : i+n) P.block(i, j, rows, cols) // P(i+1 : i+rows, j+1 : j+cols) P.block\u003crows, cols\u003e(i, j) // P(i+1 : i+rows, j+1 : j+cols) P.row(i) // P(i+1, :) P.col(j) // P(:, j+1) P.leftCols\u003ccols\u003e() // P(:, 1:cols) P.leftCols(cols) // P(:, 1:cols) P.middleCols\u003ccols\u003e(j) // P(:, j+1:j+cols) P.middleCols(j, cols) // P(:, j+1:j+cols) P.rightCols\u003ccols\u003e() // P(:, end-cols+1:end) P.rightCols(cols) // P(:, end-cols+1:end) P.topRows\u003crows\u003e() // P(1:rows, :) P.topRows(rows) // P(1:rows, :) P.middleRows\u003crows\u003e(i) // P(i+1:i+rows, :) P.middleRows(i, rows) // P(i+1:i+rows, :) P.bottomRows\u003crows\u003e() // P(end-rows+1:end, :) P.bottomRows(rows) // P(end-rows+1:end, :) P.topLeftCorner(rows, cols) // P(1:rows, 1:cols) P.topRightCorner(rows, cols) // P(1:rows, end-cols+1:end) P.bottomLeftCorner(rows, cols) // P(end-rows+1:end, 1:cols) P.bottomRightCorner(rows, cols) // P(end-rows+1:end, end-cols+1:end) P.topLeftCorner\u003crows,cols\u003e() // P(1:rows, 1:cols) P.topRightCorner\u003crows,cols\u003e() // P(1:rows, end-cols+1:end) P.bottomLeftCorner\u003crows,cols\u003e() // P(end-rows+1:end, 1:cols) P.bottomRightCorner\u003crows,cols\u003e() // P(end-rows+1:end, end-cols+1:end) Eigen 矩阵元素交换 // Of particular note is Eigen's swap function which is highly optimized. // Eigen // Matlab R.row(i) = P.col(j); // R(i, :) = P(:, i) R.col(j1).swap(mat1.col(j2)); // R(:, [j1 j2]) = R(:, [j2, j1]) Eigen 矩阵转置 // Views, transpose, etc; all read-write except for .adjoint(). // Eigen // Matlab R.adjoint() // R' R.transpose() // R.' or conj(R') R.diagonal() // diag(R) x.asDiagonal() // diag(x) R.transpose().colwise().reverse(); // rot90(R) R.conjugate() // conj(R) Eigen 矩阵乘积 // All the same as Matlab, but matlab doesn't have *= style operators. // Matrix-vector. Matrix-matrix. Matrix-scalar. y = M*x; R = P*Q; R = P*s; a = b*M; R = P - Q; R = s*P; a *= M; R = P + Q; R = P/s; R *= Q; R = s*P; R += Q; R *= s; R -= Q; R /= s; Eigen 矩阵单个元素操作 // Vectorized operations on each element independently // Eigen // Matlab R = P.cwiseProduct(Q); // R = P .* Q R = P.array() * s.array();// R = P .* s R = P.cwiseQuotient(Q); // R = P ./ Q R = P.array() / Q.array();// R = P ./ Q R = P.array() + s.array();// R = P + s R = P.array() - s.array();// R = P - s R.array() += s; // R = R + s R.array() -= s; // R = R - s R.array() \u003c Q.array(); // R \u003c Q R.array() \u003c= Q.array(); // R \u003c= Q R.cwiseInverse(); // 1 ./ P R.array().inverse(); // 1 ./ P R.array().sin() // sin(P) R.array().cos() // cos(P) R.array().pow(s) // P .^ s R.array().square() // P .^ 2 R.array().cube() // P .^ 3 R.cwiseSqrt() // sqrt(P) R.array().sqrt() // sqrt(P) R.array().exp() // exp(P) R.array().log() // log(P) R.cwiseMax(P) // max(R, P) R.array().max(P.array()) // max(R, P) R.cwiseMin(P) // min(R, P) R.array().min(P.array()) // min(R, P) R.cwiseAbs() // abs(P) R.array().abs() // abs(P) R.cwiseAbs2() // abs(P.^2) R.array().abs2() // abs(P.^2) (R.array() \u003c s).select(P,Q); // (R \u003c s ? P : Q) Eigen 矩阵化简 // Reductions. int r, c; // Eigen // Matlab R.minCoeff() // min(R(:)) R.maxCoeff() // max(R(:)) s = R.minCoeff(\u0026r, \u0026c) // [s, i] = min(R(:)); [r, c] = ind2sub(size(R), i); s = R.maxCoeff(\u0026r, \u0026c) // [s, i] = max(R(:)); [r, c] = ind2sub(size(R), i); R.sum() // sum(R(:)) R.colwise().sum() // sum(R) R.rowwise().sum() // sum(R, 2) or sum(R')' R.prod() // prod(R(:)) R.colwise().prod() // prod(R) R.rowwise().prod() // prod(R, 2) or prod(R')' R.trace() // trace(R) R.all() // all(R(:)) R.colwise().all() // all(R) R.rowwise().all() // all(R, 2) R.any() // any(R(:)) R.colwise().any() // any(R) R.rowwise().any() // any(R, 2) Eigen 矩阵点乘 // Dot products, norms, etc. // Eigen // Matlab x.norm() // norm(x). Note that norm(R) doesn't work in Eigen. x.squaredNorm() // dot(x, x) Note the equivalence is not true for complex x.dot(y) // dot(x, y) x.cross(y) // cross(x, y) Requires #include Eigen 矩阵类型转换 //// Type conversion // Eigen // Matlab A.cast\u003cdouble\u003e(); // double(A) A.cast\u003cfloat\u003e(); // single(A) A.cast\u003cint\u003e(); // int32(A) A.real(); // real(A) A.imag(); // imag(A) // if the original type equals destination type, no work is done Eigen 求解线性方程组 Ax = b // Solve Ax = b. Result stored in x. Matlab: x = A \\ b. x = A.ldlt().solve(b)); // A sym. p.s.d. #include x = A.llt() .solve(b)); // A sym. p.d. #include x = A.lu() .solve(b)); // Stable and fast. #include x = A.qr() .solve(b)); // No pivoting. #include x = A.svd() .solve(b)); // Stable, slowest. #include // .ldlt() -\u003e .matrixL() and .matrixD() // .llt() -\u003e .matrixL() // .lu() -\u003e .matrixL() and .matrixU() // .qr() -\u003e .matrixQ() and .matrixR() // .svd() -\u003e .matrixU(), .singularValues(), and .matrixV() Eigen 矩阵特征值 // Eigenvalue problems // Eigen // Matlab A.eigenvalues(); // eig(A); EigenSolver\u003cMatrix3d\u003e eig(A); // [vec val] = eig(A) eig.eigenvalues(); // diag(val) eig.eigenvectors(); // vec // For self-adjoint matrices use SelfAdjointEigenSolver\u003c\u003e ceres-solver 机器人的最经典的非线性优化库，可以直接移步到：http://ceres-solver.org/\n最经典的场景，如：$f(x) = Asin(\\omega x + \\phi)$已知$x_i和y_i$，其中$y_i$为观测值，拟合其余参数。\ng2o 目前未使用过(甚至Demo)，同样的都是优化库，但是它本身基于图优化。\n机器人类 PCL ROS/ROS2 ROS的链接：https://www.ros.org/\nROS2的链接：https://docs.ros.org/en/rolling/index.html\n集成度不错的机器人系统库\n音频类 groove OpenAL AI类 BehaviorTree-CPP 官方使用的行为树框架了属于是，参考：https://www.behaviortree.dev/\n它似乎比较喜欢使用xml来预架构行为树，是个比较规范但是非常麻烦的方式\n类型和实现来说相对比较全面，对于偏大型的行为层，可以使用这组第三方库，如果行为树规模较小，不推荐使用\nshark mlpack libtorch OpenCV OpenVINO 参数和日志 spdlog yaml-cpp nlohmann-json ",
+  "wordCount" : "1170",
+  "inLanguage": "en",
+  "datePublished": "0001-01-01T00:00:00Z",
+  "dateModified": "0001-01-01T00:00:00Z",
+  "author":{
+    "@type": "Person",
+    "name": "KnightSnape"
+  },
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "http://knightsnape.github.io/public/posts/third_party_summary/"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "PaperMod",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "http://knightsnape.github.io/public/favicon.ico"
+    }
+  }
+}
+</script>
+</head>
+
+<body class="" id="top">
+<script>
+    if (localStorage.getItem("pref-theme") === "dark") {
+        document.body.classList.add('dark');
+    } else if (localStorage.getItem("pref-theme") === "light") {
+        document.body.classList.remove('dark')
+    } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        document.body.classList.add('dark');
+    }
+
+</script>
+
+<header class="header">
+    <nav class="nav">
+        <div class="logo">
+            <a href="http://knightsnape.github.io/public/" accesskey="h" title="PaperMod (Alt + H)">PaperMod</a>
+            <div class="logo-switches">
+                <button id="theme-toggle" accesskey="t" title="(Alt + T)">
+                    <svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                    </svg>
+                    <svg id="sun" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="5"></circle>
+                        <line x1="12" y1="1" x2="12" y2="3"></line>
+                        <line x1="12" y1="21" x2="12" y2="23"></line>
+                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                        <line x1="1" y1="12" x2="3" y2="12"></line>
+                        <line x1="21" y1="12" x2="23" y2="12"></line>
+                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                    </svg>
+                </button>
+            </div>
+        </div>
+        <ul id="menu">
+            <li>
+                <a href="http://knightsnape.github.io/public/categories/" title="category">
+                    <span>category</span>
+                </a>
+            </li>
+            <li>
+                <a href="http://knightsnape.github.io/public/series/" title="series">
+                    <span>series</span>
+                </a>
+            </li>
+            <li>
+                <a href="http://knightsnape.github.io/public/tags/" title="tag">
+                    <span>tag</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+</header>
+<main class="main">
+
+<article class="post-single">
+  <header class="post-header">
+    <div class="breadcrumbs"><a href="http://knightsnape.github.io/public/">Home</a>&nbsp;»&nbsp;<a href="http://knightsnape.github.io/public/posts/">Posts</a></div>
+    <h1 class="post-title entry-hint-parent">
+      ThirdParty Test and Summary
+    </h1>
+    <div class="post-description">
+      Test and evaluate cpp ThirdParty and Summary It
+    </div>
+    <div class="post-meta">6 min&nbsp;·&nbsp;KnightSnape&nbsp;|&nbsp;<a href="https://github.com/KnightSnape/posts/third_party_Summary.md" rel="noopener noreferrer" target="_blank">Suggest Changes</a>
+
+</div>
+  </header> <div class="toc">
+    <details  open>
+        <summary accesskey="c" title="(Alt + C)">
+            <span class="details">Table of Contents</span>
+        </summary>
+
+        <div class="inner"><ul>
+                <li>
+                    <a href="#c%e7%ac%ac%e4%b8%89%e6%96%b9%e5%ba%93" aria-label="C&#43;&#43;第三方库">C++第三方库</a><ul>
+                        
+                <li>
+                    <a href="#%e5%89%8d%e8%a8%80" aria-label="前言">前言</a></li></ul>
+                </li>
+                <li>
+                    <a href="#%e6%a1%86%e6%9e%b6%e7%b1%bb" aria-label="框架类">框架类</a><ul>
+                        
+                <li>
+                    <a href="#qt" aria-label="Qt">Qt</a></li>
+                <li>
+                    <a href="#boost" aria-label="Boost">Boost</a></li></ul>
+                </li>
+                <li>
+                    <a href="#%e6%95%b0%e5%ad%a6%e7%b1%bb" aria-label="数学类">数学类</a><ul>
+                        
+                <li>
+                    <a href="#eigen" aria-label="Eigen">Eigen</a></li>
+                <li>
+                    <a href="#ceres-solver" aria-label="ceres-solver">ceres-solver</a></li>
+                <li>
+                    <a href="#g2o" aria-label="g2o">g2o</a></li></ul>
+                </li>
+                <li>
+                    <a href="#%e6%9c%ba%e5%99%a8%e4%ba%ba%e7%b1%bb" aria-label="机器人类">机器人类</a><ul>
+                        
+                <li>
+                    <a href="#pcl" aria-label="PCL">PCL</a></li>
+                <li>
+                    <a href="#rosros2" aria-label="ROS/ROS2">ROS/ROS2</a></li></ul>
+                </li>
+                <li>
+                    <a href="#%e9%9f%b3%e9%a2%91%e7%b1%bb" aria-label="音频类">音频类</a><ul>
+                        
+                <li>
+                    <a href="#groove" aria-label="groove">groove</a></li>
+                <li>
+                    <a href="#openal" aria-label="OpenAL">OpenAL</a></li></ul>
+                </li>
+                <li>
+                    <a href="#ai%e7%b1%bb" aria-label="AI类">AI类</a><ul>
+                        
+                <li>
+                    <a href="#behaviortree-cpp" aria-label="BehaviorTree-CPP">BehaviorTree-CPP</a></li>
+                <li>
+                    <a href="#shark" aria-label="shark">shark</a></li>
+                <li>
+                    <a href="#mlpack" aria-label="mlpack">mlpack</a></li>
+                <li>
+                    <a href="#libtorch" aria-label="libtorch">libtorch</a></li>
+                <li>
+                    <a href="#opencv" aria-label="OpenCV">OpenCV</a></li>
+                <li>
+                    <a href="#openvino" aria-label="OpenVINO">OpenVINO</a></li></ul>
+                </li>
+                <li>
+                    <a href="#%e5%8f%82%e6%95%b0%e5%92%8c%e6%97%a5%e5%bf%97" aria-label="参数和日志">参数和日志</a><ul>
+                        
+                <li>
+                    <a href="#spdlog" aria-label="spdlog">spdlog</a></li>
+                <li>
+                    <a href="#yaml-cpp" aria-label="yaml-cpp">yaml-cpp</a></li>
+                <li>
+                    <a href="#nlohmann-json" aria-label="nlohmann-json">nlohmann-json</a>
+                </li>
+            </ul>
+            </li>
+            </ul>
+        </div>
+    </details>
+</div>
+
+  <div class="post-content"><h1 id="c第三方库">C++第三方库<a hidden class="anchor" aria-hidden="true" href="#c第三方库">#</a></h1>
+<h2 id="前言">前言<a hidden class="anchor" aria-hidden="true" href="#前言">#</a></h2>
+<p>有关这个部分将是在我目前对我遇到的所有C++第三方库的认知，测试以及相关的总结，由于自己实力很给，所以如果总结有误，请联系KnightSnape</p>
+<ul>
+<li>
+<p><a href="#1-%E6%A1%86%E6%9E%B6%E7%B1%BB">1.框架类</a></p>
+<ul>
+<li>
+<p><a href="#11-Qt">1.1.Qt</a></p>
+</li>
+<li>
+<p><a href="#12-Boost">1.2.Boost</a></p>
+</li>
+</ul>
+</li>
+<li>
+<p><a href="#2-%E6%95%B0%E5%AD%A6%E7%B1%BB">2.数学类</a></p>
+<ul>
+<li>
+<p><a href="#21-Eigen">2.1.Eigen</a></p>
+</li>
+<li>
+<p><a href="#22-ceres-solver">2.2.ceres-solver</a></p>
+</li>
+<li>
+<p><a href="#23-g2o">2.3.g2o</a></p>
+</li>
+</ul>
+</li>
+<li>
+<p><a href="#3-%E6%9C%BA%E5%99%A8%E4%BA%BA%E7%B1%BB">3.机器人类</a></p>
+<ul>
+<li>
+<p><a href="#31-PCL">3.1.PCL</a></p>
+</li>
+<li>
+<p><a href="#32-ROS/ROS2">3.2.ROS/ROS2</a></p>
+</li>
+</ul>
+</li>
+<li>
+<p><a href="#4-%E9%9F%B3%E9%A2%91%E7%B1%BB">4.音频类</a></p>
+<ul>
+<li>
+<p><a href="#41-groove">4.1.groove</a></p>
+</li>
+<li>
+<p><a href="#42-OpenAL">4.2.OpenAL</a></p>
+</li>
+</ul>
+</li>
+<li>
+<p><a href="#5-AI%E7%B1%BB">5.AI类</a></p>
+<ul>
+<li>
+<p><a href="#51-BehaviorTree-CPP">5.1.BehaviorTree-CPP</a></p>
+</li>
+<li>
+<p><a href="#52-shark">5.2.shark</a></p>
+</li>
+<li>
+<p><a href="#53-mlpack">5.3.mlpack</a></p>
+</li>
+<li>
+<p><a href="#54-libtorch">5.4.libtorch</a></p>
+</li>
+<li>
+<p><a href="#55-OpenCV">5.5.OpenCV</a></p>
+</li>
+<li>
+<p><a href="#56-OpenVINO">5.6.OpenVINO</a></p>
+</li>
+</ul>
+</li>
+<li>
+<p><a href="#6-%E5%8F%82%E6%95%B0%E5%92%8C%E6%97%A5%E5%BF%97">6.参数和日志</a></p>
+<ul>
+<li>
+<p><a href="61-spdlog">6.1.spdlog</a></p>
+</li>
+<li>
+<p><a href="62-yaml-cpp">6.2.yaml-cpp</a></p>
+</li>
+<li>
+<p><a href="63-nlohmann-json">6.3.nlohmann-json</a></p>
+</li>
+</ul>
+</li>
+</ul>
+<h1 id="框架类">框架类<a hidden class="anchor" aria-hidden="true" href="#框架类">#</a></h1>
+<h2 id="qt">Qt<a hidden class="anchor" aria-hidden="true" href="#qt">#</a></h2>
+<h2 id="boost">Boost<a hidden class="anchor" aria-hidden="true" href="#boost">#</a></h2>
+<h1 id="数学类">数学类<a hidden class="anchor" aria-hidden="true" href="#数学类">#</a></h1>
+<h2 id="eigen">Eigen<a hidden class="anchor" aria-hidden="true" href="#eigen">#</a></h2>
+<p>经典的线性代数库了，这个在有关机器人的所有方向上使用范围都是非常广的，除了图像级矩阵直接使用OpenCV之外，矩阵运算全用的是它。</p>
+<ul>
+<li><strong>矩阵定义</strong></li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&lt;Eigen/Dense&gt;</span><span class="cp">
+</span></span></span><span class="line"><span class="cl"><span class="cp"></span>
+</span></span><span class="line"><span class="cl"><span class="n">Matrix</span><span class="o">&lt;</span><span class="kt">double</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="o">&gt;</span> <span class="n">A</span><span class="p">;</span>               <span class="c1">// Fixed rows and cols. Same as Matrix3d.
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="n">Matrix</span><span class="o">&lt;</span><span class="kt">double</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="n">Dynamic</span><span class="o">&gt;</span> <span class="n">B</span><span class="p">;</span>         <span class="c1">// Fixed rows, dynamic cols.
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="n">Matrix</span><span class="o">&lt;</span><span class="kt">double</span><span class="p">,</span> <span class="n">Dynamic</span><span class="p">,</span> <span class="n">Dynamic</span><span class="o">&gt;</span> <span class="n">C</span><span class="p">;</span>   <span class="c1">// Full dynamic. Same as MatrixXd.
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="n">Matrix</span><span class="o">&lt;</span><span class="kt">double</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="n">RowMajor</span><span class="o">&gt;</span> <span class="n">E</span><span class="p">;</span>     <span class="c1">// Row major; default is column-major.
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="n">Matrix3f</span> <span class="n">P</span><span class="p">,</span> <span class="n">Q</span><span class="p">,</span> <span class="n">R</span><span class="p">;</span>                     <span class="c1">// 3x3 float matrix.
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="n">Vector3f</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">z</span><span class="p">;</span>                     <span class="c1">// 3x1 float matrix.
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="n">RowVector3f</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">c</span><span class="p">;</span>                  <span class="c1">// 1x3 float matrix.
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="n">VectorXd</span> <span class="n">v</span><span class="p">;</span>                           <span class="c1">// Dynamic column vector of doubles
+</span></span></span><span class="line"><span class="cl"><span class="c1">// Eigen          // Matlab           // comments
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="n">x</span><span class="p">.</span><span class="n">size</span><span class="p">()</span>          <span class="c1">// length(x)        // vector size
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="n">C</span><span class="p">.</span><span class="n">rows</span><span class="p">()</span>          <span class="c1">// size(C,1)        // number of rows
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="n">C</span><span class="p">.</span><span class="n">cols</span><span class="p">()</span>          <span class="c1">// size(C,2)        // number of columns
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="n">x</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>              <span class="c1">// x(i+1)           // Matlab is 1-based
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="n">C</span><span class="p">(</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">)</span>            <span class="c1">// C(i+1,j+1)       //
+</span></span></span></code></pre></div><ul>
+<li>** Eigen 基础使用**</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="c1">// Basic usage
+</span></span></span><span class="line"><span class="cl"><span class="c1">// Eigen        // Matlab           // comments
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="n">x</span><span class="p">.</span><span class="n">size</span><span class="p">()</span>        <span class="c1">// length(x)        // vector size
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="n">C</span><span class="p">.</span><span class="n">rows</span><span class="p">()</span>        <span class="c1">// size(C,1)        // number of rows
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="n">C</span><span class="p">.</span><span class="n">cols</span><span class="p">()</span>        <span class="c1">// size(C,2)        // number of columns
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="n">x</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>            <span class="c1">// x(i+1)           // Matlab is 1-based
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="n">C</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">)</span>         <span class="c1">// C(i+1,j+1)       //
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>
+</span></span><span class="line"><span class="cl"><span class="n">A</span><span class="p">.</span><span class="n">resize</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="mi">4</span><span class="p">);</span>   <span class="c1">// Runtime error if assertions are on.
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="n">B</span><span class="p">.</span><span class="n">resize</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="mi">9</span><span class="p">);</span>   <span class="c1">// Runtime error if assertions are on.
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="n">A</span><span class="p">.</span><span class="n">resize</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">);</span>   <span class="c1">// Ok; size didn&#39;t change.
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="n">B</span><span class="p">.</span><span class="n">resize</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">9</span><span class="p">);</span>   <span class="c1">// Ok; only dynamic cols changed.
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>                  
+</span></span><span class="line"><span class="cl"><span class="n">A</span> <span class="o">&lt;&lt;</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span>     <span class="c1">// Initialize A. The elements can also be
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>     <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span>     <span class="c1">// matrices, which are stacked along cols
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>     <span class="mi">7</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">9</span><span class="p">;</span>     <span class="c1">// and then the rows are stacked.
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="n">B</span> <span class="o">&lt;&lt;</span> <span class="n">A</span><span class="p">,</span> <span class="n">A</span><span class="p">,</span> <span class="n">A</span><span class="p">;</span>     <span class="c1">// B is three horizontally stacked A&#39;s.
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="n">A</span><span class="p">.</span><span class="n">fill</span><span class="p">(</span><span class="mi">10</span><span class="p">);</span>       <span class="c1">// Fill A with all 10&#39;s.
+</span></span></span></code></pre></div><ul>
+<li><strong>Eigen 特殊矩阵生成</strong></li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="c1">// Eigen                            // Matlab
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="n">MatrixXd</span><span class="o">::</span><span class="n">Identity</span><span class="p">(</span><span class="n">rows</span><span class="p">,</span><span class="n">cols</span><span class="p">)</span>       <span class="c1">// eye(rows,cols)
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="n">C</span><span class="p">.</span><span class="n">setIdentity</span><span class="p">(</span><span class="n">rows</span><span class="p">,</span><span class="n">cols</span><span class="p">)</span>            <span class="c1">// C = eye(rows,cols)
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="n">MatrixXd</span><span class="o">::</span><span class="n">Zero</span><span class="p">(</span><span class="n">rows</span><span class="p">,</span><span class="n">cols</span><span class="p">)</span>           <span class="c1">// zeros(rows,cols)
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="n">C</span><span class="p">.</span><span class="n">setZero</span><span class="p">(</span><span class="n">rows</span><span class="p">,</span><span class="n">cols</span><span class="p">)</span>                <span class="c1">// C = ones(rows,cols)
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="n">MatrixXd</span><span class="o">::</span><span class="n">Ones</span><span class="p">(</span><span class="n">rows</span><span class="p">,</span><span class="n">cols</span><span class="p">)</span>           <span class="c1">// ones(rows,cols)
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="n">C</span><span class="p">.</span><span class="n">setOnes</span><span class="p">(</span><span class="n">rows</span><span class="p">,</span><span class="n">cols</span><span class="p">)</span>                <span class="c1">// C = ones(rows,cols)
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="n">MatrixXd</span><span class="o">::</span><span class="n">Random</span><span class="p">(</span><span class="n">rows</span><span class="p">,</span><span class="n">cols</span><span class="p">)</span>         <span class="c1">// rand(rows,cols)*2-1        // MatrixXd::Random returns uniform random numbers in (-1, 1).
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="n">C</span><span class="p">.</span><span class="n">setRandom</span><span class="p">(</span><span class="n">rows</span><span class="p">,</span><span class="n">cols</span><span class="p">)</span>              <span class="c1">// C = rand(rows,cols)*2-1
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="n">VectorXd</span><span class="o">::</span><span class="n">LinSpaced</span><span class="p">(</span><span class="n">size</span><span class="p">,</span><span class="n">low</span><span class="p">,</span><span class="n">high</span><span class="p">)</span>  <span class="c1">// linspace(low,high,size)&#39;
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="n">v</span><span class="p">.</span><span class="n">setLinSpaced</span><span class="p">(</span><span class="n">size</span><span class="p">,</span><span class="n">low</span><span class="p">,</span><span class="n">high</span><span class="p">)</span>       <span class="c1">// v = linspace(low,high,size)&#39;
+</span></span></span></code></pre></div><ul>
+<li><strong>Eigen 矩阵分块</strong></li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="c1">// Matrix slicing and blocks. All expressions listed here are read/write.
+</span></span></span><span class="line"><span class="cl"><span class="c1">// Templated size versions are faster. Note that Matlab is 1-based (a size N
+</span></span></span><span class="line"><span class="cl"><span class="c1">// vector is x(1)...x(N)).
+</span></span></span><span class="line"><span class="cl"><span class="c1">// Eigen                           // Matlab
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="n">x</span><span class="p">.</span><span class="n">head</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>                          <span class="c1">// x(1:n)
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="n">x</span><span class="p">.</span><span class="n">head</span><span class="o">&lt;</span><span class="n">n</span><span class="o">&gt;</span><span class="p">()</span>                        <span class="c1">// x(1:n)
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="n">x</span><span class="p">.</span><span class="n">tail</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>                          <span class="c1">// x(end - n + 1: end)
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="n">x</span><span class="p">.</span><span class="n">tail</span><span class="o">&lt;</span><span class="n">n</span><span class="o">&gt;</span><span class="p">()</span>                        <span class="c1">// x(end - n + 1: end)
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="n">x</span><span class="p">.</span><span class="n">segment</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">n</span><span class="p">)</span>                    <span class="c1">// x(i+1 : i+n)
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="n">x</span><span class="p">.</span><span class="n">segment</span><span class="o">&lt;</span><span class="n">n</span><span class="o">&gt;</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>                    <span class="c1">// x(i+1 : i+n)
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="n">P</span><span class="p">.</span><span class="n">block</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">,</span> <span class="n">rows</span><span class="p">,</span> <span class="n">cols</span><span class="p">)</span>          <span class="c1">// P(i+1 : i+rows, j+1 : j+cols)
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="n">P</span><span class="p">.</span><span class="n">block</span><span class="o">&lt;</span><span class="n">rows</span><span class="p">,</span> <span class="n">cols</span><span class="o">&gt;</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">)</span>          <span class="c1">// P(i+1 : i+rows, j+1 : j+cols)
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="n">P</span><span class="p">.</span><span class="n">row</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>                           <span class="c1">// P(i+1, :)
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="n">P</span><span class="p">.</span><span class="n">col</span><span class="p">(</span><span class="n">j</span><span class="p">)</span>                           <span class="c1">// P(:, j+1)
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="n">P</span><span class="p">.</span><span class="n">leftCols</span><span class="o">&lt;</span><span class="n">cols</span><span class="o">&gt;</span><span class="p">()</span>                 <span class="c1">// P(:, 1:cols)
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="n">P</span><span class="p">.</span><span class="n">leftCols</span><span class="p">(</span><span class="n">cols</span><span class="p">)</span>                   <span class="c1">// P(:, 1:cols)
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="n">P</span><span class="p">.</span><span class="n">middleCols</span><span class="o">&lt;</span><span class="n">cols</span><span class="o">&gt;</span><span class="p">(</span><span class="n">j</span><span class="p">)</span>              <span class="c1">// P(:, j+1:j+cols)
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="n">P</span><span class="p">.</span><span class="n">middleCols</span><span class="p">(</span><span class="n">j</span><span class="p">,</span> <span class="n">cols</span><span class="p">)</span>              <span class="c1">// P(:, j+1:j+cols)
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="n">P</span><span class="p">.</span><span class="n">rightCols</span><span class="o">&lt;</span><span class="n">cols</span><span class="o">&gt;</span><span class="p">()</span>                <span class="c1">// P(:, end-cols+1:end)
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="n">P</span><span class="p">.</span><span class="n">rightCols</span><span class="p">(</span><span class="n">cols</span><span class="p">)</span>                  <span class="c1">// P(:, end-cols+1:end)
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="n">P</span><span class="p">.</span><span class="n">topRows</span><span class="o">&lt;</span><span class="n">rows</span><span class="o">&gt;</span><span class="p">()</span>                  <span class="c1">// P(1:rows, :)
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="n">P</span><span class="p">.</span><span class="n">topRows</span><span class="p">(</span><span class="n">rows</span><span class="p">)</span>                    <span class="c1">// P(1:rows, :)
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="n">P</span><span class="p">.</span><span class="n">middleRows</span><span class="o">&lt;</span><span class="n">rows</span><span class="o">&gt;</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>              <span class="c1">// P(i+1:i+rows, :)
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="n">P</span><span class="p">.</span><span class="n">middleRows</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">rows</span><span class="p">)</span>              <span class="c1">// P(i+1:i+rows, :)
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="n">P</span><span class="p">.</span><span class="n">bottomRows</span><span class="o">&lt;</span><span class="n">rows</span><span class="o">&gt;</span><span class="p">()</span>               <span class="c1">// P(end-rows+1:end, :)
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="n">P</span><span class="p">.</span><span class="n">bottomRows</span><span class="p">(</span><span class="n">rows</span><span class="p">)</span>                 <span class="c1">// P(end-rows+1:end, :)
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="n">P</span><span class="p">.</span><span class="n">topLeftCorner</span><span class="p">(</span><span class="n">rows</span><span class="p">,</span> <span class="n">cols</span><span class="p">)</span>        <span class="c1">// P(1:rows, 1:cols)
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="n">P</span><span class="p">.</span><span class="n">topRightCorner</span><span class="p">(</span><span class="n">rows</span><span class="p">,</span> <span class="n">cols</span><span class="p">)</span>       <span class="c1">// P(1:rows, end-cols+1:end)
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="n">P</span><span class="p">.</span><span class="n">bottomLeftCorner</span><span class="p">(</span><span class="n">rows</span><span class="p">,</span> <span class="n">cols</span><span class="p">)</span>     <span class="c1">// P(end-rows+1:end, 1:cols)
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="n">P</span><span class="p">.</span><span class="n">bottomRightCorner</span><span class="p">(</span><span class="n">rows</span><span class="p">,</span> <span class="n">cols</span><span class="p">)</span>    <span class="c1">// P(end-rows+1:end, end-cols+1:end)
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="n">P</span><span class="p">.</span><span class="n">topLeftCorner</span><span class="o">&lt;</span><span class="n">rows</span><span class="p">,</span><span class="n">cols</span><span class="o">&gt;</span><span class="p">()</span>       <span class="c1">// P(1:rows, 1:cols)
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="n">P</span><span class="p">.</span><span class="n">topRightCorner</span><span class="o">&lt;</span><span class="n">rows</span><span class="p">,</span><span class="n">cols</span><span class="o">&gt;</span><span class="p">()</span>      <span class="c1">// P(1:rows, end-cols+1:end)
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="n">P</span><span class="p">.</span><span class="n">bottomLeftCorner</span><span class="o">&lt;</span><span class="n">rows</span><span class="p">,</span><span class="n">cols</span><span class="o">&gt;</span><span class="p">()</span>    <span class="c1">// P(end-rows+1:end, 1:cols)
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="n">P</span><span class="p">.</span><span class="n">bottomRightCorner</span><span class="o">&lt;</span><span class="n">rows</span><span class="p">,</span><span class="n">cols</span><span class="o">&gt;</span><span class="p">()</span>   <span class="c1">// P(end-rows+1:end, end-cols+1:end)
+</span></span></span></code></pre></div><ul>
+<li><strong>Eigen 矩阵元素交换</strong></li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="c1">// Of particular note is Eigen&#39;s swap function which is highly optimized.
+</span></span></span><span class="line"><span class="cl"><span class="c1">// Eigen                           // Matlab
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="n">R</span><span class="p">.</span><span class="n">row</span><span class="p">(</span><span class="n">i</span><span class="p">)</span> <span class="o">=</span> <span class="n">P</span><span class="p">.</span><span class="n">col</span><span class="p">(</span><span class="n">j</span><span class="p">);</span>               <span class="c1">// R(i, :) = P(:, i)
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="n">R</span><span class="p">.</span><span class="n">col</span><span class="p">(</span><span class="n">j1</span><span class="p">).</span><span class="n">swap</span><span class="p">(</span><span class="n">mat1</span><span class="p">.</span><span class="n">col</span><span class="p">(</span><span class="n">j2</span><span class="p">));</span>      <span class="c1">// R(:, [j1 j2]) = R(:, [j2, j1])
+</span></span></span></code></pre></div><ul>
+<li><strong>Eigen 矩阵转置</strong></li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="c1">// Views, transpose, etc; all read-write except for .adjoint().
+</span></span></span><span class="line"><span class="cl"><span class="c1">// Eigen                           // Matlab
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="n">R</span><span class="p">.</span><span class="n">adjoint</span><span class="p">()</span>                        <span class="c1">// R&#39;
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="n">R</span><span class="p">.</span><span class="n">transpose</span><span class="p">()</span>                      <span class="c1">// R.&#39; or conj(R&#39;)
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="n">R</span><span class="p">.</span><span class="n">diagonal</span><span class="p">()</span>                       <span class="c1">// diag(R)
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="n">x</span><span class="p">.</span><span class="n">asDiagonal</span><span class="p">()</span>                     <span class="c1">// diag(x)
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="n">R</span><span class="p">.</span><span class="n">transpose</span><span class="p">().</span><span class="n">colwise</span><span class="p">().</span><span class="n">reverse</span><span class="p">();</span> <span class="c1">// rot90(R)
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="n">R</span><span class="p">.</span><span class="n">conjugate</span><span class="p">()</span>                      <span class="c1">// conj(R)
+</span></span></span></code></pre></div><ul>
+<li><strong>Eigen 矩阵乘积</strong></li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="c1">// All the same as Matlab, but matlab doesn&#39;t have *= style operators.
+</span></span></span><span class="line"><span class="cl"><span class="c1">// Matrix-vector.  Matrix-matrix.   Matrix-scalar.
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="n">y</span>  <span class="o">=</span> <span class="n">M</span><span class="o">*</span><span class="n">x</span><span class="p">;</span>          <span class="n">R</span>  <span class="o">=</span> <span class="n">P</span><span class="o">*</span><span class="n">Q</span><span class="p">;</span>        <span class="n">R</span>  <span class="o">=</span> <span class="n">P</span><span class="o">*</span><span class="n">s</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="n">a</span>  <span class="o">=</span> <span class="n">b</span><span class="o">*</span><span class="n">M</span><span class="p">;</span>          <span class="n">R</span>  <span class="o">=</span> <span class="n">P</span> <span class="o">-</span> <span class="n">Q</span><span class="p">;</span>      <span class="n">R</span>  <span class="o">=</span> <span class="n">s</span><span class="o">*</span><span class="n">P</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="n">a</span> <span class="o">*=</span> <span class="n">M</span><span class="p">;</span>            <span class="n">R</span>  <span class="o">=</span> <span class="n">P</span> <span class="o">+</span> <span class="n">Q</span><span class="p">;</span>      <span class="n">R</span>  <span class="o">=</span> <span class="n">P</span><span class="o">/</span><span class="n">s</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">                   <span class="n">R</span> <span class="o">*=</span> <span class="n">Q</span><span class="p">;</span>          <span class="n">R</span>  <span class="o">=</span> <span class="n">s</span><span class="o">*</span><span class="n">P</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">                   <span class="n">R</span> <span class="o">+=</span> <span class="n">Q</span><span class="p">;</span>          <span class="n">R</span> <span class="o">*=</span> <span class="n">s</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">                   <span class="n">R</span> <span class="o">-=</span> <span class="n">Q</span><span class="p">;</span>          <span class="n">R</span> <span class="o">/=</span> <span class="n">s</span><span class="p">;</span>
+</span></span></code></pre></div><ul>
+<li><strong>Eigen 矩阵单个元素操作</strong></li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="c1">// Vectorized operations on each element independently
+</span></span></span><span class="line"><span class="cl"><span class="c1">// Eigen                  // Matlab
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="n">R</span> <span class="o">=</span> <span class="n">P</span><span class="p">.</span><span class="n">cwiseProduct</span><span class="p">(</span><span class="n">Q</span><span class="p">);</span>    <span class="c1">// R = P .* Q
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="n">R</span> <span class="o">=</span> <span class="n">P</span><span class="p">.</span><span class="n">array</span><span class="p">()</span> <span class="o">*</span> <span class="n">s</span><span class="p">.</span><span class="n">array</span><span class="p">();</span><span class="c1">// R = P .* s
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="n">R</span> <span class="o">=</span> <span class="n">P</span><span class="p">.</span><span class="n">cwiseQuotient</span><span class="p">(</span><span class="n">Q</span><span class="p">);</span>   <span class="c1">// R = P ./ Q
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="n">R</span> <span class="o">=</span> <span class="n">P</span><span class="p">.</span><span class="n">array</span><span class="p">()</span> <span class="o">/</span> <span class="n">Q</span><span class="p">.</span><span class="n">array</span><span class="p">();</span><span class="c1">// R = P ./ Q
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="n">R</span> <span class="o">=</span> <span class="n">P</span><span class="p">.</span><span class="n">array</span><span class="p">()</span> <span class="o">+</span> <span class="n">s</span><span class="p">.</span><span class="n">array</span><span class="p">();</span><span class="c1">// R = P + s
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="n">R</span> <span class="o">=</span> <span class="n">P</span><span class="p">.</span><span class="n">array</span><span class="p">()</span> <span class="o">-</span> <span class="n">s</span><span class="p">.</span><span class="n">array</span><span class="p">();</span><span class="c1">// R = P - s
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="n">R</span><span class="p">.</span><span class="n">array</span><span class="p">()</span> <span class="o">+=</span> <span class="n">s</span><span class="p">;</span>           <span class="c1">// R = R + s
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="n">R</span><span class="p">.</span><span class="n">array</span><span class="p">()</span> <span class="o">-=</span> <span class="n">s</span><span class="p">;</span>           <span class="c1">// R = R - s
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="n">R</span><span class="p">.</span><span class="n">array</span><span class="p">()</span> <span class="o">&lt;</span> <span class="n">Q</span><span class="p">.</span><span class="n">array</span><span class="p">();</span>    <span class="c1">// R &lt; Q
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="n">R</span><span class="p">.</span><span class="n">array</span><span class="p">()</span> <span class="o">&lt;=</span> <span class="n">Q</span><span class="p">.</span><span class="n">array</span><span class="p">();</span>   <span class="c1">// R &lt;= Q
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="n">R</span><span class="p">.</span><span class="n">cwiseInverse</span><span class="p">();</span>         <span class="c1">// 1 ./ P
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="n">R</span><span class="p">.</span><span class="n">array</span><span class="p">().</span><span class="n">inverse</span><span class="p">();</span>      <span class="c1">// 1 ./ P
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="n">R</span><span class="p">.</span><span class="n">array</span><span class="p">().</span><span class="n">sin</span><span class="p">()</span>           <span class="c1">// sin(P)
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="n">R</span><span class="p">.</span><span class="n">array</span><span class="p">().</span><span class="n">cos</span><span class="p">()</span>           <span class="c1">// cos(P)
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="n">R</span><span class="p">.</span><span class="n">array</span><span class="p">().</span><span class="n">pow</span><span class="p">(</span><span class="n">s</span><span class="p">)</span>          <span class="c1">// P .^ s
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="n">R</span><span class="p">.</span><span class="n">array</span><span class="p">().</span><span class="n">square</span><span class="p">()</span>        <span class="c1">// P .^ 2
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="n">R</span><span class="p">.</span><span class="n">array</span><span class="p">().</span><span class="n">cube</span><span class="p">()</span>          <span class="c1">// P .^ 3
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="n">R</span><span class="p">.</span><span class="n">cwiseSqrt</span><span class="p">()</span>             <span class="c1">// sqrt(P)
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="n">R</span><span class="p">.</span><span class="n">array</span><span class="p">().</span><span class="n">sqrt</span><span class="p">()</span>          <span class="c1">// sqrt(P)
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="n">R</span><span class="p">.</span><span class="n">array</span><span class="p">().</span><span class="n">exp</span><span class="p">()</span>           <span class="c1">// exp(P)
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="n">R</span><span class="p">.</span><span class="n">array</span><span class="p">().</span><span class="n">log</span><span class="p">()</span>           <span class="c1">// log(P)
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="n">R</span><span class="p">.</span><span class="n">cwiseMax</span><span class="p">(</span><span class="n">P</span><span class="p">)</span>             <span class="c1">// max(R, P)
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="n">R</span><span class="p">.</span><span class="n">array</span><span class="p">().</span><span class="n">max</span><span class="p">(</span><span class="n">P</span><span class="p">.</span><span class="n">array</span><span class="p">())</span>  <span class="c1">// max(R, P)
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="n">R</span><span class="p">.</span><span class="n">cwiseMin</span><span class="p">(</span><span class="n">P</span><span class="p">)</span>             <span class="c1">// min(R, P)
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="n">R</span><span class="p">.</span><span class="n">array</span><span class="p">().</span><span class="n">min</span><span class="p">(</span><span class="n">P</span><span class="p">.</span><span class="n">array</span><span class="p">())</span>  <span class="c1">// min(R, P)
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="n">R</span><span class="p">.</span><span class="n">cwiseAbs</span><span class="p">()</span>              <span class="c1">// abs(P)
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="n">R</span><span class="p">.</span><span class="n">array</span><span class="p">().</span><span class="n">abs</span><span class="p">()</span>           <span class="c1">// abs(P)
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="n">R</span><span class="p">.</span><span class="n">cwiseAbs2</span><span class="p">()</span>             <span class="c1">// abs(P.^2)
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="n">R</span><span class="p">.</span><span class="n">array</span><span class="p">().</span><span class="n">abs2</span><span class="p">()</span>          <span class="c1">// abs(P.^2)
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="p">(</span><span class="n">R</span><span class="p">.</span><span class="n">array</span><span class="p">()</span> <span class="o">&lt;</span> <span class="n">s</span><span class="p">).</span><span class="n">select</span><span class="p">(</span><span class="n">P</span><span class="p">,</span><span class="n">Q</span><span class="p">);</span>  <span class="c1">// (R &lt; s ? P : Q)
+</span></span></span></code></pre></div><ul>
+<li><strong>Eigen 矩阵化简</strong></li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="c1">// Reductions.
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kt">int</span> <span class="n">r</span><span class="p">,</span> <span class="n">c</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="c1">// Eigen                  // Matlab
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="n">R</span><span class="p">.</span><span class="n">minCoeff</span><span class="p">()</span>              <span class="c1">// min(R(:))
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="n">R</span><span class="p">.</span><span class="n">maxCoeff</span><span class="p">()</span>              <span class="c1">// max(R(:))
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="n">s</span> <span class="o">=</span> <span class="n">R</span><span class="p">.</span><span class="n">minCoeff</span><span class="p">(</span><span class="o">&amp;</span><span class="n">r</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">c</span><span class="p">)</span>    <span class="c1">// [s, i] = min(R(:)); [r, c] = ind2sub(size(R), i);
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="n">s</span> <span class="o">=</span> <span class="n">R</span><span class="p">.</span><span class="n">maxCoeff</span><span class="p">(</span><span class="o">&amp;</span><span class="n">r</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">c</span><span class="p">)</span>    <span class="c1">// [s, i] = max(R(:)); [r, c] = ind2sub(size(R), i);
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="n">R</span><span class="p">.</span><span class="n">sum</span><span class="p">()</span>                   <span class="c1">// sum(R(:))
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="n">R</span><span class="p">.</span><span class="n">colwise</span><span class="p">().</span><span class="n">sum</span><span class="p">()</span>         <span class="c1">// sum(R)
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="n">R</span><span class="p">.</span><span class="n">rowwise</span><span class="p">().</span><span class="n">sum</span><span class="p">()</span>         <span class="c1">// sum(R, 2) or sum(R&#39;)&#39;
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="n">R</span><span class="p">.</span><span class="n">prod</span><span class="p">()</span>                  <span class="c1">// prod(R(:))
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="n">R</span><span class="p">.</span><span class="n">colwise</span><span class="p">().</span><span class="n">prod</span><span class="p">()</span>        <span class="c1">// prod(R)
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="n">R</span><span class="p">.</span><span class="n">rowwise</span><span class="p">().</span><span class="n">prod</span><span class="p">()</span>        <span class="c1">// prod(R, 2) or prod(R&#39;)&#39;
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="n">R</span><span class="p">.</span><span class="n">trace</span><span class="p">()</span>                 <span class="c1">// trace(R)
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="n">R</span><span class="p">.</span><span class="n">all</span><span class="p">()</span>                   <span class="c1">// all(R(:))
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="n">R</span><span class="p">.</span><span class="n">colwise</span><span class="p">().</span><span class="n">all</span><span class="p">()</span>         <span class="c1">// all(R)
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="n">R</span><span class="p">.</span><span class="n">rowwise</span><span class="p">().</span><span class="n">all</span><span class="p">()</span>         <span class="c1">// all(R, 2)
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="n">R</span><span class="p">.</span><span class="n">any</span><span class="p">()</span>                   <span class="c1">// any(R(:))
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="n">R</span><span class="p">.</span><span class="n">colwise</span><span class="p">().</span><span class="n">any</span><span class="p">()</span>         <span class="c1">// any(R)
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="n">R</span><span class="p">.</span><span class="n">rowwise</span><span class="p">().</span><span class="n">any</span><span class="p">()</span>         <span class="c1">// any(R, 2)
+</span></span></span></code></pre></div><ul>
+<li><strong>Eigen 矩阵点乘</strong></li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="c1">// Dot products, norms, etc.
+</span></span></span><span class="line"><span class="cl"><span class="c1">// Eigen                  // Matlab
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="n">x</span><span class="p">.</span><span class="n">norm</span><span class="p">()</span>                  <span class="c1">// norm(x).    Note that norm(R) doesn&#39;t work in Eigen.
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="n">x</span><span class="p">.</span><span class="n">squaredNorm</span><span class="p">()</span>           <span class="c1">// dot(x, x)   Note the equivalence is not true for complex
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="n">x</span><span class="p">.</span><span class="n">dot</span><span class="p">(</span><span class="n">y</span><span class="p">)</span>                  <span class="c1">// dot(x, y)
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="n">x</span><span class="p">.</span><span class="n">cross</span><span class="p">(</span><span class="n">y</span><span class="p">)</span>                <span class="c1">// cross(x, y) Requires #include &lt;Eigen/Geometry&gt;
+</span></span></span></code></pre></div><ul>
+<li><strong>Eigen 矩阵类型转换</strong></li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="c1">//// Type conversion
+</span></span></span><span class="line"><span class="cl"><span class="c1">// Eigen                           // Matlab
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="n">A</span><span class="p">.</span><span class="n">cast</span><span class="o">&lt;</span><span class="kt">double</span><span class="o">&gt;</span><span class="p">();</span>                  <span class="c1">// double(A)
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="n">A</span><span class="p">.</span><span class="n">cast</span><span class="o">&lt;</span><span class="kt">float</span><span class="o">&gt;</span><span class="p">();</span>                   <span class="c1">// single(A)
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="n">A</span><span class="p">.</span><span class="n">cast</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span><span class="p">();</span>                     <span class="c1">// int32(A)
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="n">A</span><span class="p">.</span><span class="n">real</span><span class="p">();</span>                          <span class="c1">// real(A)
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="n">A</span><span class="p">.</span><span class="n">imag</span><span class="p">();</span>                          <span class="c1">// imag(A)
+</span></span></span><span class="line"><span class="cl"><span class="c1">// if the original type equals destination type, no work is done
+</span></span></span></code></pre></div><ul>
+<li><strong>Eigen 求解线性方程组 Ax = b</strong></li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="c1">// Solve Ax = b. Result stored in x. Matlab: x = A \ b.
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="n">x</span> <span class="o">=</span> <span class="n">A</span><span class="p">.</span><span class="n">ldlt</span><span class="p">().</span><span class="n">solve</span><span class="p">(</span><span class="n">b</span><span class="p">));</span>  <span class="c1">// A sym. p.s.d.    #include &lt;Eigen/Cholesky&gt;
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="n">x</span> <span class="o">=</span> <span class="n">A</span><span class="p">.</span><span class="n">llt</span><span class="p">()</span> <span class="p">.</span><span class="n">solve</span><span class="p">(</span><span class="n">b</span><span class="p">));</span>  <span class="c1">// A sym. p.d.      #include &lt;Eigen/Cholesky&gt;
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="n">x</span> <span class="o">=</span> <span class="n">A</span><span class="p">.</span><span class="n">lu</span><span class="p">()</span>  <span class="p">.</span><span class="n">solve</span><span class="p">(</span><span class="n">b</span><span class="p">));</span>  <span class="c1">// Stable and fast. #include &lt;Eigen/LU&gt;
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="n">x</span> <span class="o">=</span> <span class="n">A</span><span class="p">.</span><span class="n">qr</span><span class="p">()</span>  <span class="p">.</span><span class="n">solve</span><span class="p">(</span><span class="n">b</span><span class="p">));</span>  <span class="c1">// No pivoting.     #include &lt;Eigen/QR&gt;
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="n">x</span> <span class="o">=</span> <span class="n">A</span><span class="p">.</span><span class="n">svd</span><span class="p">()</span> <span class="p">.</span><span class="n">solve</span><span class="p">(</span><span class="n">b</span><span class="p">));</span>  <span class="c1">// Stable, slowest. #include &lt;Eigen/SVD&gt;
+</span></span></span><span class="line"><span class="cl"><span class="c1">// .ldlt() -&gt; .matrixL() and .matrixD()
+</span></span></span><span class="line"><span class="cl"><span class="c1">// .llt()  -&gt; .matrixL()
+</span></span></span><span class="line"><span class="cl"><span class="c1">// .lu()   -&gt; .matrixL() and .matrixU()
+</span></span></span><span class="line"><span class="cl"><span class="c1">// .qr()   -&gt; .matrixQ() and .matrixR()
+</span></span></span><span class="line"><span class="cl"><span class="c1">// .svd()  -&gt; .matrixU(), .singularValues(), and .matrixV()
+</span></span></span></code></pre></div><ul>
+<li><strong>Eigen 矩阵特征值</strong></li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="c1">// Eigenvalue problems
+</span></span></span><span class="line"><span class="cl"><span class="c1">// Eigen                          // Matlab
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="n">A</span><span class="p">.</span><span class="n">eigenvalues</span><span class="p">();</span>                  <span class="c1">// eig(A);
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="n">EigenSolver</span><span class="o">&lt;</span><span class="n">Matrix3d</span><span class="o">&gt;</span> <span class="n">eig</span><span class="p">(</span><span class="n">A</span><span class="p">);</span>     <span class="c1">// [vec val] = eig(A)
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="n">eig</span><span class="p">.</span><span class="n">eigenvalues</span><span class="p">();</span>                <span class="c1">// diag(val)
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="n">eig</span><span class="p">.</span><span class="n">eigenvectors</span><span class="p">();</span>               <span class="c1">// vec
+</span></span></span><span class="line"><span class="cl"><span class="c1">// For self-adjoint matrices use SelfAdjointEigenSolver&lt;&gt;
+</span></span></span></code></pre></div><h2 id="ceres-solver">ceres-solver<a hidden class="anchor" aria-hidden="true" href="#ceres-solver">#</a></h2>
+<p>机器人的最经典的非线性优化库，可以直接移步到：http://ceres-solver.org/</p>
+<p>最经典的场景，如：$f(x) = Asin(\omega x + \phi)$已知$x_i和y_i$，其中$y_i$为观测值，拟合其余参数。</p>
+<h2 id="g2o">g2o<a hidden class="anchor" aria-hidden="true" href="#g2o">#</a></h2>
+<p>目前未使用过(甚至Demo)，同样的都是优化库，但是它本身基于图优化。</p>
+<h1 id="机器人类">机器人类<a hidden class="anchor" aria-hidden="true" href="#机器人类">#</a></h1>
+<h2 id="pcl">PCL<a hidden class="anchor" aria-hidden="true" href="#pcl">#</a></h2>
+<h2 id="rosros2">ROS/ROS2<a hidden class="anchor" aria-hidden="true" href="#rosros2">#</a></h2>
+<p>ROS的链接：https://www.ros.org/</p>
+<p>ROS2的链接：https://docs.ros.org/en/rolling/index.html</p>
+<p>集成度不错的机器人系统库</p>
+<h1 id="音频类">音频类<a hidden class="anchor" aria-hidden="true" href="#音频类">#</a></h1>
+<h2 id="groove">groove<a hidden class="anchor" aria-hidden="true" href="#groove">#</a></h2>
+<h2 id="openal">OpenAL<a hidden class="anchor" aria-hidden="true" href="#openal">#</a></h2>
+<h1 id="ai类">AI类<a hidden class="anchor" aria-hidden="true" href="#ai类">#</a></h1>
+<h2 id="behaviortree-cpp">BehaviorTree-CPP<a hidden class="anchor" aria-hidden="true" href="#behaviortree-cpp">#</a></h2>
+<p>官方使用的行为树框架了属于是，参考：https://www.behaviortree.dev/</p>
+<p>它似乎比较喜欢使用xml来预架构行为树，是个比较规范但是非常麻烦的方式</p>
+<p>类型和实现来说相对比较全面，对于偏大型的行为层，可以使用这组第三方库，如果行为树规模较小，不推荐使用</p>
+<h2 id="shark">shark<a hidden class="anchor" aria-hidden="true" href="#shark">#</a></h2>
+<h2 id="mlpack">mlpack<a hidden class="anchor" aria-hidden="true" href="#mlpack">#</a></h2>
+<h2 id="libtorch">libtorch<a hidden class="anchor" aria-hidden="true" href="#libtorch">#</a></h2>
+<h2 id="opencv">OpenCV<a hidden class="anchor" aria-hidden="true" href="#opencv">#</a></h2>
+<h2 id="openvino">OpenVINO<a hidden class="anchor" aria-hidden="true" href="#openvino">#</a></h2>
+<h1 id="参数和日志">参数和日志<a hidden class="anchor" aria-hidden="true" href="#参数和日志">#</a></h1>
+<h2 id="spdlog">spdlog<a hidden class="anchor" aria-hidden="true" href="#spdlog">#</a></h2>
+<h2 id="yaml-cpp">yaml-cpp<a hidden class="anchor" aria-hidden="true" href="#yaml-cpp">#</a></h2>
+<h2 id="nlohmann-json">nlohmann-json<a hidden class="anchor" aria-hidden="true" href="#nlohmann-json">#</a></h2>
+
+
+  </div>
+
+  <footer class="post-footer">
+    <ul class="post-tags">
+      <li><a href="http://knightsnape.github.io/public/tags/thirdparty/">ThirdParty</a></li>
+    </ul>
+<nav class="paginav">
+  <a class="prev" href="http://knightsnape.github.io/public/posts/navigation_algorithm/">
+    <span class="title">« Prev</span>
+    <br>
+    <span>Navigation Algorithm</span>
+  </a>
+</nav>
+
+
+<ul class="share-buttons">
+    <li>
+        <a target="_blank" rel="noopener noreferrer" aria-label="share ThirdParty Test and Summary on x"
+            href="https://x.com/intent/tweet/?text=ThirdParty%20Test%20and%20Summary&amp;url=http%3a%2f%2fknightsnape.github.io%2fpublic%2fposts%2fthird_party_summary%2f&amp;hashtags=ThirdParty">
+            <svg version="1.1" viewBox="0 0 512 512" xml:space="preserve" height="30px" width="30px" fill="currentColor">
+                <path
+                    d="M512 62.554 L 512 449.446 C 512 483.97 483.97 512 449.446 512 L 62.554 512 C 28.03 512 0 483.97 0 449.446 L 0 62.554 C 0 28.03 28.029 0 62.554 0 L 449.446 0 C 483.971 0 512 28.03 512 62.554 Z M 269.951 190.75 L 182.567 75.216 L 56 75.216 L 207.216 272.95 L 63.9 436.783 L 125.266 436.783 L 235.9 310.383 L 332.567 436.783 L 456 436.783 L 298.367 228.367 L 432.367 75.216 L 371.033 75.216 Z M 127.633 110 L 164.101 110 L 383.481 400.065 L 349.5 400.065 Z" />
+            </svg>
+        </a>
+    </li>
+    <li>
+        <a target="_blank" rel="noopener noreferrer" aria-label="share ThirdParty Test and Summary on linkedin"
+            href="https://www.linkedin.com/shareArticle?mini=true&amp;url=http%3a%2f%2fknightsnape.github.io%2fpublic%2fposts%2fthird_party_summary%2f&amp;title=ThirdParty%20Test%20and%20Summary&amp;summary=ThirdParty%20Test%20and%20Summary&amp;source=http%3a%2f%2fknightsnape.github.io%2fpublic%2fposts%2fthird_party_summary%2f">
+            <svg version="1.1" viewBox="0 0 512 512" xml:space="preserve" height="30px" width="30px" fill="currentColor">
+                <path
+                    d="M449.446,0c34.525,0 62.554,28.03 62.554,62.554l0,386.892c0,34.524 -28.03,62.554 -62.554,62.554l-386.892,0c-34.524,0 -62.554,-28.03 -62.554,-62.554l0,-386.892c0,-34.524 28.029,-62.554 62.554,-62.554l386.892,0Zm-288.985,423.278l0,-225.717l-75.04,0l0,225.717l75.04,0Zm270.539,0l0,-129.439c0,-69.333 -37.018,-101.586 -86.381,-101.586c-39.804,0 -57.634,21.891 -67.617,37.266l0,-31.958l-75.021,0c0.995,21.181 0,225.717 0,225.717l75.02,0l0,-126.056c0,-6.748 0.486,-13.492 2.474,-18.315c5.414,-13.475 17.767,-27.434 38.494,-27.434c27.135,0 38.007,20.707 38.007,51.037l0,120.768l75.024,0Zm-307.552,-334.556c-25.674,0 -42.448,16.879 -42.448,39.002c0,21.658 16.264,39.002 41.455,39.002l0.484,0c26.165,0 42.452,-17.344 42.452,-39.002c-0.485,-22.092 -16.241,-38.954 -41.943,-39.002Z" />
+            </svg>
+        </a>
+    </li>
+    <li>
+        <a target="_blank" rel="noopener noreferrer" aria-label="share ThirdParty Test and Summary on reddit"
+            href="https://reddit.com/submit?url=http%3a%2f%2fknightsnape.github.io%2fpublic%2fposts%2fthird_party_summary%2f&title=ThirdParty%20Test%20and%20Summary">
+            <svg version="1.1" viewBox="0 0 512 512" xml:space="preserve" height="30px" width="30px" fill="currentColor">
+                <path
+                    d="M449.446,0c34.525,0 62.554,28.03 62.554,62.554l0,386.892c0,34.524 -28.03,62.554 -62.554,62.554l-386.892,0c-34.524,0 -62.554,-28.03 -62.554,-62.554l0,-386.892c0,-34.524 28.029,-62.554 62.554,-62.554l386.892,0Zm-3.446,265.638c0,-22.964 -18.616,-41.58 -41.58,-41.58c-11.211,0 -21.361,4.457 -28.841,11.666c-28.424,-20.508 -67.586,-33.757 -111.204,-35.278l18.941,-89.121l61.884,13.157c0.756,15.734 13.642,28.29 29.56,28.29c16.407,0 29.706,-13.299 29.706,-29.701c0,-16.403 -13.299,-29.702 -29.706,-29.702c-11.666,0 -21.657,6.792 -26.515,16.578l-69.105,-14.69c-1.922,-0.418 -3.939,-0.042 -5.585,1.036c-1.658,1.073 -2.811,2.761 -3.224,4.686l-21.152,99.438c-44.258,1.228 -84.046,14.494 -112.837,35.232c-7.468,-7.164 -17.589,-11.591 -28.757,-11.591c-22.965,0 -41.585,18.616 -41.585,41.58c0,16.896 10.095,31.41 24.568,37.918c-0.639,4.135 -0.99,8.328 -0.99,12.576c0,63.977 74.469,115.836 166.33,115.836c91.861,0 166.334,-51.859 166.334,-115.836c0,-4.218 -0.347,-8.387 -0.977,-12.493c14.564,-6.47 24.735,-21.034 24.735,-38.001Zm-119.474,108.193c-20.27,20.241 -59.115,21.816 -70.534,21.816c-11.428,0 -50.277,-1.575 -70.522,-21.82c-3.007,-3.008 -3.007,-7.882 0,-10.889c3.003,-2.999 7.882,-3.003 10.885,0c12.777,12.781 40.11,17.317 59.637,17.317c19.522,0 46.86,-4.536 59.657,-17.321c3.016,-2.999 7.886,-2.995 10.885,0.008c3.008,3.011 3.003,7.882 -0.008,10.889Zm-5.23,-48.781c-16.373,0 -29.701,-13.324 -29.701,-29.698c0,-16.381 13.328,-29.714 29.701,-29.714c16.378,0 29.706,13.333 29.706,29.714c0,16.374 -13.328,29.698 -29.706,29.698Zm-160.386,-29.702c0,-16.381 13.328,-29.71 29.714,-29.71c16.369,0 29.689,13.329 29.689,29.71c0,16.373 -13.32,29.693 -29.689,29.693c-16.386,0 -29.714,-13.32 -29.714,-29.693Z" />
+            </svg>
+        </a>
+    </li>
+    <li>
+        <a target="_blank" rel="noopener noreferrer" aria-label="share ThirdParty Test and Summary on facebook"
+            href="https://facebook.com/sharer/sharer.php?u=http%3a%2f%2fknightsnape.github.io%2fpublic%2fposts%2fthird_party_summary%2f">
+            <svg version="1.1" viewBox="0 0 512 512" xml:space="preserve" height="30px" width="30px" fill="currentColor">
+                <path
+                    d="M449.446,0c34.525,0 62.554,28.03 62.554,62.554l0,386.892c0,34.524 -28.03,62.554 -62.554,62.554l-106.468,0l0,-192.915l66.6,0l12.672,-82.621l-79.272,0l0,-53.617c0,-22.603 11.073,-44.636 46.58,-44.636l36.042,0l0,-70.34c0,0 -32.71,-5.582 -63.982,-5.582c-65.288,0 -107.96,39.569 -107.96,111.204l0,62.971l-72.573,0l0,82.621l72.573,0l0,192.915l-191.104,0c-34.524,0 -62.554,-28.03 -62.554,-62.554l0,-386.892c0,-34.524 28.029,-62.554 62.554,-62.554l386.892,0Z" />
+            </svg>
+        </a>
+    </li>
+    <li>
+        <a target="_blank" rel="noopener noreferrer" aria-label="share ThirdParty Test and Summary on whatsapp"
+            href="https://api.whatsapp.com/send?text=ThirdParty%20Test%20and%20Summary%20-%20http%3a%2f%2fknightsnape.github.io%2fpublic%2fposts%2fthird_party_summary%2f">
+            <svg version="1.1" viewBox="0 0 512 512" xml:space="preserve" height="30px" width="30px" fill="currentColor">
+                <path
+                    d="M449.446,0c34.525,0 62.554,28.03 62.554,62.554l0,386.892c0,34.524 -28.03,62.554 -62.554,62.554l-386.892,0c-34.524,0 -62.554,-28.03 -62.554,-62.554l0,-386.892c0,-34.524 28.029,-62.554 62.554,-62.554l386.892,0Zm-58.673,127.703c-33.842,-33.881 -78.847,-52.548 -126.798,-52.568c-98.799,0 -179.21,80.405 -179.249,179.234c-0.013,31.593 8.241,62.428 23.927,89.612l-25.429,92.884l95.021,-24.925c26.181,14.28 55.659,21.807 85.658,21.816l0.074,0c98.789,0 179.206,-80.413 179.247,-179.243c0.018,-47.895 -18.61,-92.93 -52.451,-126.81Zm-126.797,275.782l-0.06,0c-26.734,-0.01 -52.954,-7.193 -75.828,-20.767l-5.441,-3.229l-56.386,14.792l15.05,-54.977l-3.542,-5.637c-14.913,-23.72 -22.791,-51.136 -22.779,-79.287c0.033,-82.142 66.867,-148.971 149.046,-148.971c39.793,0.014 77.199,15.531 105.329,43.692c28.128,28.16 43.609,65.592 43.594,105.4c-0.034,82.149 -66.866,148.983 -148.983,148.984Zm81.721,-111.581c-4.479,-2.242 -26.499,-13.075 -30.604,-14.571c-4.105,-1.495 -7.091,-2.241 -10.077,2.241c-2.986,4.483 -11.569,14.572 -14.182,17.562c-2.612,2.988 -5.225,3.364 -9.703,1.12c-4.479,-2.241 -18.91,-6.97 -36.017,-22.23c-13.314,-11.876 -22.304,-26.542 -24.916,-31.026c-2.612,-4.484 -0.279,-6.908 1.963,-9.14c2.016,-2.007 4.48,-5.232 6.719,-7.847c2.24,-2.615 2.986,-4.484 4.479,-7.472c1.493,-2.99 0.747,-5.604 -0.374,-7.846c-1.119,-2.241 -10.077,-24.288 -13.809,-33.256c-3.635,-8.733 -7.327,-7.55 -10.077,-7.688c-2.609,-0.13 -5.598,-0.158 -8.583,-0.158c-2.986,0 -7.839,1.121 -11.944,5.604c-4.105,4.484 -15.675,15.32 -15.675,37.364c0,22.046 16.048,43.342 18.287,46.332c2.24,2.99 31.582,48.227 76.511,67.627c10.685,4.615 19.028,7.371 25.533,9.434c10.728,3.41 20.492,2.929 28.209,1.775c8.605,-1.285 26.499,-10.833 30.231,-21.295c3.732,-10.464 3.732,-19.431 2.612,-21.298c-1.119,-1.869 -4.105,-2.99 -8.583,-5.232Z" />
+            </svg>
+        </a>
+    </li>
+    <li>
+        <a target="_blank" rel="noopener noreferrer" aria-label="share ThirdParty Test and Summary on telegram"
+            href="https://telegram.me/share/url?text=ThirdParty%20Test%20and%20Summary&amp;url=http%3a%2f%2fknightsnape.github.io%2fpublic%2fposts%2fthird_party_summary%2f">
+            <svg version="1.1" xml:space="preserve" viewBox="2 2 28 28" height="30px" width="30px" fill="currentColor">
+                <path
+                    d="M26.49,29.86H5.5a3.37,3.37,0,0,1-2.47-1,3.35,3.35,0,0,1-1-2.47V5.48A3.36,3.36,0,0,1,3,3,3.37,3.37,0,0,1,5.5,2h21A3.38,3.38,0,0,1,29,3a3.36,3.36,0,0,1,1,2.46V26.37a3.35,3.35,0,0,1-1,2.47A3.38,3.38,0,0,1,26.49,29.86Zm-5.38-6.71a.79.79,0,0,0,.85-.66L24.73,9.24a.55.55,0,0,0-.18-.46.62.62,0,0,0-.41-.17q-.08,0-16.53,6.11a.59.59,0,0,0-.41.59.57.57,0,0,0,.43.52l4,1.24,1.61,4.83a.62.62,0,0,0,.63.43.56.56,0,0,0,.4-.17L16.54,20l4.09,3A.9.9,0,0,0,21.11,23.15ZM13.8,20.71l-1.21-4q8.72-5.55,8.78-5.55c.15,0,.23,0,.23.16a.18.18,0,0,1,0,.06s-2.51,2.3-7.52,6.8Z" />
+            </svg>
+        </a>
+    </li>
+    <li>
+        <a target="_blank" rel="noopener noreferrer" aria-label="share ThirdParty Test and Summary on ycombinator"
+            href="https://news.ycombinator.com/submitlink?t=ThirdParty%20Test%20and%20Summary&u=http%3a%2f%2fknightsnape.github.io%2fpublic%2fposts%2fthird_party_summary%2f">
+            <svg version="1.1" xml:space="preserve" width="30px" height="30px" viewBox="0 0 512 512" fill="currentColor"
+                xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape">
+                <path
+                    d="M449.446 0C483.971 0 512 28.03 512 62.554L512 449.446C512 483.97 483.97 512 449.446 512L62.554 512C28.03 512 0 483.97 0 449.446L0 62.554C0 28.03 28.029 0 62.554 0L449.446 0ZM183.8767 87.9921H121.8427L230.6673 292.4508V424.0079H281.3328V292.4508L390.1575 87.9921H328.1233L256 238.2489z" />
+            </svg>
+        </a>
+    </li>
+</ul>
+
+  </footer>
+</article>
+    </main>
+    
+<footer class="footer">
+    <span>&copy; 2024 <a href="http://knightsnape.github.io/public/">PaperMod</a></span>
+    <span>
+        Powered by
+        <a href="https://gohugo.io/" rel="noopener noreferrer" target="_blank">Hugo</a> &
+        <a href="https://github.com/adityatelange/hugo-PaperMod/" rel="noopener" target="_blank">PaperMod</a>
+    </span>
+</footer>
+<a href="#top" aria-label="go to top" title="Go to Top (Alt + G)" class="top-link" id="top-link" accesskey="g">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 6" fill="currentColor">
+        <path d="M12 6H0l6-6z" />
+    </svg>
+</a>
+
+<script>
+    let menu = document.getElementById('menu')
+    if (menu) {
+        menu.scrollLeft = localStorage.getItem("menu-scroll-position");
+        menu.onscroll = function () {
+            localStorage.setItem("menu-scroll-position", menu.scrollLeft);
+        }
+    }
+
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener("click", function (e) {
+            e.preventDefault();
+            var id = this.getAttribute("href").substr(1);
+            if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView({
+                    behavior: "smooth"
+                });
+            } else {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView();
+            }
+            if (id === "top") {
+                history.replaceState(null, null, " ");
+            } else {
+                history.pushState(null, null, `#${id}`);
+            }
+        });
+    });
+
+</script>
+<script>
+    var mybutton = document.getElementById("top-link");
+    window.onscroll = function () {
+        if (document.body.scrollTop > 800 || document.documentElement.scrollTop > 800) {
+            mybutton.style.visibility = "visible";
+            mybutton.style.opacity = "1";
+        } else {
+            mybutton.style.visibility = "hidden";
+            mybutton.style.opacity = "0";
+        }
+    };
+
+</script>
+<script>
+    document.getElementById("theme-toggle").addEventListener("click", () => {
+        if (document.body.className.includes("dark")) {
+            document.body.classList.remove('dark');
+            localStorage.setItem("pref-theme", 'light');
+        } else {
+            document.body.classList.add('dark');
+            localStorage.setItem("pref-theme", 'dark');
+        }
+    })
+
+</script>
+<script>
+    document.querySelectorAll('pre > code').forEach((codeblock) => {
+        const container = codeblock.parentNode.parentNode;
+
+        const copybutton = document.createElement('button');
+        copybutton.classList.add('copy-code');
+        copybutton.innerHTML = 'copy';
+
+        function copyingDone() {
+            copybutton.innerHTML = 'copied!';
+            setTimeout(() => {
+                copybutton.innerHTML = 'copy';
+            }, 2000);
+        }
+
+        copybutton.addEventListener('click', (cb) => {
+            if ('clipboard' in navigator) {
+                navigator.clipboard.writeText(codeblock.textContent);
+                copyingDone();
+                return;
+            }
+
+            const range = document.createRange();
+            range.selectNodeContents(codeblock);
+            const selection = window.getSelection();
+            selection.removeAllRanges();
+            selection.addRange(range);
+            try {
+                document.execCommand('copy');
+                copyingDone();
+            } catch (e) { };
+            selection.removeRange(range);
+        });
+
+        if (container.classList.contains("highlight")) {
+            container.appendChild(copybutton);
+        } else if (container.parentNode.firstChild == container) {
+            
+        } else if (codeblock.parentNode.parentNode.parentNode.parentNode.parentNode.nodeName == "TABLE") {
+            
+            codeblock.parentNode.parentNode.parentNode.parentNode.parentNode.appendChild(copybutton);
+        } else {
+            
+            codeblock.parentNode.appendChild(copybutton);
+        }
+    });
+</script>
+</body>
+
+</html>
